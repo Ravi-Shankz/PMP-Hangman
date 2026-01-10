@@ -1,0 +1,4002 @@
+[
+  {
+    "term": "WORK BREAKDOWN STRUCTURE",
+    "hint": "A hierarchical decomposition of project scope into deliverables and work packages (WBS)."
+  },
+  {
+    "term": "CRITICAL PATH",
+    "hint": "The longest sequence of dependent activities that determines the shortest possible project duration."
+  },
+  {
+    "term": "FLOAT",
+    "hint": "Schedule flexibility: how long an activity can slip without delaying the project finish date."
+  },
+  {
+    "term": "MILESTONE",
+    "hint": "A significant point or event in a project, often used for tracking progress."
+  },
+  {
+    "term": "DELIVERABLE",
+    "hint": "A unique product, result, or service that must be produced to complete a process, phase, or project."
+  },
+  {
+    "term": "PROJECT CHARTER",
+    "hint": "A document that formally authorizes the project and gives the PM authority to apply resources."
+  },
+  {
+    "term": "BUSINESS CASE",
+    "hint": "A justification for the project, including expected benefits and costs."
+  },
+  {
+    "term": "BENEFITS MANAGEMENT PLAN",
+    "hint": "A plan that describes how and when project benefits will be delivered and measured."
+  },
+  {
+    "term": "SCOPE BASELINE",
+    "hint": "Approved scope statement, WBS, and WBS dictionary used as the basis for comparison."
+  },
+  {
+    "term": "SCHEDULE BASELINE",
+    "hint": "The approved version of the schedule model used as a basis for comparison."
+  },
+  {
+    "term": "COST BASELINE",
+    "hint": "The approved version of the time-phased project budget used as a basis for comparison."
+  },
+  {
+    "term": "ASSUMPTION LOG",
+    "hint": "A record of assumptions and constraints throughout the project."
+  },
+  {
+    "term": "ISSUE LOG",
+    "hint": "A register of issues, owners, and resolution status."
+  },
+  {
+    "term": "RISK REGISTER",
+    "hint": "A document listing identified risks, responses, owners, and current status."
+  },
+  {
+    "term": "STAKEHOLDER REGISTER",
+    "hint": "A document with details about stakeholders: interests, influence, and engagement needs."
+  },
+  {
+    "term": "COMMUNICATIONS MANAGEMENT PLAN",
+    "hint": "Defines what information is shared, to whom, when, and how."
+  },
+  {
+    "term": "RESOURCE MANAGEMENT PLAN",
+    "hint": "Describes how resources are acquired, managed, and released."
+  },
+  {
+    "term": "QUALITY MANAGEMENT PLAN",
+    "hint": "Describes quality standards, how they will be met, and how quality will be measured."
+  },
+  {
+    "term": "PROCUREMENT MANAGEMENT PLAN",
+    "hint": "Describes how procurements will be managed, including contract types and roles."
+  },
+  {
+    "term": "CHANGE CONTROL BOARD",
+    "hint": "A formally chartered group responsible for approving or rejecting change requests (CCB)."
+  },
+  {
+    "term": "INTEGRATED CHANGE CONTROL",
+    "hint": "Reviewing change requests, approving changes, and managing baselines."
+  },
+  {
+    "term": "CHANGE REQUEST",
+    "hint": "A formal proposal to modify any document, deliverable, or baseline."
+  },
+  {
+    "term": "CONFIGURATION MANAGEMENT",
+    "hint": "Ensures project artifacts are consistently defined, controlled, and traceable."
+  },
+  {
+    "term": "EARNED VALUE MANAGEMENT",
+    "hint": "A method integrating scope, schedule, and cost to measure performance (EVM)."
+  },
+  {
+    "term": "COST PERFORMANCE INDEX",
+    "hint": "EV/AC — efficiency of cost utilization (CPI)."
+  },
+  {
+    "term": "SCHEDULE PERFORMANCE INDEX",
+    "hint": "EV/PV — efficiency of schedule performance (SPI)."
+  },
+  {
+    "term": "ESTIMATE AT COMPLETION",
+    "hint": "Expected total cost of the project at completion (EAC)."
+  },
+  {
+    "term": "ESTIMATE TO COMPLETE",
+    "hint": "Expected cost to finish all remaining project work (ETC)."
+  },
+  {
+    "term": "PROJECT MANAGEMENT PLAN",
+    "hint": "How the project is executed, monitored, controlled, and closed."
+  },
+  {
+    "term": "TAILORING",
+    "hint": "Selecting and adjusting processes to fit the project context while meeting objectives."
+  },
+  {
+    "term": "LESSONS LEARNED REGISTER",
+    "hint": "Knowledge gained during the project to improve future performance."
+  },
+  {
+    "term": "RETROSPECTIVE",
+    "hint": "A session to inspect how the team worked and decide improvements (Agile)."
+  },
+  {
+    "term": "DAILY STANDUP",
+    "hint": "A short daily coordination meeting to surface progress and blockers."
+  },
+  {
+    "term": "SPRINT",
+    "hint": "A timeboxed iteration in Scrum used to create a usable increment."
+  },
+  {
+    "term": "PRODUCT BACKLOG",
+    "hint": "An ordered list of work needed to improve the product (Scrum)."
+  },
+  {
+    "term": "SPRINT BACKLOG",
+    "hint": "Selected Product Backlog items plus a plan to deliver them in the sprint."
+  },
+  {
+    "term": "PRODUCT OWNER",
+    "hint": "Accountable for maximizing product value and managing the Product Backlog (Scrum)."
+  },
+  {
+    "term": "SCRUM MASTER",
+    "hint": "Facilitates Scrum, removes impediments, and coaches the team (Scrum)."
+  },
+  {
+    "term": "INCREMENT",
+    "hint": "A usable, potentially releasable product slice created each sprint."
+  },
+  {
+    "term": "DEFINITION OF DONE",
+    "hint": "Shared understanding of what it means for work to be complete and of acceptable quality."
+  },
+  {
+    "term": "USER STORY",
+    "hint": "A feature description from an end user perspective, often 'As a… I want… so that…'."
+  },
+  {
+    "term": "ACCEPTANCE CRITERIA",
+    "hint": "Conditions that must be met for a work item to be accepted."
+  },
+  {
+    "term": "VELOCITY",
+    "hint": "Amount of work a team completes in a sprint, often measured in story points."
+  },
+  {
+    "term": "BURNDOWN CHART",
+    "hint": "Shows remaining work over time in a sprint or release."
+  },
+  {
+    "term": "KANBAN",
+    "hint": "A method focusing on flow, visualizing work, and limiting work in progress (WIP)."
+  },
+  {
+    "term": "WORK IN PROGRESS LIMIT",
+    "hint": "A cap on items in progress to improve flow."
+  },
+  {
+    "term": "LEAD TIME",
+    "hint": "Time from request to delivery for a work item."
+  },
+  {
+    "term": "CYCLE TIME",
+    "hint": "Time from work start to work finish for a work item."
+  },
+  {
+    "term": "MINIMUM VIABLE PRODUCT",
+    "hint": "The smallest product that delivers value and enables learning (MVP)."
+  },
+  {
+    "term": "TECHNICAL DEBT",
+    "hint": "The implied cost of rework from choosing an easy solution now over a better one."
+  },
+  {
+    "term": "ROOT CAUSE ANALYSIS",
+    "hint": "A structured approach to find underlying causes rather than symptoms."
+  },
+  {
+    "term": "RACI MATRIX",
+    "hint": "Responsibility assignment matrix: Responsible, Accountable, Consulted, Informed."
+  },
+  {
+    "term": "API",
+    "hint": "An interface that enables software systems to communicate (Application Programming Interface)."
+  },
+  {
+    "term": "MICROSERVICES",
+    "hint": "An architecture where small services are independently deployable and loosely coupled."
+  },
+  {
+    "term": "CI/CD",
+    "hint": "Continuous Integration/Continuous Delivery: automating build, test, and deployment."
+  },
+  {
+    "term": "DEVOPS",
+    "hint": "Practices combining development and operations to deliver software faster and more reliably."
+  },
+  {
+    "term": "INFRASTRUCTURE AS CODE",
+    "hint": "Managing infrastructure with versioned code (IaC)."
+  },
+  {
+    "term": "KUBERNETES",
+    "hint": "A platform to orchestrate containerized applications."
+  },
+  {
+    "term": "DOCKER",
+    "hint": "A platform for building and running applications in containers."
+  },
+  {
+    "term": "OBSERVABILITY",
+    "hint": "Understanding system state via logs, metrics, and traces."
+  },
+  {
+    "term": "AUTHENTICATION",
+    "hint": "Verifying identity (who you are)."
+  },
+  {
+    "term": "AUTHORIZATION",
+    "hint": "Granting permissions (what you can do)."
+  },
+  {
+    "term": "ENCRYPTION",
+    "hint": "Protecting data by transforming it into a secure format."
+  },
+  {
+    "term": "INCIDENT MANAGEMENT",
+    "hint": "Handling unplanned interruptions and restoring service."
+  },
+  {
+    "term": "PROBLEM MANAGEMENT",
+    "hint": "Finding root causes and preventing incident recurrence."
+  },
+  {
+    "term": "POSTMORTEM",
+    "hint": "A blameless review to learn from incidents and improve systems."
+  },
+  {
+    "term": "INTEGRATION MANAGEMENT PLAN",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION REGISTER",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION LOG",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION MATRIX",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION REPORT",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION BASELINE",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION STRATEGY",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION PLAN",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION CHECKLIST",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION DASHBOARD",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION CALENDAR",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION GOVERNANCE",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION FRAMEWORK",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION GUIDELINE",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION PLAYBOOK",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION TEMPLATE",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION WORKSHEET",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION MODEL",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION ESTIMATE",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "INTEGRATION FORECAST",
+    "hint": "A project artifact related to integration used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE MANAGEMENT PLAN",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE REGISTER",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE LOG",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE MATRIX",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE REPORT",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE STRATEGY",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE PLAN",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE CHECKLIST",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE DASHBOARD",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE CALENDAR",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE GOVERNANCE",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE FRAMEWORK",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE GUIDELINE",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE PLAYBOOK",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE TEMPLATE",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE WORKSHEET",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE MODEL",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE ESTIMATE",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCOPE FORECAST",
+    "hint": "A project artifact related to scope used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE MANAGEMENT PLAN",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE REGISTER",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE LOG",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE MATRIX",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE REPORT",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE STRATEGY",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE PLAN",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE CHECKLIST",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE DASHBOARD",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE CALENDAR",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE GOVERNANCE",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE FRAMEWORK",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE GUIDELINE",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE PLAYBOOK",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE TEMPLATE",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE WORKSHEET",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE MODEL",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE ESTIMATE",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "SCHEDULE FORECAST",
+    "hint": "A project artifact related to schedule used to plan, track, or control work."
+  },
+  {
+    "term": "COST MANAGEMENT PLAN",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST REGISTER",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST LOG",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST MATRIX",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST REPORT",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST STRATEGY",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST PLAN",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST CHECKLIST",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST DASHBOARD",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST CALENDAR",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST GOVERNANCE",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST FRAMEWORK",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST GUIDELINE",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST PLAYBOOK",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST TEMPLATE",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST WORKSHEET",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST MODEL",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST ESTIMATE",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "COST FORECAST",
+    "hint": "A project artifact related to cost used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY REGISTER",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY LOG",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY MATRIX",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY REPORT",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY BASELINE",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY STRATEGY",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY PLAN",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY CHECKLIST",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY DASHBOARD",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY CALENDAR",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY GOVERNANCE",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY FRAMEWORK",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY GUIDELINE",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY PLAYBOOK",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY TEMPLATE",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY WORKSHEET",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY MODEL",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY ESTIMATE",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "QUALITY FORECAST",
+    "hint": "A project artifact related to quality used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE REGISTER",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE LOG",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE MATRIX",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE REPORT",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE BASELINE",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE STRATEGY",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE PLAN",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE CHECKLIST",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE DASHBOARD",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE CALENDAR",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE GOVERNANCE",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE FRAMEWORK",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE GUIDELINE",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE PLAYBOOK",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE TEMPLATE",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE WORKSHEET",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE MODEL",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE ESTIMATE",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "RESOURCE FORECAST",
+    "hint": "A project artifact related to resource used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS REGISTER",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS LOG",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS MATRIX",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS REPORT",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS BASELINE",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS STRATEGY",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS PLAN",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS CHECKLIST",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS DASHBOARD",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS CALENDAR",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS GOVERNANCE",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS FRAMEWORK",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS GUIDELINE",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS PLAYBOOK",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS TEMPLATE",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS WORKSHEET",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS MODEL",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS ESTIMATE",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "COMMUNICATIONS FORECAST",
+    "hint": "A project artifact related to communications used to plan, track, or control work."
+  },
+  {
+    "term": "RISK MANAGEMENT PLAN",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK LOG",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK MATRIX",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK REPORT",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK BASELINE",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK STRATEGY",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK PLAN",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK CHECKLIST",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK DASHBOARD",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK CALENDAR",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK GOVERNANCE",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK FRAMEWORK",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK GUIDELINE",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK PLAYBOOK",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK TEMPLATE",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK WORKSHEET",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK MODEL",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK ESTIMATE",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "RISK FORECAST",
+    "hint": "A project artifact related to risk used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT REGISTER",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT LOG",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT MATRIX",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT REPORT",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT BASELINE",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT STRATEGY",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT PLAN",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT CHECKLIST",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT DASHBOARD",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT CALENDAR",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT GOVERNANCE",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT FRAMEWORK",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT GUIDELINE",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT PLAYBOOK",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT TEMPLATE",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT WORKSHEET",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT MODEL",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT ESTIMATE",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "PROCUREMENT FORECAST",
+    "hint": "A project artifact related to procurement used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER MANAGEMENT PLAN",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER LOG",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER MATRIX",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER REPORT",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER BASELINE",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER STRATEGY",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER PLAN",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER CHECKLIST",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER DASHBOARD",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER CALENDAR",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER GOVERNANCE",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER FRAMEWORK",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER GUIDELINE",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER PLAYBOOK",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER TEMPLATE",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER WORKSHEET",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER MODEL",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER ESTIMATE",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "STAKEHOLDER FORECAST",
+    "hint": "A project artifact related to stakeholder used to plan, track, or control work."
+  },
+  {
+    "term": "SPRINT PLAN",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT BOARD",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT CHART",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT GOAL",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT REVIEW",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT RETROSPECTIVE",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT DEMO",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT METRICS",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT CADENCE",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT POLICY",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "SPRINT WIP LIMIT",
+    "hint": "An Agile concept/artifact used to manage sprint work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE PLAN",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE BOARD",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE CHART",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE GOAL",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE REVIEW",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE RETROSPECTIVE",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE DEMO",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE METRICS",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE CADENCE",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE POLICY",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "RELEASE WIP LIMIT",
+    "hint": "An Agile concept/artifact used to manage release work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT PLAN",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT BOARD",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT CHART",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT GOAL",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT REVIEW",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT RETROSPECTIVE",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT DEMO",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT METRICS",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT CADENCE",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT POLICY",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "PRODUCT WIP LIMIT",
+    "hint": "An Agile concept/artifact used to manage product work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM PLAN",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM BOARD",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM CHART",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM GOAL",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM REVIEW",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM RETROSPECTIVE",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM DEMO",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM METRICS",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM CADENCE",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM POLICY",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "TEAM WIP LIMIT",
+    "hint": "An Agile concept/artifact used to manage team work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG PLAN",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG BOARD",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG CHART",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG GOAL",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG REVIEW",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG RETROSPECTIVE",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG DEMO",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG METRICS",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG CADENCE",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG POLICY",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "BACKLOG WIP LIMIT",
+    "hint": "An Agile concept/artifact used to manage backlog work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN PLAN",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN BOARD",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN CHART",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN GOAL",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN REVIEW",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN RETROSPECTIVE",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN DEMO",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN METRICS",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN CADENCE",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN POLICY",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "KANBAN WIP LIMIT",
+    "hint": "An Agile concept/artifact used to manage kanban work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW PLAN",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW BOARD",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW CHART",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW GOAL",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW REVIEW",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW RETROSPECTIVE",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW DEMO",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW METRICS",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW CADENCE",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW POLICY",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "FLOW WIP LIMIT",
+    "hint": "An Agile concept/artifact used to manage flow work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION PLAN",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION BOARD",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION CHART",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION GOAL",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION REVIEW",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION RETROSPECTIVE",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION DEMO",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION METRICS",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION CADENCE",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION POLICY",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "ITERATION WIP LIMIT",
+    "hint": "An Agile concept/artifact used to manage iteration work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT PLAN",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT BOARD",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT CHART",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT GOAL",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT REVIEW",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT RETROSPECTIVE",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT DEMO",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT METRICS",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT CADENCE",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT POLICY",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "INCREMENT WIP LIMIT",
+    "hint": "An Agile concept/artifact used to manage increment work and improve delivery outcomes."
+  },
+  {
+    "term": "DEFINE SCOPE",
+    "hint": "A process-style phrase describing work to define scope on a project."
+  },
+  {
+    "term": "DEFINE SCHEDULE",
+    "hint": "A process-style phrase describing work to define schedule on a project."
+  },
+  {
+    "term": "DEFINE COSTS",
+    "hint": "A process-style phrase describing work to define costs on a project."
+  },
+  {
+    "term": "DEFINE QUALITY",
+    "hint": "A process-style phrase describing work to define quality on a project."
+  },
+  {
+    "term": "DEFINE RISKS",
+    "hint": "A process-style phrase describing work to define risks on a project."
+  },
+  {
+    "term": "DEFINE PROCUREMENTS",
+    "hint": "A process-style phrase describing work to define procurements on a project."
+  },
+  {
+    "term": "DEFINE STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to define stakeholders on a project."
+  },
+  {
+    "term": "DEFINE COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to define communications on a project."
+  },
+  {
+    "term": "DEFINE RESOURCES",
+    "hint": "A process-style phrase describing work to define resources on a project."
+  },
+  {
+    "term": "DEFINE INTEGRATION",
+    "hint": "A process-style phrase describing work to define integration on a project."
+  },
+  {
+    "term": "PLAN SCOPE",
+    "hint": "A process-style phrase describing work to plan scope on a project."
+  },
+  {
+    "term": "PLAN SCHEDULE",
+    "hint": "A process-style phrase describing work to plan schedule on a project."
+  },
+  {
+    "term": "PLAN COSTS",
+    "hint": "A process-style phrase describing work to plan costs on a project."
+  },
+  {
+    "term": "PLAN QUALITY",
+    "hint": "A process-style phrase describing work to plan quality on a project."
+  },
+  {
+    "term": "PLAN RISKS",
+    "hint": "A process-style phrase describing work to plan risks on a project."
+  },
+  {
+    "term": "PLAN PROCUREMENTS",
+    "hint": "A process-style phrase describing work to plan procurements on a project."
+  },
+  {
+    "term": "PLAN STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to plan stakeholders on a project."
+  },
+  {
+    "term": "PLAN COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to plan communications on a project."
+  },
+  {
+    "term": "PLAN RESOURCES",
+    "hint": "A process-style phrase describing work to plan resources on a project."
+  },
+  {
+    "term": "PLAN INTEGRATION",
+    "hint": "A process-style phrase describing work to plan integration on a project."
+  },
+  {
+    "term": "ESTIMATE SCOPE",
+    "hint": "A process-style phrase describing work to estimate scope on a project."
+  },
+  {
+    "term": "ESTIMATE SCHEDULE",
+    "hint": "A process-style phrase describing work to estimate schedule on a project."
+  },
+  {
+    "term": "ESTIMATE COSTS",
+    "hint": "A process-style phrase describing work to estimate costs on a project."
+  },
+  {
+    "term": "ESTIMATE QUALITY",
+    "hint": "A process-style phrase describing work to estimate quality on a project."
+  },
+  {
+    "term": "ESTIMATE RISKS",
+    "hint": "A process-style phrase describing work to estimate risks on a project."
+  },
+  {
+    "term": "ESTIMATE PROCUREMENTS",
+    "hint": "A process-style phrase describing work to estimate procurements on a project."
+  },
+  {
+    "term": "ESTIMATE STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to estimate stakeholders on a project."
+  },
+  {
+    "term": "ESTIMATE COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to estimate communications on a project."
+  },
+  {
+    "term": "ESTIMATE RESOURCES",
+    "hint": "A process-style phrase describing work to estimate resources on a project."
+  },
+  {
+    "term": "ESTIMATE INTEGRATION",
+    "hint": "A process-style phrase describing work to estimate integration on a project."
+  },
+  {
+    "term": "DEVELOP SCOPE",
+    "hint": "A process-style phrase describing work to develop scope on a project."
+  },
+  {
+    "term": "DEVELOP SCHEDULE",
+    "hint": "A process-style phrase describing work to develop schedule on a project."
+  },
+  {
+    "term": "DEVELOP COSTS",
+    "hint": "A process-style phrase describing work to develop costs on a project."
+  },
+  {
+    "term": "DEVELOP QUALITY",
+    "hint": "A process-style phrase describing work to develop quality on a project."
+  },
+  {
+    "term": "DEVELOP RISKS",
+    "hint": "A process-style phrase describing work to develop risks on a project."
+  },
+  {
+    "term": "DEVELOP PROCUREMENTS",
+    "hint": "A process-style phrase describing work to develop procurements on a project."
+  },
+  {
+    "term": "DEVELOP STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to develop stakeholders on a project."
+  },
+  {
+    "term": "DEVELOP COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to develop communications on a project."
+  },
+  {
+    "term": "DEVELOP RESOURCES",
+    "hint": "A process-style phrase describing work to develop resources on a project."
+  },
+  {
+    "term": "DEVELOP INTEGRATION",
+    "hint": "A process-style phrase describing work to develop integration on a project."
+  },
+  {
+    "term": "MANAGE SCOPE",
+    "hint": "A process-style phrase describing work to manage scope on a project."
+  },
+  {
+    "term": "MANAGE SCHEDULE",
+    "hint": "A process-style phrase describing work to manage schedule on a project."
+  },
+  {
+    "term": "MANAGE COSTS",
+    "hint": "A process-style phrase describing work to manage costs on a project."
+  },
+  {
+    "term": "MANAGE QUALITY",
+    "hint": "A process-style phrase describing work to manage quality on a project."
+  },
+  {
+    "term": "MANAGE RISKS",
+    "hint": "A process-style phrase describing work to manage risks on a project."
+  },
+  {
+    "term": "MANAGE PROCUREMENTS",
+    "hint": "A process-style phrase describing work to manage procurements on a project."
+  },
+  {
+    "term": "MANAGE STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to manage stakeholders on a project."
+  },
+  {
+    "term": "MANAGE COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to manage communications on a project."
+  },
+  {
+    "term": "MANAGE RESOURCES",
+    "hint": "A process-style phrase describing work to manage resources on a project."
+  },
+  {
+    "term": "MANAGE INTEGRATION",
+    "hint": "A process-style phrase describing work to manage integration on a project."
+  },
+  {
+    "term": "CONTROL SCOPE",
+    "hint": "A process-style phrase describing work to control scope on a project."
+  },
+  {
+    "term": "CONTROL SCHEDULE",
+    "hint": "A process-style phrase describing work to control schedule on a project."
+  },
+  {
+    "term": "CONTROL COSTS",
+    "hint": "A process-style phrase describing work to control costs on a project."
+  },
+  {
+    "term": "CONTROL QUALITY",
+    "hint": "A process-style phrase describing work to control quality on a project."
+  },
+  {
+    "term": "CONTROL RISKS",
+    "hint": "A process-style phrase describing work to control risks on a project."
+  },
+  {
+    "term": "CONTROL PROCUREMENTS",
+    "hint": "A process-style phrase describing work to control procurements on a project."
+  },
+  {
+    "term": "CONTROL STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to control stakeholders on a project."
+  },
+  {
+    "term": "CONTROL COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to control communications on a project."
+  },
+  {
+    "term": "CONTROL RESOURCES",
+    "hint": "A process-style phrase describing work to control resources on a project."
+  },
+  {
+    "term": "CONTROL INTEGRATION",
+    "hint": "A process-style phrase describing work to control integration on a project."
+  },
+  {
+    "term": "MONITOR SCOPE",
+    "hint": "A process-style phrase describing work to monitor scope on a project."
+  },
+  {
+    "term": "MONITOR SCHEDULE",
+    "hint": "A process-style phrase describing work to monitor schedule on a project."
+  },
+  {
+    "term": "MONITOR COSTS",
+    "hint": "A process-style phrase describing work to monitor costs on a project."
+  },
+  {
+    "term": "MONITOR QUALITY",
+    "hint": "A process-style phrase describing work to monitor quality on a project."
+  },
+  {
+    "term": "MONITOR RISKS",
+    "hint": "A process-style phrase describing work to monitor risks on a project."
+  },
+  {
+    "term": "MONITOR PROCUREMENTS",
+    "hint": "A process-style phrase describing work to monitor procurements on a project."
+  },
+  {
+    "term": "MONITOR STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to monitor stakeholders on a project."
+  },
+  {
+    "term": "MONITOR COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to monitor communications on a project."
+  },
+  {
+    "term": "MONITOR RESOURCES",
+    "hint": "A process-style phrase describing work to monitor resources on a project."
+  },
+  {
+    "term": "MONITOR INTEGRATION",
+    "hint": "A process-style phrase describing work to monitor integration on a project."
+  },
+  {
+    "term": "VALIDATE SCOPE",
+    "hint": "A process-style phrase describing work to validate scope on a project."
+  },
+  {
+    "term": "VALIDATE SCHEDULE",
+    "hint": "A process-style phrase describing work to validate schedule on a project."
+  },
+  {
+    "term": "VALIDATE COSTS",
+    "hint": "A process-style phrase describing work to validate costs on a project."
+  },
+  {
+    "term": "VALIDATE QUALITY",
+    "hint": "A process-style phrase describing work to validate quality on a project."
+  },
+  {
+    "term": "VALIDATE RISKS",
+    "hint": "A process-style phrase describing work to validate risks on a project."
+  },
+  {
+    "term": "VALIDATE PROCUREMENTS",
+    "hint": "A process-style phrase describing work to validate procurements on a project."
+  },
+  {
+    "term": "VALIDATE STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to validate stakeholders on a project."
+  },
+  {
+    "term": "VALIDATE COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to validate communications on a project."
+  },
+  {
+    "term": "VALIDATE RESOURCES",
+    "hint": "A process-style phrase describing work to validate resources on a project."
+  },
+  {
+    "term": "VALIDATE INTEGRATION",
+    "hint": "A process-style phrase describing work to validate integration on a project."
+  },
+  {
+    "term": "CLOSE SCOPE",
+    "hint": "A process-style phrase describing work to close scope on a project."
+  },
+  {
+    "term": "CLOSE SCHEDULE",
+    "hint": "A process-style phrase describing work to close schedule on a project."
+  },
+  {
+    "term": "CLOSE COSTS",
+    "hint": "A process-style phrase describing work to close costs on a project."
+  },
+  {
+    "term": "CLOSE QUALITY",
+    "hint": "A process-style phrase describing work to close quality on a project."
+  },
+  {
+    "term": "CLOSE RISKS",
+    "hint": "A process-style phrase describing work to close risks on a project."
+  },
+  {
+    "term": "CLOSE PROCUREMENTS",
+    "hint": "A process-style phrase describing work to close procurements on a project."
+  },
+  {
+    "term": "CLOSE STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to close stakeholders on a project."
+  },
+  {
+    "term": "CLOSE COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to close communications on a project."
+  },
+  {
+    "term": "CLOSE RESOURCES",
+    "hint": "A process-style phrase describing work to close resources on a project."
+  },
+  {
+    "term": "CLOSE INTEGRATION",
+    "hint": "A process-style phrase describing work to close integration on a project."
+  },
+  {
+    "term": "PERFORM SCOPE",
+    "hint": "A process-style phrase describing work to perform scope on a project."
+  },
+  {
+    "term": "PERFORM SCHEDULE",
+    "hint": "A process-style phrase describing work to perform schedule on a project."
+  },
+  {
+    "term": "PERFORM COSTS",
+    "hint": "A process-style phrase describing work to perform costs on a project."
+  },
+  {
+    "term": "PERFORM QUALITY",
+    "hint": "A process-style phrase describing work to perform quality on a project."
+  },
+  {
+    "term": "PERFORM RISKS",
+    "hint": "A process-style phrase describing work to perform risks on a project."
+  },
+  {
+    "term": "PERFORM PROCUREMENTS",
+    "hint": "A process-style phrase describing work to perform procurements on a project."
+  },
+  {
+    "term": "PERFORM STAKEHOLDERS",
+    "hint": "A process-style phrase describing work to perform stakeholders on a project."
+  },
+  {
+    "term": "PERFORM COMMUNICATIONS",
+    "hint": "A process-style phrase describing work to perform communications on a project."
+  },
+  {
+    "term": "PERFORM RESOURCES",
+    "hint": "A process-style phrase describing work to perform resources on a project."
+  },
+  {
+    "term": "PERFORM INTEGRATION",
+    "hint": "A process-style phrase describing work to perform integration on a project."
+  },
+  {
+    "term": "PROJECT GOVERNANCE",
+    "hint": "A delivery term related to project governance used in project environments."
+  },
+  {
+    "term": "PROJECT OVERSIGHT",
+    "hint": "A delivery term related to project oversight used in project environments."
+  },
+  {
+    "term": "PROJECT CONTROLS",
+    "hint": "A delivery term related to project controls used in project environments."
+  },
+  {
+    "term": "PROJECT ASSURANCE",
+    "hint": "A delivery term related to project assurance used in project environments."
+  },
+  {
+    "term": "PROJECT REPORTING",
+    "hint": "A delivery term related to project reporting used in project environments."
+  },
+  {
+    "term": "PROJECT FORECASTING",
+    "hint": "A delivery term related to project forecasting used in project environments."
+  },
+  {
+    "term": "PROJECT PLANNING",
+    "hint": "A delivery term related to project planning used in project environments."
+  },
+  {
+    "term": "PROJECT BASELINING",
+    "hint": "A delivery term related to project baselining used in project environments."
+  },
+  {
+    "term": "PROJECT TRACKING",
+    "hint": "A delivery term related to project tracking used in project environments."
+  },
+  {
+    "term": "PROJECT REVIEW",
+    "hint": "A delivery term related to project review used in project environments."
+  },
+  {
+    "term": "PROJECT COMPLIANCE",
+    "hint": "A delivery term related to project compliance used in project environments."
+  },
+  {
+    "term": "PROJECT ALIGNMENT",
+    "hint": "A delivery term related to project alignment used in project environments."
+  },
+  {
+    "term": "PROGRAM GOVERNANCE",
+    "hint": "A delivery term related to program governance used in project environments."
+  },
+  {
+    "term": "PROGRAM OVERSIGHT",
+    "hint": "A delivery term related to program oversight used in project environments."
+  },
+  {
+    "term": "PROGRAM CONTROLS",
+    "hint": "A delivery term related to program controls used in project environments."
+  },
+  {
+    "term": "PROGRAM ASSURANCE",
+    "hint": "A delivery term related to program assurance used in project environments."
+  },
+  {
+    "term": "PROGRAM REPORTING",
+    "hint": "A delivery term related to program reporting used in project environments."
+  },
+  {
+    "term": "PROGRAM FORECASTING",
+    "hint": "A delivery term related to program forecasting used in project environments."
+  },
+  {
+    "term": "PROGRAM PLANNING",
+    "hint": "A delivery term related to program planning used in project environments."
+  },
+  {
+    "term": "PROGRAM BASELINING",
+    "hint": "A delivery term related to program baselining used in project environments."
+  },
+  {
+    "term": "PROGRAM TRACKING",
+    "hint": "A delivery term related to program tracking used in project environments."
+  },
+  {
+    "term": "PROGRAM REVIEW",
+    "hint": "A delivery term related to program review used in project environments."
+  },
+  {
+    "term": "PROGRAM COMPLIANCE",
+    "hint": "A delivery term related to program compliance used in project environments."
+  },
+  {
+    "term": "PROGRAM ALIGNMENT",
+    "hint": "A delivery term related to program alignment used in project environments."
+  },
+  {
+    "term": "PORTFOLIO GOVERNANCE",
+    "hint": "A delivery term related to portfolio governance used in project environments."
+  },
+  {
+    "term": "PORTFOLIO OVERSIGHT",
+    "hint": "A delivery term related to portfolio oversight used in project environments."
+  },
+  {
+    "term": "PORTFOLIO CONTROLS",
+    "hint": "A delivery term related to portfolio controls used in project environments."
+  },
+  {
+    "term": "PORTFOLIO ASSURANCE",
+    "hint": "A delivery term related to portfolio assurance used in project environments."
+  },
+  {
+    "term": "PORTFOLIO REPORTING",
+    "hint": "A delivery term related to portfolio reporting used in project environments."
+  },
+  {
+    "term": "PORTFOLIO FORECASTING",
+    "hint": "A delivery term related to portfolio forecasting used in project environments."
+  },
+  {
+    "term": "PORTFOLIO PLANNING",
+    "hint": "A delivery term related to portfolio planning used in project environments."
+  },
+  {
+    "term": "PORTFOLIO BASELINING",
+    "hint": "A delivery term related to portfolio baselining used in project environments."
+  },
+  {
+    "term": "PORTFOLIO TRACKING",
+    "hint": "A delivery term related to portfolio tracking used in project environments."
+  },
+  {
+    "term": "PORTFOLIO REVIEW",
+    "hint": "A delivery term related to portfolio review used in project environments."
+  },
+  {
+    "term": "PORTFOLIO COMPLIANCE",
+    "hint": "A delivery term related to portfolio compliance used in project environments."
+  },
+  {
+    "term": "PORTFOLIO ALIGNMENT",
+    "hint": "A delivery term related to portfolio alignment used in project environments."
+  },
+  {
+    "term": "DELIVERY GOVERNANCE",
+    "hint": "A delivery term related to delivery governance used in project environments."
+  },
+  {
+    "term": "DELIVERY OVERSIGHT",
+    "hint": "A delivery term related to delivery oversight used in project environments."
+  },
+  {
+    "term": "DELIVERY CONTROLS",
+    "hint": "A delivery term related to delivery controls used in project environments."
+  },
+  {
+    "term": "DELIVERY ASSURANCE",
+    "hint": "A delivery term related to delivery assurance used in project environments."
+  },
+  {
+    "term": "DELIVERY REPORTING",
+    "hint": "A delivery term related to delivery reporting used in project environments."
+  },
+  {
+    "term": "DELIVERY FORECASTING",
+    "hint": "A delivery term related to delivery forecasting used in project environments."
+  },
+  {
+    "term": "DELIVERY PLANNING",
+    "hint": "A delivery term related to delivery planning used in project environments."
+  },
+  {
+    "term": "DELIVERY BASELINING",
+    "hint": "A delivery term related to delivery baselining used in project environments."
+  },
+  {
+    "term": "DELIVERY TRACKING",
+    "hint": "A delivery term related to delivery tracking used in project environments."
+  },
+  {
+    "term": "DELIVERY REVIEW",
+    "hint": "A delivery term related to delivery review used in project environments."
+  },
+  {
+    "term": "DELIVERY COMPLIANCE",
+    "hint": "A delivery term related to delivery compliance used in project environments."
+  },
+  {
+    "term": "DELIVERY ALIGNMENT",
+    "hint": "A delivery term related to delivery alignment used in project environments."
+  },
+  {
+    "term": "CHANGE GOVERNANCE",
+    "hint": "A delivery term related to change governance used in project environments."
+  },
+  {
+    "term": "CHANGE OVERSIGHT",
+    "hint": "A delivery term related to change oversight used in project environments."
+  },
+  {
+    "term": "CHANGE CONTROLS",
+    "hint": "A delivery term related to change controls used in project environments."
+  },
+  {
+    "term": "CHANGE ASSURANCE",
+    "hint": "A delivery term related to change assurance used in project environments."
+  },
+  {
+    "term": "CHANGE REPORTING",
+    "hint": "A delivery term related to change reporting used in project environments."
+  },
+  {
+    "term": "CHANGE FORECASTING",
+    "hint": "A delivery term related to change forecasting used in project environments."
+  },
+  {
+    "term": "CHANGE PLANNING",
+    "hint": "A delivery term related to change planning used in project environments."
+  },
+  {
+    "term": "CHANGE BASELINING",
+    "hint": "A delivery term related to change baselining used in project environments."
+  },
+  {
+    "term": "CHANGE TRACKING",
+    "hint": "A delivery term related to change tracking used in project environments."
+  },
+  {
+    "term": "CHANGE REVIEW",
+    "hint": "A delivery term related to change review used in project environments."
+  },
+  {
+    "term": "CHANGE COMPLIANCE",
+    "hint": "A delivery term related to change compliance used in project environments."
+  },
+  {
+    "term": "CHANGE ALIGNMENT",
+    "hint": "A delivery term related to change alignment used in project environments."
+  },
+  {
+    "term": "QUALITY OVERSIGHT",
+    "hint": "A delivery term related to quality oversight used in project environments."
+  },
+  {
+    "term": "QUALITY CONTROLS",
+    "hint": "A delivery term related to quality controls used in project environments."
+  },
+  {
+    "term": "QUALITY ASSURANCE",
+    "hint": "A delivery term related to quality assurance used in project environments."
+  },
+  {
+    "term": "QUALITY REPORTING",
+    "hint": "A delivery term related to quality reporting used in project environments."
+  },
+  {
+    "term": "QUALITY FORECASTING",
+    "hint": "A delivery term related to quality forecasting used in project environments."
+  },
+  {
+    "term": "QUALITY PLANNING",
+    "hint": "A delivery term related to quality planning used in project environments."
+  },
+  {
+    "term": "QUALITY BASELINING",
+    "hint": "A delivery term related to quality baselining used in project environments."
+  },
+  {
+    "term": "QUALITY TRACKING",
+    "hint": "A delivery term related to quality tracking used in project environments."
+  },
+  {
+    "term": "QUALITY REVIEW",
+    "hint": "A delivery term related to quality review used in project environments."
+  },
+  {
+    "term": "QUALITY COMPLIANCE",
+    "hint": "A delivery term related to quality compliance used in project environments."
+  },
+  {
+    "term": "QUALITY ALIGNMENT",
+    "hint": "A delivery term related to quality alignment used in project environments."
+  },
+  {
+    "term": "RISK OVERSIGHT",
+    "hint": "A delivery term related to risk oversight used in project environments."
+  },
+  {
+    "term": "RISK CONTROLS",
+    "hint": "A delivery term related to risk controls used in project environments."
+  },
+  {
+    "term": "RISK ASSURANCE",
+    "hint": "A delivery term related to risk assurance used in project environments."
+  },
+  {
+    "term": "RISK REPORTING",
+    "hint": "A delivery term related to risk reporting used in project environments."
+  },
+  {
+    "term": "RISK FORECASTING",
+    "hint": "A delivery term related to risk forecasting used in project environments."
+  },
+  {
+    "term": "RISK PLANNING",
+    "hint": "A delivery term related to risk planning used in project environments."
+  },
+  {
+    "term": "RISK BASELINING",
+    "hint": "A delivery term related to risk baselining used in project environments."
+  },
+  {
+    "term": "RISK TRACKING",
+    "hint": "A delivery term related to risk tracking used in project environments."
+  },
+  {
+    "term": "RISK REVIEW",
+    "hint": "A delivery term related to risk review used in project environments."
+  },
+  {
+    "term": "RISK COMPLIANCE",
+    "hint": "A delivery term related to risk compliance used in project environments."
+  },
+  {
+    "term": "RISK ALIGNMENT",
+    "hint": "A delivery term related to risk alignment used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER OVERSIGHT",
+    "hint": "A delivery term related to stakeholder oversight used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER CONTROLS",
+    "hint": "A delivery term related to stakeholder controls used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER ASSURANCE",
+    "hint": "A delivery term related to stakeholder assurance used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER REPORTING",
+    "hint": "A delivery term related to stakeholder reporting used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER FORECASTING",
+    "hint": "A delivery term related to stakeholder forecasting used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER PLANNING",
+    "hint": "A delivery term related to stakeholder planning used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER BASELINING",
+    "hint": "A delivery term related to stakeholder baselining used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER TRACKING",
+    "hint": "A delivery term related to stakeholder tracking used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER REVIEW",
+    "hint": "A delivery term related to stakeholder review used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER COMPLIANCE",
+    "hint": "A delivery term related to stakeholder compliance used in project environments."
+  },
+  {
+    "term": "STAKEHOLDER ALIGNMENT",
+    "hint": "A delivery term related to stakeholder alignment used in project environments."
+  },
+  {
+    "term": "RESOURCE OVERSIGHT",
+    "hint": "A delivery term related to resource oversight used in project environments."
+  },
+  {
+    "term": "RESOURCE CONTROLS",
+    "hint": "A delivery term related to resource controls used in project environments."
+  },
+  {
+    "term": "RESOURCE ASSURANCE",
+    "hint": "A delivery term related to resource assurance used in project environments."
+  },
+  {
+    "term": "RESOURCE REPORTING",
+    "hint": "A delivery term related to resource reporting used in project environments."
+  },
+  {
+    "term": "RESOURCE FORECASTING",
+    "hint": "A delivery term related to resource forecasting used in project environments."
+  },
+  {
+    "term": "RESOURCE PLANNING",
+    "hint": "A delivery term related to resource planning used in project environments."
+  },
+  {
+    "term": "RESOURCE BASELINING",
+    "hint": "A delivery term related to resource baselining used in project environments."
+  },
+  {
+    "term": "RESOURCE TRACKING",
+    "hint": "A delivery term related to resource tracking used in project environments."
+  },
+  {
+    "term": "RESOURCE REVIEW",
+    "hint": "A delivery term related to resource review used in project environments."
+  },
+  {
+    "term": "RESOURCE COMPLIANCE",
+    "hint": "A delivery term related to resource compliance used in project environments."
+  },
+  {
+    "term": "RESOURCE ALIGNMENT",
+    "hint": "A delivery term related to resource alignment used in project environments."
+  },
+  {
+    "term": "FINANCIAL GOVERNANCE",
+    "hint": "A delivery term related to financial governance used in project environments."
+  },
+  {
+    "term": "FINANCIAL OVERSIGHT",
+    "hint": "A delivery term related to financial oversight used in project environments."
+  },
+  {
+    "term": "FINANCIAL CONTROLS",
+    "hint": "A delivery term related to financial controls used in project environments."
+  },
+  {
+    "term": "FINANCIAL ASSURANCE",
+    "hint": "A delivery term related to financial assurance used in project environments."
+  },
+  {
+    "term": "FINANCIAL REPORTING",
+    "hint": "A delivery term related to financial reporting used in project environments."
+  },
+  {
+    "term": "FINANCIAL FORECASTING",
+    "hint": "A delivery term related to financial forecasting used in project environments."
+  },
+  {
+    "term": "FINANCIAL PLANNING",
+    "hint": "A delivery term related to financial planning used in project environments."
+  },
+  {
+    "term": "FINANCIAL BASELINING",
+    "hint": "A delivery term related to financial baselining used in project environments."
+  },
+  {
+    "term": "FINANCIAL TRACKING",
+    "hint": "A delivery term related to financial tracking used in project environments."
+  },
+  {
+    "term": "FINANCIAL REVIEW",
+    "hint": "A delivery term related to financial review used in project environments."
+  },
+  {
+    "term": "FINANCIAL COMPLIANCE",
+    "hint": "A delivery term related to financial compliance used in project environments."
+  },
+  {
+    "term": "FINANCIAL ALIGNMENT",
+    "hint": "A delivery term related to financial alignment used in project environments."
+  },
+  {
+    "term": "AGILE GOVERNANCE",
+    "hint": "A delivery term related to agile governance used in project environments."
+  },
+  {
+    "term": "AGILE OVERSIGHT",
+    "hint": "A delivery term related to agile oversight used in project environments."
+  },
+  {
+    "term": "AGILE CONTROLS",
+    "hint": "A delivery term related to agile controls used in project environments."
+  },
+  {
+    "term": "AGILE ASSURANCE",
+    "hint": "A delivery term related to agile assurance used in project environments."
+  },
+  {
+    "term": "AGILE REPORTING",
+    "hint": "A delivery term related to agile reporting used in project environments."
+  },
+  {
+    "term": "AGILE FORECASTING",
+    "hint": "A delivery term related to agile forecasting used in project environments."
+  },
+  {
+    "term": "AGILE PLANNING",
+    "hint": "A delivery term related to agile planning used in project environments."
+  },
+  {
+    "term": "AGILE BASELINING",
+    "hint": "A delivery term related to agile baselining used in project environments."
+  },
+  {
+    "term": "AGILE TRACKING",
+    "hint": "A delivery term related to agile tracking used in project environments."
+  },
+  {
+    "term": "AGILE REVIEW",
+    "hint": "A delivery term related to agile review used in project environments."
+  },
+  {
+    "term": "AGILE COMPLIANCE",
+    "hint": "A delivery term related to agile compliance used in project environments."
+  },
+  {
+    "term": "AGILE ALIGNMENT",
+    "hint": "A delivery term related to agile alignment used in project environments."
+  },
+  {
+    "term": "SCRUM GOVERNANCE",
+    "hint": "A delivery term related to scrum governance used in project environments."
+  },
+  {
+    "term": "SCRUM OVERSIGHT",
+    "hint": "A delivery term related to scrum oversight used in project environments."
+  },
+  {
+    "term": "SCRUM CONTROLS",
+    "hint": "A delivery term related to scrum controls used in project environments."
+  },
+  {
+    "term": "SCRUM ASSURANCE",
+    "hint": "A delivery term related to scrum assurance used in project environments."
+  },
+  {
+    "term": "SCRUM REPORTING",
+    "hint": "A delivery term related to scrum reporting used in project environments."
+  },
+  {
+    "term": "SCRUM FORECASTING",
+    "hint": "A delivery term related to scrum forecasting used in project environments."
+  },
+  {
+    "term": "SCRUM PLANNING",
+    "hint": "A delivery term related to scrum planning used in project environments."
+  },
+  {
+    "term": "SCRUM BASELINING",
+    "hint": "A delivery term related to scrum baselining used in project environments."
+  },
+  {
+    "term": "SCRUM TRACKING",
+    "hint": "A delivery term related to scrum tracking used in project environments."
+  },
+  {
+    "term": "SCRUM REVIEW",
+    "hint": "A delivery term related to scrum review used in project environments."
+  },
+  {
+    "term": "SCRUM COMPLIANCE",
+    "hint": "A delivery term related to scrum compliance used in project environments."
+  },
+  {
+    "term": "SCRUM ALIGNMENT",
+    "hint": "A delivery term related to scrum alignment used in project environments."
+  },
+  {
+    "term": "KANBAN GOVERNANCE",
+    "hint": "A delivery term related to kanban governance used in project environments."
+  },
+  {
+    "term": "KANBAN OVERSIGHT",
+    "hint": "A delivery term related to kanban oversight used in project environments."
+  },
+  {
+    "term": "KANBAN CONTROLS",
+    "hint": "A delivery term related to kanban controls used in project environments."
+  },
+  {
+    "term": "KANBAN ASSURANCE",
+    "hint": "A delivery term related to kanban assurance used in project environments."
+  },
+  {
+    "term": "KANBAN REPORTING",
+    "hint": "A delivery term related to kanban reporting used in project environments."
+  },
+  {
+    "term": "KANBAN FORECASTING",
+    "hint": "A delivery term related to kanban forecasting used in project environments."
+  },
+  {
+    "term": "KANBAN PLANNING",
+    "hint": "A delivery term related to kanban planning used in project environments."
+  },
+  {
+    "term": "KANBAN BASELINING",
+    "hint": "A delivery term related to kanban baselining used in project environments."
+  },
+  {
+    "term": "KANBAN TRACKING",
+    "hint": "A delivery term related to kanban tracking used in project environments."
+  },
+  {
+    "term": "KANBAN COMPLIANCE",
+    "hint": "A delivery term related to kanban compliance used in project environments."
+  },
+  {
+    "term": "KANBAN ALIGNMENT",
+    "hint": "A delivery term related to kanban alignment used in project environments."
+  },
+  {
+    "term": "PROJECT WORKSHOP",
+    "hint": "A common project practice/artifact: project workshop."
+  },
+  {
+    "term": "PROJECT CHECKPOINT",
+    "hint": "A common project practice/artifact: project checkpoint."
+  },
+  {
+    "term": "PROJECT CADENCE",
+    "hint": "A common project practice/artifact: project cadence."
+  },
+  {
+    "term": "PROJECT MODEL",
+    "hint": "A common project practice/artifact: project model."
+  },
+  {
+    "term": "PROJECT PACK",
+    "hint": "A common project practice/artifact: project pack."
+  },
+  {
+    "term": "PROJECT SUMMARY",
+    "hint": "A common project practice/artifact: project summary."
+  },
+  {
+    "term": "PROJECT BRIEF",
+    "hint": "A common project practice/artifact: project brief."
+  },
+  {
+    "term": "PROJECT RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: project risk assessment."
+  },
+  {
+    "term": "PROJECT STATUS REPORT",
+    "hint": "A common project practice/artifact: project status report."
+  },
+  {
+    "term": "PROJECT HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: project health dashboard."
+  },
+  {
+    "term": "PROJECT STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: project steering committee."
+  },
+  {
+    "term": "PROGRAM WORKSHOP",
+    "hint": "A common project practice/artifact: program workshop."
+  },
+  {
+    "term": "PROGRAM CHECKPOINT",
+    "hint": "A common project practice/artifact: program checkpoint."
+  },
+  {
+    "term": "PROGRAM CADENCE",
+    "hint": "A common project practice/artifact: program cadence."
+  },
+  {
+    "term": "PROGRAM MODEL",
+    "hint": "A common project practice/artifact: program model."
+  },
+  {
+    "term": "PROGRAM PACK",
+    "hint": "A common project practice/artifact: program pack."
+  },
+  {
+    "term": "PROGRAM SUMMARY",
+    "hint": "A common project practice/artifact: program summary."
+  },
+  {
+    "term": "PROGRAM BRIEF",
+    "hint": "A common project practice/artifact: program brief."
+  },
+  {
+    "term": "PROGRAM RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: program risk assessment."
+  },
+  {
+    "term": "PROGRAM STATUS REPORT",
+    "hint": "A common project practice/artifact: program status report."
+  },
+  {
+    "term": "PROGRAM HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: program health dashboard."
+  },
+  {
+    "term": "PROGRAM STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: program steering committee."
+  },
+  {
+    "term": "PORTFOLIO WORKSHOP",
+    "hint": "A common project practice/artifact: portfolio workshop."
+  },
+  {
+    "term": "PORTFOLIO CHECKPOINT",
+    "hint": "A common project practice/artifact: portfolio checkpoint."
+  },
+  {
+    "term": "PORTFOLIO CADENCE",
+    "hint": "A common project practice/artifact: portfolio cadence."
+  },
+  {
+    "term": "PORTFOLIO MODEL",
+    "hint": "A common project practice/artifact: portfolio model."
+  },
+  {
+    "term": "PORTFOLIO PACK",
+    "hint": "A common project practice/artifact: portfolio pack."
+  },
+  {
+    "term": "PORTFOLIO SUMMARY",
+    "hint": "A common project practice/artifact: portfolio summary."
+  },
+  {
+    "term": "PORTFOLIO BRIEF",
+    "hint": "A common project practice/artifact: portfolio brief."
+  },
+  {
+    "term": "PORTFOLIO RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: portfolio risk assessment."
+  },
+  {
+    "term": "PORTFOLIO STATUS REPORT",
+    "hint": "A common project practice/artifact: portfolio status report."
+  },
+  {
+    "term": "PORTFOLIO HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: portfolio health dashboard."
+  },
+  {
+    "term": "PORTFOLIO STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: portfolio steering committee."
+  },
+  {
+    "term": "DELIVERY WORKSHOP",
+    "hint": "A common project practice/artifact: delivery workshop."
+  },
+  {
+    "term": "DELIVERY CHECKPOINT",
+    "hint": "A common project practice/artifact: delivery checkpoint."
+  },
+  {
+    "term": "DELIVERY CADENCE",
+    "hint": "A common project practice/artifact: delivery cadence."
+  },
+  {
+    "term": "DELIVERY MODEL",
+    "hint": "A common project practice/artifact: delivery model."
+  },
+  {
+    "term": "DELIVERY PACK",
+    "hint": "A common project practice/artifact: delivery pack."
+  },
+  {
+    "term": "DELIVERY SUMMARY",
+    "hint": "A common project practice/artifact: delivery summary."
+  },
+  {
+    "term": "DELIVERY BRIEF",
+    "hint": "A common project practice/artifact: delivery brief."
+  },
+  {
+    "term": "DELIVERY RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: delivery risk assessment."
+  },
+  {
+    "term": "DELIVERY STATUS REPORT",
+    "hint": "A common project practice/artifact: delivery status report."
+  },
+  {
+    "term": "DELIVERY HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: delivery health dashboard."
+  },
+  {
+    "term": "DELIVERY STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: delivery steering committee."
+  },
+  {
+    "term": "CHANGE WORKSHOP",
+    "hint": "A common project practice/artifact: change workshop."
+  },
+  {
+    "term": "CHANGE CHECKPOINT",
+    "hint": "A common project practice/artifact: change checkpoint."
+  },
+  {
+    "term": "CHANGE CADENCE",
+    "hint": "A common project practice/artifact: change cadence."
+  },
+  {
+    "term": "CHANGE MODEL",
+    "hint": "A common project practice/artifact: change model."
+  },
+  {
+    "term": "CHANGE PACK",
+    "hint": "A common project practice/artifact: change pack."
+  },
+  {
+    "term": "CHANGE SUMMARY",
+    "hint": "A common project practice/artifact: change summary."
+  },
+  {
+    "term": "CHANGE BRIEF",
+    "hint": "A common project practice/artifact: change brief."
+  },
+  {
+    "term": "CHANGE RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: change risk assessment."
+  },
+  {
+    "term": "CHANGE STATUS REPORT",
+    "hint": "A common project practice/artifact: change status report."
+  },
+  {
+    "term": "CHANGE HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: change health dashboard."
+  },
+  {
+    "term": "CHANGE STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: change steering committee."
+  },
+  {
+    "term": "QUALITY WORKSHOP",
+    "hint": "A common project practice/artifact: quality workshop."
+  },
+  {
+    "term": "QUALITY CHECKPOINT",
+    "hint": "A common project practice/artifact: quality checkpoint."
+  },
+  {
+    "term": "QUALITY CADENCE",
+    "hint": "A common project practice/artifact: quality cadence."
+  },
+  {
+    "term": "QUALITY PACK",
+    "hint": "A common project practice/artifact: quality pack."
+  },
+  {
+    "term": "QUALITY SUMMARY",
+    "hint": "A common project practice/artifact: quality summary."
+  },
+  {
+    "term": "QUALITY BRIEF",
+    "hint": "A common project practice/artifact: quality brief."
+  },
+  {
+    "term": "QUALITY RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: quality risk assessment."
+  },
+  {
+    "term": "QUALITY STATUS REPORT",
+    "hint": "A common project practice/artifact: quality status report."
+  },
+  {
+    "term": "QUALITY HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: quality health dashboard."
+  },
+  {
+    "term": "QUALITY STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: quality steering committee."
+  },
+  {
+    "term": "RISK WORKSHOP",
+    "hint": "A common project practice/artifact: risk workshop."
+  },
+  {
+    "term": "RISK CHECKPOINT",
+    "hint": "A common project practice/artifact: risk checkpoint."
+  },
+  {
+    "term": "RISK CADENCE",
+    "hint": "A common project practice/artifact: risk cadence."
+  },
+  {
+    "term": "RISK PACK",
+    "hint": "A common project practice/artifact: risk pack."
+  },
+  {
+    "term": "RISK SUMMARY",
+    "hint": "A common project practice/artifact: risk summary."
+  },
+  {
+    "term": "RISK BRIEF",
+    "hint": "A common project practice/artifact: risk brief."
+  },
+  {
+    "term": "RISK RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: risk risk assessment."
+  },
+  {
+    "term": "RISK STATUS REPORT",
+    "hint": "A common project practice/artifact: risk status report."
+  },
+  {
+    "term": "RISK HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: risk health dashboard."
+  },
+  {
+    "term": "RISK STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: risk steering committee."
+  },
+  {
+    "term": "STAKEHOLDER WORKSHOP",
+    "hint": "A common project practice/artifact: stakeholder workshop."
+  },
+  {
+    "term": "STAKEHOLDER CHECKPOINT",
+    "hint": "A common project practice/artifact: stakeholder checkpoint."
+  },
+  {
+    "term": "STAKEHOLDER CADENCE",
+    "hint": "A common project practice/artifact: stakeholder cadence."
+  },
+  {
+    "term": "STAKEHOLDER PACK",
+    "hint": "A common project practice/artifact: stakeholder pack."
+  },
+  {
+    "term": "STAKEHOLDER SUMMARY",
+    "hint": "A common project practice/artifact: stakeholder summary."
+  },
+  {
+    "term": "STAKEHOLDER BRIEF",
+    "hint": "A common project practice/artifact: stakeholder brief."
+  },
+  {
+    "term": "STAKEHOLDER RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: stakeholder risk assessment."
+  },
+  {
+    "term": "STAKEHOLDER STATUS REPORT",
+    "hint": "A common project practice/artifact: stakeholder status report."
+  },
+  {
+    "term": "STAKEHOLDER HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: stakeholder health dashboard."
+  },
+  {
+    "term": "STAKEHOLDER STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: stakeholder steering committee."
+  },
+  {
+    "term": "RESOURCE WORKSHOP",
+    "hint": "A common project practice/artifact: resource workshop."
+  },
+  {
+    "term": "RESOURCE CHECKPOINT",
+    "hint": "A common project practice/artifact: resource checkpoint."
+  },
+  {
+    "term": "RESOURCE CADENCE",
+    "hint": "A common project practice/artifact: resource cadence."
+  },
+  {
+    "term": "RESOURCE PACK",
+    "hint": "A common project practice/artifact: resource pack."
+  },
+  {
+    "term": "RESOURCE SUMMARY",
+    "hint": "A common project practice/artifact: resource summary."
+  },
+  {
+    "term": "RESOURCE BRIEF",
+    "hint": "A common project practice/artifact: resource brief."
+  },
+  {
+    "term": "RESOURCE RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: resource risk assessment."
+  },
+  {
+    "term": "RESOURCE STATUS REPORT",
+    "hint": "A common project practice/artifact: resource status report."
+  },
+  {
+    "term": "RESOURCE HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: resource health dashboard."
+  },
+  {
+    "term": "RESOURCE STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: resource steering committee."
+  },
+  {
+    "term": "FINANCIAL WORKSHOP",
+    "hint": "A common project practice/artifact: financial workshop."
+  },
+  {
+    "term": "FINANCIAL CHECKPOINT",
+    "hint": "A common project practice/artifact: financial checkpoint."
+  },
+  {
+    "term": "FINANCIAL CADENCE",
+    "hint": "A common project practice/artifact: financial cadence."
+  },
+  {
+    "term": "FINANCIAL MODEL",
+    "hint": "A common project practice/artifact: financial model."
+  },
+  {
+    "term": "FINANCIAL PACK",
+    "hint": "A common project practice/artifact: financial pack."
+  },
+  {
+    "term": "FINANCIAL SUMMARY",
+    "hint": "A common project practice/artifact: financial summary."
+  },
+  {
+    "term": "FINANCIAL BRIEF",
+    "hint": "A common project practice/artifact: financial brief."
+  },
+  {
+    "term": "FINANCIAL RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: financial risk assessment."
+  },
+  {
+    "term": "FINANCIAL STATUS REPORT",
+    "hint": "A common project practice/artifact: financial status report."
+  },
+  {
+    "term": "FINANCIAL HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: financial health dashboard."
+  },
+  {
+    "term": "FINANCIAL STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: financial steering committee."
+  },
+  {
+    "term": "AGILE WORKSHOP",
+    "hint": "A common project practice/artifact: agile workshop."
+  },
+  {
+    "term": "AGILE CHECKPOINT",
+    "hint": "A common project practice/artifact: agile checkpoint."
+  },
+  {
+    "term": "AGILE CADENCE",
+    "hint": "A common project practice/artifact: agile cadence."
+  },
+  {
+    "term": "AGILE MODEL",
+    "hint": "A common project practice/artifact: agile model."
+  },
+  {
+    "term": "AGILE PACK",
+    "hint": "A common project practice/artifact: agile pack."
+  },
+  {
+    "term": "AGILE SUMMARY",
+    "hint": "A common project practice/artifact: agile summary."
+  },
+  {
+    "term": "AGILE BRIEF",
+    "hint": "A common project practice/artifact: agile brief."
+  },
+  {
+    "term": "AGILE RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: agile risk assessment."
+  },
+  {
+    "term": "AGILE STATUS REPORT",
+    "hint": "A common project practice/artifact: agile status report."
+  },
+  {
+    "term": "AGILE HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: agile health dashboard."
+  },
+  {
+    "term": "AGILE STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: agile steering committee."
+  },
+  {
+    "term": "SCRUM WORKSHOP",
+    "hint": "A common project practice/artifact: scrum workshop."
+  },
+  {
+    "term": "SCRUM CHECKPOINT",
+    "hint": "A common project practice/artifact: scrum checkpoint."
+  },
+  {
+    "term": "SCRUM CADENCE",
+    "hint": "A common project practice/artifact: scrum cadence."
+  },
+  {
+    "term": "SCRUM MODEL",
+    "hint": "A common project practice/artifact: scrum model."
+  },
+  {
+    "term": "SCRUM PACK",
+    "hint": "A common project practice/artifact: scrum pack."
+  },
+  {
+    "term": "SCRUM SUMMARY",
+    "hint": "A common project practice/artifact: scrum summary."
+  },
+  {
+    "term": "SCRUM BRIEF",
+    "hint": "A common project practice/artifact: scrum brief."
+  },
+  {
+    "term": "SCRUM RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: scrum risk assessment."
+  },
+  {
+    "term": "SCRUM STATUS REPORT",
+    "hint": "A common project practice/artifact: scrum status report."
+  },
+  {
+    "term": "SCRUM HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: scrum health dashboard."
+  },
+  {
+    "term": "SCRUM STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: scrum steering committee."
+  },
+  {
+    "term": "KANBAN WORKSHOP",
+    "hint": "A common project practice/artifact: kanban workshop."
+  },
+  {
+    "term": "KANBAN CHECKPOINT",
+    "hint": "A common project practice/artifact: kanban checkpoint."
+  },
+  {
+    "term": "KANBAN MODEL",
+    "hint": "A common project practice/artifact: kanban model."
+  },
+  {
+    "term": "KANBAN PACK",
+    "hint": "A common project practice/artifact: kanban pack."
+  },
+  {
+    "term": "KANBAN SUMMARY",
+    "hint": "A common project practice/artifact: kanban summary."
+  },
+  {
+    "term": "KANBAN BRIEF",
+    "hint": "A common project practice/artifact: kanban brief."
+  },
+  {
+    "term": "KANBAN RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: kanban risk assessment."
+  },
+  {
+    "term": "KANBAN STATUS REPORT",
+    "hint": "A common project practice/artifact: kanban status report."
+  },
+  {
+    "term": "KANBAN HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: kanban health dashboard."
+  },
+  {
+    "term": "KANBAN STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: kanban steering committee."
+  },
+  {
+    "term": "RESOURCE CHANGE LOG",
+    "hint": "A term used in delivery environments related to resource change log."
+  },
+  {
+    "term": "SERVICE CUTOVER PLAN",
+    "hint": "A common project practice/artifact: service cutover plan."
+  },
+  {
+    "term": "PROGRAM POST-IMPLEMENTATION REVIEW",
+    "hint": "A common project practice/artifact: program post-implementation review."
+  },
+  {
+    "term": "SCHEDULE RELEASE NOTES",
+    "hint": "A common project practice/artifact: schedule release notes."
+  },
+  {
+    "term": "IMPROVE DELIVERY",
+    "hint": "A verb phrase describing a management action to improve delivery."
+  },
+  {
+    "term": "STANDARDIZE QUALITY",
+    "hint": "A verb phrase describing a management action to standardize quality."
+  },
+  {
+    "term": "COMPLIANCE STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: compliance steering committee."
+  },
+  {
+    "term": "PRODUCT OPERATIONS HANDOFF",
+    "hint": "A common project practice/artifact: product operations handoff."
+  },
+  {
+    "term": "DATA TRACEABILITY",
+    "hint": "A term used in delivery environments related to data traceability."
+  },
+  {
+    "term": "FINANCIAL ADOPTION PLAN",
+    "hint": "A common project practice/artifact: financial adoption plan."
+  },
+  {
+    "term": "COMPLIANCE DASHBOARD",
+    "hint": "A term used in delivery environments related to compliance dashboard."
+  },
+  {
+    "term": "RISK GATE REVIEW",
+    "hint": "A common project practice/artifact: risk gate review."
+  },
+  {
+    "term": "SERVICE GOVERNANCE",
+    "hint": "A term used in delivery environments related to service governance."
+  },
+  {
+    "term": "PRODUCT REMEDIATION PLAN",
+    "hint": "A common project practice/artifact: product remediation plan."
+  },
+  {
+    "term": "RELEASE STATUS",
+    "hint": "A term used in delivery environments related to release status."
+  },
+  {
+    "term": "DATA CONTROL TESTING",
+    "hint": "A common project practice/artifact: data control testing."
+  },
+  {
+    "term": "BENEFITS ANALYTICS",
+    "hint": "A term used in delivery environments related to benefits analytics."
+  },
+  {
+    "term": "TESTING HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: testing health dashboard."
+  },
+  {
+    "term": "PORTFOLIO WORKFLOW",
+    "hint": "A term used in delivery environments related to portfolio workflow."
+  },
+  {
+    "term": "VALUE OVERSIGHT",
+    "hint": "A term used in delivery environments related to value oversight."
+  },
+  {
+    "term": "PORTFOLIO GATE REVIEW",
+    "hint": "A common project practice/artifact: portfolio gate review."
+  },
+  {
+    "term": "REQUIREMENTS FORECASTING",
+    "hint": "A term used in delivery environments related to requirements forecasting."
+  },
+  {
+    "term": "GOVERNANCE OVERSIGHT",
+    "hint": "A term used in delivery environments related to governance oversight."
+  },
+  {
+    "term": "PRODUCT ALIGNMENT",
+    "hint": "A term used in delivery environments related to product alignment."
+  },
+  {
+    "term": "SERVICE DASHBOARD",
+    "hint": "A term used in delivery environments related to service dashboard."
+  },
+  {
+    "term": "MONITOR VALUE",
+    "hint": "A verb phrase describing a management action to monitor value."
+  },
+  {
+    "term": "CHANGE CONTROL TESTING",
+    "hint": "A common project practice/artifact: change control testing."
+  },
+  {
+    "term": "ARCHITECTURE RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: architecture risk assessment."
+  },
+  {
+    "term": "SCOPE FORECASTING",
+    "hint": "A term used in delivery environments related to scope forecasting."
+  },
+  {
+    "term": "COST WORKFLOW",
+    "hint": "A term used in delivery environments related to cost workflow."
+  },
+  {
+    "term": "VALUE CHANGE LOG",
+    "hint": "A term used in delivery environments related to value change log."
+  },
+  {
+    "term": "DEPLOYMENT FRAMEWORK",
+    "hint": "A term used in delivery environments related to deployment framework."
+  },
+  {
+    "term": "DATA AUDIT",
+    "hint": "A term used in delivery environments related to data audit."
+  },
+  {
+    "term": "SCHEDULE PLANNING",
+    "hint": "A term used in delivery environments related to schedule planning."
+  },
+  {
+    "term": "PORTFOLIO RUNBOOK",
+    "hint": "A term used in delivery environments related to portfolio runbook."
+  },
+  {
+    "term": "AGILE TRACEABILITY",
+    "hint": "A term used in delivery environments related to agile traceability."
+  },
+  {
+    "term": "AGILE REGISTER",
+    "hint": "A term used in delivery environments related to agile register."
+  },
+  {
+    "term": "BENEFITS METRICS",
+    "hint": "A term used in delivery environments related to benefits metrics."
+  },
+  {
+    "term": "PROJECT TRACEABILITY",
+    "hint": "A term used in delivery environments related to project traceability."
+  },
+  {
+    "term": "REQUIREMENTS OPERATIONS HANDOFF",
+    "hint": "A common project practice/artifact: requirements operations handoff."
+  },
+  {
+    "term": "QUALITY ROADMAP",
+    "hint": "A term used in delivery environments related to quality roadmap."
+  },
+  {
+    "term": "DELIVERY WORKFLOW",
+    "hint": "A term used in delivery environments related to delivery workflow."
+  },
+  {
+    "term": "COMMUNICATIONS ACTION LOG",
+    "hint": "A term used in delivery environments related to communications action log."
+  },
+  {
+    "term": "GOVERNANCE RISK PROFILE",
+    "hint": "A term used in delivery environments related to governance risk profile."
+  },
+  {
+    "term": "COMPLIANCE PLAYBOOK",
+    "hint": "A term used in delivery environments related to compliance playbook."
+  },
+  {
+    "term": "COMPLIANCE GATE REVIEW",
+    "hint": "A common project practice/artifact: compliance gate review."
+  },
+  {
+    "term": "COMPLIANCE RUNBOOK",
+    "hint": "A term used in delivery environments related to compliance runbook."
+  },
+  {
+    "term": "INCIDENT RISK PROFILE",
+    "hint": "A term used in delivery environments related to incident risk profile."
+  },
+  {
+    "term": "GOVERNANCE PLANNING",
+    "hint": "A term used in delivery environments related to governance planning."
+  },
+  {
+    "term": "REQUIREMENTS DASHBOARD",
+    "hint": "A term used in delivery environments related to requirements dashboard."
+  },
+  {
+    "term": "SCOPE CONTROL TESTING",
+    "hint": "A common project practice/artifact: scope control testing."
+  },
+  {
+    "term": "VALUE DASHBOARD",
+    "hint": "A term used in delivery environments related to value dashboard."
+  },
+  {
+    "term": "PRODUCT ANALYTICS",
+    "hint": "A term used in delivery environments related to product analytics."
+  },
+  {
+    "term": "IMPROVE STAKEHOLDERS",
+    "hint": "A verb phrase describing a management action to improve stakeholders."
+  },
+  {
+    "term": "BENEFITS PLAYBOOK",
+    "hint": "A term used in delivery environments related to benefits playbook."
+  },
+  {
+    "term": "SCHEDULE ADOPTION PLAN",
+    "hint": "A common project practice/artifact: schedule adoption plan."
+  },
+  {
+    "term": "SECURITY RISK PROFILE",
+    "hint": "A term used in delivery environments related to security risk profile."
+  },
+  {
+    "term": "PLATFORM REMEDIATION PLAN",
+    "hint": "A common project practice/artifact: platform remediation plan."
+  },
+  {
+    "term": "STAKEHOLDER REMEDIATION PLAN",
+    "hint": "A common project practice/artifact: stakeholder remediation plan."
+  },
+  {
+    "term": "RELEASE HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: release health dashboard."
+  },
+  {
+    "term": "RISK ACTION LOG",
+    "hint": "A term used in delivery environments related to risk action log."
+  },
+  {
+    "term": "GOVERN STAKEHOLDERS",
+    "hint": "A verb phrase describing a management action to govern stakeholders."
+  },
+  {
+    "term": "TESTING CONTROL TESTING",
+    "hint": "A common project practice/artifact: testing control testing."
+  },
+  {
+    "term": "ENABLE QUALITY",
+    "hint": "A verb phrase describing a management action to enable quality."
+  },
+  {
+    "term": "CHANGE ESCALATION PATH",
+    "hint": "A common project practice/artifact: change escalation path."
+  },
+  {
+    "term": "ARCHITECTURE PIPELINE",
+    "hint": "A term used in delivery environments related to architecture pipeline."
+  },
+  {
+    "term": "VERIFY SCOPE",
+    "hint": "A verb phrase describing a management action to verify scope."
+  },
+  {
+    "term": "PROJECT FRAMEWORK",
+    "hint": "A term used in delivery environments related to project framework."
+  },
+  {
+    "term": "VERIFY QUALITY",
+    "hint": "A verb phrase describing a management action to verify quality."
+  },
+  {
+    "term": "SERVICE ACTION LOG",
+    "hint": "A term used in delivery environments related to service action log."
+  },
+  {
+    "term": "OPERATIONS CHECKPOINT",
+    "hint": "A common project practice/artifact: operations checkpoint."
+  },
+  {
+    "term": "RESOURCE LESSONS LEARNED",
+    "hint": "A common project practice/artifact: resource lessons learned."
+  },
+  {
+    "term": "CUSTOMER OPERATIONS HANDOFF",
+    "hint": "A common project practice/artifact: customer operations handoff."
+  },
+  {
+    "term": "ARCHITECTURE BRIEF",
+    "hint": "A common project practice/artifact: architecture brief."
+  },
+  {
+    "term": "VALUE RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: value risk assessment."
+  },
+  {
+    "term": "SECURITY STATUS",
+    "hint": "A term used in delivery environments related to security status."
+  },
+  {
+    "term": "PLATFORM DECISION LOG",
+    "hint": "A term used in delivery environments related to platform decision log."
+  },
+  {
+    "term": "PROGRAM ADOPTION PLAN",
+    "hint": "A common project practice/artifact: program adoption plan."
+  },
+  {
+    "term": "CUSTOMER WORKFLOW",
+    "hint": "A term used in delivery environments related to customer workflow."
+  },
+  {
+    "term": "STAKEHOLDER CUTOVER PLAN",
+    "hint": "A common project practice/artifact: stakeholder cutover plan."
+  },
+  {
+    "term": "SCHEDULE OPERATING MODEL",
+    "hint": "A term used in delivery environments related to schedule operating model."
+  },
+  {
+    "term": "CUSTOMER OPERATING MODEL",
+    "hint": "A term used in delivery environments related to customer operating model."
+  },
+  {
+    "term": "DELIVERY RUNBOOK",
+    "hint": "A term used in delivery environments related to delivery runbook."
+  },
+  {
+    "term": "ASSESS QUALITY",
+    "hint": "A verb phrase describing a management action to assess quality."
+  },
+  {
+    "term": "ASSURANCE READINESS REVIEW",
+    "hint": "A common project practice/artifact: assurance readiness review."
+  },
+  {
+    "term": "EVALUATE COMPLIANCE",
+    "hint": "A verb phrase describing a management action to evaluate compliance."
+  },
+  {
+    "term": "DATA RELEASE NOTES",
+    "hint": "A common project practice/artifact: data release notes."
+  },
+  {
+    "term": "REQUIREMENTS ALIGNMENT",
+    "hint": "A term used in delivery environments related to requirements alignment."
+  },
+  {
+    "term": "DEPLOYMENT PLANNING",
+    "hint": "A term used in delivery environments related to deployment planning."
+  },
+  {
+    "term": "ASSURANCE MODEL",
+    "hint": "A common project practice/artifact: assurance model."
+  },
+  {
+    "term": "SCOPE OPERATIONS HANDOFF",
+    "hint": "A common project practice/artifact: scope operations handoff."
+  },
+  {
+    "term": "SCHEDULE ACTION PLAN",
+    "hint": "A common project practice/artifact: schedule action plan."
+  },
+  {
+    "term": "AGILE READINESS REVIEW",
+    "hint": "A common project practice/artifact: agile readiness review."
+  },
+  {
+    "term": "SERVICE ANALYTICS",
+    "hint": "A term used in delivery environments related to service analytics."
+  },
+  {
+    "term": "GOVERNANCE STATUS REPORT",
+    "hint": "A common project practice/artifact: governance status report."
+  },
+  {
+    "term": "DELIVERY LESSONS LEARNED",
+    "hint": "A common project practice/artifact: delivery lessons learned."
+  },
+  {
+    "term": "OPERATIONS OPERATING MODEL",
+    "hint": "A term used in delivery environments related to operations operating model."
+  },
+  {
+    "term": "ASSESS COMPLIANCE",
+    "hint": "A verb phrase describing a management action to assess compliance."
+  },
+  {
+    "term": "DATA QUALITY GATES",
+    "hint": "A common project practice/artifact: data quality gates."
+  },
+  {
+    "term": "ASSESS SCHEDULE",
+    "hint": "A verb phrase describing a management action to assess schedule."
+  },
+  {
+    "term": "INCIDENT BACKLOG",
+    "hint": "A term used in delivery environments related to incident backlog."
+  },
+  {
+    "term": "PROCUREMENT SUMMARY",
+    "hint": "A common project practice/artifact: procurement summary."
+  },
+  {
+    "term": "DELIVERY ESCALATION PATH",
+    "hint": "A common project practice/artifact: delivery escalation path."
+  },
+  {
+    "term": "PLATFORM TRAINING PLAN",
+    "hint": "A common project practice/artifact: platform training plan."
+  },
+  {
+    "term": "VALUE PIPELINE",
+    "hint": "A term used in delivery environments related to value pipeline."
+  },
+  {
+    "term": "EVALUATE SECURITY",
+    "hint": "A verb phrase describing a management action to evaluate security."
+  },
+  {
+    "term": "CUSTOMER LESSONS LEARNED",
+    "hint": "A common project practice/artifact: customer lessons learned."
+  },
+  {
+    "term": "COMPLIANCE CONTROLS",
+    "hint": "A term used in delivery environments related to compliance controls."
+  },
+  {
+    "term": "EVALUATE SCOPE",
+    "hint": "A verb phrase describing a management action to evaluate scope."
+  },
+  {
+    "term": "SERVICE ACTION PLAN",
+    "hint": "A common project practice/artifact: service action plan."
+  },
+  {
+    "term": "RESOURCE METRICS",
+    "hint": "A term used in delivery environments related to resource metrics."
+  },
+  {
+    "term": "ARCHITECTURE ASSURANCE",
+    "hint": "A term used in delivery environments related to architecture assurance."
+  },
+  {
+    "term": "ENABLE CHANGE",
+    "hint": "A verb phrase describing a management action to enable change."
+  },
+  {
+    "term": "COMMUNICATIONS ROADMAP",
+    "hint": "A term used in delivery environments related to communications roadmap."
+  },
+  {
+    "term": "DEPLOYMENT ESCALATION PATH",
+    "hint": "A common project practice/artifact: deployment escalation path."
+  },
+  {
+    "term": "SERVICE RISK ASSESSMENT",
+    "hint": "A common project practice/artifact: service risk assessment."
+  },
+  {
+    "term": "OPERATIONS CONTROLS",
+    "hint": "A term used in delivery environments related to operations controls."
+  },
+  {
+    "term": "ASSURANCE PLANNING",
+    "hint": "A term used in delivery environments related to assurance planning."
+  },
+  {
+    "term": "COST RISK PROFILE",
+    "hint": "A term used in delivery environments related to cost risk profile."
+  },
+  {
+    "term": "COMMUNICATIONS ANALYTICS",
+    "hint": "A term used in delivery environments related to communications analytics."
+  },
+  {
+    "term": "DELIVERY DASHBOARD",
+    "hint": "A term used in delivery environments related to delivery dashboard."
+  },
+  {
+    "term": "PROJECT CONTROL TESTING",
+    "hint": "A common project practice/artifact: project control testing."
+  },
+  {
+    "term": "DATA ESCALATION PATH",
+    "hint": "A common project practice/artifact: data escalation path."
+  },
+  {
+    "term": "BENEFITS GO-LIVE CHECKLIST",
+    "hint": "A common project practice/artifact: benefits go-live checklist."
+  },
+  {
+    "term": "COMMUNICATIONS CADENCE",
+    "hint": "A common project practice/artifact: communications cadence."
+  },
+  {
+    "term": "SCOPE HEALTH",
+    "hint": "A term used in delivery environments related to scope health."
+  },
+  {
+    "term": "SERVICE COMMUNICATION PLAN",
+    "hint": "A term used in delivery environments related to service communication plan."
+  },
+  {
+    "term": "PROGRAM TRACEABILITY",
+    "hint": "A term used in delivery environments related to program traceability."
+  },
+  {
+    "term": "COMMUNICATIONS AUDIT",
+    "hint": "A term used in delivery environments related to communications audit."
+  },
+  {
+    "term": "STANDARDIZE DELIVERY",
+    "hint": "A verb phrase describing a management action to standardize delivery."
+  },
+  {
+    "term": "SECURITY QUALITY GATES",
+    "hint": "A common project practice/artifact: security quality gates."
+  },
+  {
+    "term": "GOVERN COST",
+    "hint": "A verb phrase describing a management action to govern cost."
+  },
+  {
+    "term": "ARCHITECTURE AUDIT",
+    "hint": "A term used in delivery environments related to architecture audit."
+  },
+  {
+    "term": "INCIDENT OVERSIGHT",
+    "hint": "A term used in delivery environments related to incident oversight."
+  },
+  {
+    "term": "PLATFORM GOVERNANCE",
+    "hint": "A term used in delivery environments related to platform governance."
+  },
+  {
+    "term": "FINANCIAL REMEDIATION PLAN",
+    "hint": "A common project practice/artifact: financial remediation plan."
+  },
+  {
+    "term": "GOVERNANCE MATRIX",
+    "hint": "A term used in delivery environments related to governance matrix."
+  },
+  {
+    "term": "PRODUCT FRAMEWORK",
+    "hint": "A term used in delivery environments related to product framework."
+  },
+  {
+    "term": "PROGRAM ANALYTICS",
+    "hint": "A term used in delivery environments related to program analytics."
+  },
+  {
+    "term": "RELEASE REMEDIATION PLAN",
+    "hint": "A common project practice/artifact: release remediation plan."
+  },
+  {
+    "term": "COST CUTOVER PLAN",
+    "hint": "A common project practice/artifact: cost cutover plan."
+  },
+  {
+    "term": "COMPLIANCE ANALYTICS",
+    "hint": "A term used in delivery environments related to compliance analytics."
+  },
+  {
+    "term": "OPTIMIZE RESOURCES",
+    "hint": "A verb phrase describing a management action to optimize resources."
+  },
+  {
+    "term": "KANBAN FRAMEWORK",
+    "hint": "A term used in delivery environments related to kanban framework."
+  },
+  {
+    "term": "COMMUNICATIONS DECISION LOG",
+    "hint": "A term used in delivery environments related to communications decision log."
+  },
+  {
+    "term": "SCHEDULE ASSURANCE",
+    "hint": "A term used in delivery environments related to schedule assurance."
+  },
+  {
+    "term": "OPERATIONS ASSURANCE",
+    "hint": "A term used in delivery environments related to operations assurance."
+  },
+  {
+    "term": "ARCHITECTURE ROADMAP",
+    "hint": "A term used in delivery environments related to architecture roadmap."
+  },
+  {
+    "term": "INCIDENT COMPLIANCE",
+    "hint": "A term used in delivery environments related to incident compliance."
+  },
+  {
+    "term": "COMMUNICATIONS HEALTH DASHBOARD",
+    "hint": "A common project practice/artifact: communications health dashboard."
+  },
+  {
+    "term": "PROCUREMENT HEALTH",
+    "hint": "A term used in delivery environments related to procurement health."
+  },
+  {
+    "term": "INCIDENT BRIEF",
+    "hint": "A common project practice/artifact: incident brief."
+  },
+  {
+    "term": "SCRUM DASHBOARD",
+    "hint": "A term used in delivery environments related to scrum dashboard."
+  },
+  {
+    "term": "SERVICE LESSONS LEARNED",
+    "hint": "A common project practice/artifact: service lessons learned."
+  },
+  {
+    "term": "EXECUTE COST",
+    "hint": "A verb phrase describing a management action to execute cost."
+  },
+  {
+    "term": "AGILE BACKLOG",
+    "hint": "A term used in delivery environments related to agile backlog."
+  },
+  {
+    "term": "QUALITY WORKFLOW",
+    "hint": "A term used in delivery environments related to quality workflow."
+  },
+  {
+    "term": "SCHEDULE STATUS REPORT",
+    "hint": "A common project practice/artifact: schedule status report."
+  },
+  {
+    "term": "ARCHITECTURE CONTROLS",
+    "hint": "A term used in delivery environments related to architecture controls."
+  },
+  {
+    "term": "RELEASE READINESS REVIEW",
+    "hint": "A common project practice/artifact: release readiness review."
+  },
+  {
+    "term": "INCIDENT RUNBOOK",
+    "hint": "A term used in delivery environments related to incident runbook."
+  },
+  {
+    "term": "RELEASE WORKSHOP",
+    "hint": "A common project practice/artifact: release workshop."
+  },
+  {
+    "term": "CUSTOMER OVERSIGHT",
+    "hint": "A term used in delivery environments related to customer oversight."
+  },
+  {
+    "term": "DATA ALIGNMENT",
+    "hint": "A term used in delivery environments related to data alignment."
+  },
+  {
+    "term": "DEPLOYMENT COMPLIANCE",
+    "hint": "A term used in delivery environments related to deployment compliance."
+  },
+  {
+    "term": "PLATFORM ACTION PLAN",
+    "hint": "A common project practice/artifact: platform action plan."
+  },
+  {
+    "term": "ASSURANCE FORECASTING",
+    "hint": "A term used in delivery environments related to assurance forecasting."
+  },
+  {
+    "term": "PROGRAM ROADMAP",
+    "hint": "A term used in delivery environments related to program roadmap."
+  },
+  {
+    "term": "SCRUM PLAYBOOK",
+    "hint": "A term used in delivery environments related to scrum playbook."
+  },
+  {
+    "term": "IMPROVE RISKS",
+    "hint": "A verb phrase describing a management action to improve risks."
+  },
+  {
+    "term": "GOVERNANCE PACK",
+    "hint": "A common project practice/artifact: governance pack."
+  },
+  {
+    "term": "SCRUM OPERATIONS HANDOFF",
+    "hint": "A common project practice/artifact: scrum operations handoff."
+  },
+  {
+    "term": "PLATFORM PLANNING",
+    "hint": "A term used in delivery environments related to platform planning."
+  },
+  {
+    "term": "PROJECT CUTOVER PLAN",
+    "hint": "A common project practice/artifact: project cutover plan."
+  },
+  {
+    "term": "INTEGRATION STEERING COMMITTEE",
+    "hint": "A common project practice/artifact: integration steering committee."
+  },
+  {
+    "term": "CHANGE CHANGE LOG",
+    "hint": "A term used in delivery environments related to change change log."
+  },
+  {
+    "term": "RESOURCE POST-IMPLEMENTATION REVIEW",
+    "hint": "A common project practice/artifact: resource post-implementation review."
+  },
+  {
+    "term": "AGILE WORKFLOW",
+    "hint": "A term used in delivery environments related to agile workflow."
+  },
+  {
+    "term": "SCHEDULE BASELINING",
+    "hint": "A term used in delivery environments related to schedule baselining."
+  },
+  {
+    "term": "SECURITY CHECKPOINT",
+    "hint": "A common project practice/artifact: security checkpoint."
+  },
+  {
+    "term": "INCIDENT BASELINING",
+    "hint": "A term used in delivery environments related to incident baselining."
+  },
+  {
+    "term": "EXECUTE RESOURCES",
+    "hint": "A verb phrase describing a management action to execute resources."
+  },
+  {
+    "term": "COMMUNICATIONS BACKLOG",
+    "hint": "A term used in delivery environments related to communications backlog."
+  },
+  {
+    "term": "COST PACK",
+    "hint": "A common project practice/artifact: cost pack."
+  },
+  {
+    "term": "OPTIMIZE SCHEDULE",
+    "hint": "A verb phrase describing a management action to optimize schedule."
+  },
+  {
+    "term": "CUSTOMER REMEDIATION PLAN",
+    "hint": "A common project practice/artifact: customer remediation plan."
+  },
+  {
+    "term": "PLATFORM PIPELINE",
+    "hint": "A term used in delivery environments related to platform pipeline."
+  },
+  {
+    "term": "SCOPE ASSURANCE",
+    "hint": "A term used in delivery environments related to scope assurance."
+  },
+  {
+    "term": "RESOURCE AUDIT",
+    "hint": "A term used in delivery environments related to resource audit."
+  },
+  {
+    "term": "FINANCIAL RISK PROFILE",
+    "hint": "A term used in delivery environments related to financial risk profile."
+  },
+  {
+    "term": "INCIDENT GO-LIVE CHECKLIST",
+    "hint": "A common project practice/artifact: incident go-live checklist."
+  },
+  {
+    "term": "CHANGE ACTION LOG",
+    "hint": "A term used in delivery environments related to change action log."
+  },
+  {
+    "term": "REQUIREMENTS TRACKING",
+    "hint": "A term used in delivery environments related to requirements tracking."
+  },
+  {
+    "term": "REQUIREMENTS POST-IMPLEMENTATION REVIEW",
+    "hint": "A common project practice/artifact: requirements post-implementation review."
+  },
+  {
+    "term": "INCIDENT CHECKPOINT",
+    "hint": "A common project practice/artifact: incident checkpoint."
+  },
+  {
+    "term": "DATA COMMUNICATION PLAN",
+    "hint": "A term used in delivery environments related to data communication plan."
+  },
+  {
+    "term": "SCRUM APPROVALS",
+    "hint": "A term used in delivery environments related to scrum approvals."
+  },
+  {
+    "term": "TESTING DASHBOARD",
+    "hint": "A term used in delivery environments related to testing dashboard."
+  },
+  {
+    "term": "TESTING RELEASE NOTES",
+    "hint": "A common project practice/artifact: testing release notes."
+  },
+  {
+    "term": "SCHEDULE ACTION LOG",
+    "hint": "A term used in delivery environments related to schedule action log."
+  },
+  {
+    "term": "AGILE DECISION LOG",
+    "hint": "A term used in delivery environments related to agile decision log."
+  },
+  {
+    "term": "OPERATIONS GO-LIVE CHECKLIST",
+    "hint": "A common project practice/artifact: operations go-live checklist."
+  },
+  {
+    "term": "OPTIMIZE DELIVERY",
+    "hint": "A verb phrase describing a management action to optimize delivery."
+  },
+  {
+    "term": "ARCHITECTURE WORKFLOW",
+    "hint": "A term used in delivery environments related to architecture workflow."
+  },
+  {
+    "term": "REQUIREMENTS PLANNING",
+    "hint": "A term used in delivery environments related to requirements planning."
+  },
+  {
+    "term": "PROCUREMENT ASSURANCE",
+    "hint": "A term used in delivery environments related to procurement assurance."
+  },
+  {
+    "term": "PLATFORM CUTOVER PLAN",
+    "hint": "A common project practice/artifact: platform cutover plan."
+  },
+  {
+    "term": "DELIVERY RELEASE NOTES",
+    "hint": "A common project practice/artifact: delivery release notes."
+  },
+  {
+    "term": "ENABLE SCHEDULE",
+    "hint": "A verb phrase describing a management action to enable schedule."
+  },
+  {
+    "term": "RISK POST-IMPLEMENTATION REVIEW",
+    "hint": "A common project practice/artifact: risk post-implementation review."
+  },
+  {
+    "term": "ASSURANCE BASELINING",
+    "hint": "A term used in delivery environments related to assurance baselining."
+  },
+  {
+    "term": "RELEASE CHANGE LOG",
+    "hint": "A term used in delivery environments related to release change log."
+  },
+  {
+    "term": "REQUIREMENTS COMPLIANCE",
+    "hint": "A term used in delivery environments related to requirements compliance."
+  },
+  {
+    "term": "COMPLIANCE MODEL",
+    "hint": "A common project practice/artifact: compliance model."
+  },
+  {
+    "term": "PROCUREMENT WORKFLOW",
+    "hint": "A term used in delivery environments related to procurement workflow."
+  },
+  {
+    "term": "GOVERNANCE DECISION LOG",
+    "hint": "A term used in delivery environments related to governance decision log."
+  },
+  {
+    "term": "PLATFORM DASHBOARD",
+    "hint": "A term used in delivery environments related to platform dashboard."
+  },
+  {
+    "term": "VERIFY DELIVERY",
+    "hint": "A verb phrase describing a management action to verify delivery."
+  },
+  {
+    "term": "VERIFY SCHEDULE",
+    "hint": "A verb phrase describing a management action to verify schedule."
+  },
+  {
+    "term": "SECURITY REPORTING",
+    "hint": "A term used in delivery environments related to security reporting."
+  },
+  {
+    "term": "PLATFORM TRACEABILITY",
+    "hint": "A term used in delivery environments related to platform traceability."
+  },
+  {
+    "term": "CUSTOMER ASSURANCE",
+    "hint": "A term used in delivery environments related to customer assurance."
+  },
+  {
+    "term": "FINANCIAL CHANGE LOG",
+    "hint": "A term used in delivery environments related to financial change log."
+  },
+  {
+    "term": "REQUIREMENTS READINESS REVIEW",
+    "hint": "A common project practice/artifact: requirements readiness review."
+  },
+  {
+    "term": "DATA ACTION LOG",
+    "hint": "A term used in delivery environments related to data action log."
+  },
+  {
+    "term": "COMPLIANCE ROADMAP",
+    "hint": "A term used in delivery environments related to compliance roadmap."
+  },
+  {
+    "term": "CUSTOMER SUMMARY",
+    "hint": "A common project practice/artifact: customer summary."
+  },
+  {
+    "term": "COMPLIANCE REMEDIATION PLAN",
+    "hint": "A common project practice/artifact: compliance remediation plan."
+  },
+  {
+    "term": "QUALITY CHANGE LOG",
+    "hint": "A term used in delivery environments related to quality change log."
+  },
+  {
+    "term": "COST COMPLIANCE",
+    "hint": "A term used in delivery environments related to cost compliance."
+  },
+  {
+    "term": "VALUE REVIEW",
+    "hint": "A term used in delivery environments related to value review."
+  },
+  {
+    "term": "PROJECT GO-LIVE CHECKLIST",
+    "hint": "A common project practice/artifact: project go-live checklist."
+  },
+  {
+    "term": "AGILE ANALYTICS",
+    "hint": "A term used in delivery environments related to agile analytics."
+  },
+  {
+    "term": "KANBAN QUALITY GATES",
+    "hint": "A common project practice/artifact: kanban quality gates."
+  },
+  {
+    "term": "OPERATIONS GATE REVIEW",
+    "hint": "A common project practice/artifact: operations gate review."
+  },
+  {
+    "term": "RISK CONTROL TESTING",
+    "hint": "A common project practice/artifact: risk control testing."
+  },
+  {
+    "term": "KANBAN ACTION PLAN",
+    "hint": "A common project practice/artifact: kanban action plan."
+  },
+  {
+    "term": "VALUE SUMMARY",
+    "hint": "A common project practice/artifact: value summary."
+  },
+  {
+    "term": "PRODUCT SUMMARY",
+    "hint": "A common project practice/artifact: product summary."
+  },
+  {
+    "term": "COST QUALITY GATES",
+    "hint": "A common project practice/artifact: cost quality gates."
+  },
+  {
+    "term": "SCRUM BACKLOG",
+    "hint": "A term used in delivery environments related to scrum backlog."
+  },
+  {
+    "term": "ASSURANCE WORKFLOW",
+    "hint": "A term used in delivery environments related to assurance workflow."
+  },
+  {
+    "term": "SERVICE DECISION LOG",
+    "hint": "A term used in delivery environments related to service decision log."
+  },
+  {
+    "term": "DEPLOYMENT REPORTING",
+    "hint": "A term used in delivery environments related to deployment reporting."
+  },
+  {
+    "term": "PROCUREMENT METRICS",
+    "hint": "A term used in delivery environments related to procurement metrics."
+  },
+  {
+    "term": "VALUE PACK",
+    "hint": "A common project practice/artifact: value pack."
+  },
+  {
+    "term": "SCRUM RELEASE NOTES",
+    "hint": "A common project practice/artifact: scrum release notes."
+  },
+  {
+    "term": "OPERATIONS PLAYBOOK",
+    "hint": "A term used in delivery environments related to operations playbook."
+  },
+  {
+    "term": "SCRUM REGISTER",
+    "hint": "A term used in delivery environments related to scrum register."
+  },
+  {
+    "term": "COMPLIANCE PIPELINE",
+    "hint": "A term used in delivery environments related to compliance pipeline."
+  },
+  {
+    "term": "PROCUREMENT OVERSIGHT",
+    "hint": "A term used in delivery environments related to procurement oversight."
+  },
+  {
+    "term": "PORTFOLIO CUTOVER PLAN",
+    "hint": "A common project practice/artifact: portfolio cutover plan."
+  },
+  {
+    "term": "SECURITY CONTROL TESTING",
+    "hint": "A common project practice/artifact: security control testing."
+  },
+  {
+    "term": "QUALITY OPERATIONS HANDOFF",
+    "hint": "A common project practice/artifact: quality operations handoff."
+  },
+  {
+    "term": "COMMUNICATIONS RELEASE NOTES",
+    "hint": "A common project practice/artifact: communications release notes."
+  }
+]
