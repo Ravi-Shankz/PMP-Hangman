@@ -6,22 +6,29 @@
   <title>PMP + Agile Hangman — Project Health</title>
   <style>
     :root{
-      /* Professional palette: slate + emerald/teal + amber + red (no blue) */
-      --bg:#0a0f16;
-      --card:#0f1722;
-      --card2:#0b1320;
-      --text:#e7eaf0;
-      --muted:#9aa6b2;
-      --border:rgba(154,166,178,0.18);
+      /* Pastel professional palette */
+      --bg:#f6f7fb;
+      --bg2:#f9fafc;
 
-      --accent:#10b981;   /* emerald */
-      --accent2:#14b8a6;  /* teal */
-      --good:#22c55e;
-      --warn:#f59e0b;
-      --bad:#ef4444;
+      --card:#ffffff;
+      --card2:#fbfcff;
+
+      --text:#0f172a;      /* slate-900 */
+      --muted:#475569;     /* slate-600 */
+      --muted2:#64748b;    /* slate-500 */
+
+      --border:rgba(15,23,42,0.10);
+
+      /* Pastel accents */
+      --accent:#7dd3c7;    /* mint */
+      --accent2:#a5b4fc;   /* lavender */
+      --good:#86efac;      /* light green */
+      --warn:#fdba74;      /* peach */
+      --bad:#fda4af;       /* pastel red */
 
       --radius:18px;
-      --shadow: 0 18px 45px rgba(0,0,0,0.38);
+      --shadow: 0 16px 40px rgba(15,23,42,0.10);
+      --shadow2: 0 10px 28px rgba(15,23,42,0.08);
     }
 
     *{box-sizing:border-box}
@@ -29,10 +36,10 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       background:
-        radial-gradient(circle at 18% 12%, rgba(16,185,129,0.16), transparent 42%),
-        radial-gradient(circle at 82% 22%, rgba(20,184,166,0.10), transparent 45%),
-        radial-gradient(circle at 55% 95%, rgba(245,158,11,0.10), transparent 50%),
-        var(--bg);
+        radial-gradient(circle at 12% 18%, rgba(125,211,199,0.35), transparent 42%),
+        radial-gradient(circle at 82% 22%, rgba(165,180,252,0.30), transparent 46%),
+        radial-gradient(circle at 55% 90%, rgba(253,186,116,0.25), transparent 52%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       color:var(--text);
       min-height:100vh;
       display:flex;
@@ -47,22 +54,23 @@
       align-items:flex-end; justify-content:space-between;
     }
     h1{margin:0; letter-spacing:-0.02em; font-size: clamp(20px, 2.4vw, 30px);}
-    .sub{color:var(--muted); margin-top:6px; line-height:1.35; font-size: 13px;}
+    .sub{color:var(--muted2); margin-top:6px; line-height:1.35; font-size: 13px;}
 
     .pill{
       padding:10px 12px; border-radius:999px;
       border:1px solid var(--border);
-      background: rgba(15,23,34,0.78);
-      box-shadow: var(--shadow);
-      font-size: 12px; color: var(--muted);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow2);
+      font-size: 12px; color: var(--muted2);
       display:flex; gap:12px; align-items:center;
       white-space:nowrap;
     }
     .pill b{color:var(--text)}
     .pill .dot{
       width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg, rgba(16,185,129,1), rgba(20,184,166,1));
-      box-shadow: 0 0 18px rgba(16,185,129,0.25);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(125,211,199,0.18);
     }
 
     .grid{
@@ -71,7 +79,7 @@
       gap:14px;
     }
     .card{
-      background: linear-gradient(180deg, rgba(15,23,34,0.90), rgba(11,19,32,0.90));
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(251,252,255,0.92));
       border:1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -82,7 +90,7 @@
       font-size: 12px;
       letter-spacing:0.12em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--muted2);
       display:flex; align-items:center; justify-content:space-between;
       gap:10px;
     }
@@ -102,12 +110,14 @@
       display:flex; gap:8px; align-items:center;
       padding: 9px 10px;
       border-radius: 14px;
-      border:1px solid rgba(154,166,178,0.20);
-      background: rgba(2,6,23,0.18);
+      border:1px solid rgba(15,23,42,0.10);
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(15,23,42,0.06);
     }
     .control label{
       font-size: 12px;
-      color: var(--muted);
+      color: var(--muted2);
       font-weight: 800;
       letter-spacing: 0.04em;
     }
@@ -121,7 +131,7 @@
       letter-spacing: 0.02em;
       cursor: pointer;
     }
-    select option{ background: #0b1320; color: var(--text); }
+    select option{ background: #ffffff; color: var(--text); }
     .toggle{
       display:flex; gap:10px; align-items:center;
       cursor:pointer;
@@ -130,8 +140,8 @@
     .toggle input{ display:none; }
     .switch{
       width: 44px; height: 26px;
-      background: rgba(154,166,178,0.22);
-      border: 1px solid rgba(154,166,178,0.22);
+      background: rgba(15,23,42,0.08);
+      border: 1px solid rgba(15,23,42,0.10);
       border-radius: 999px;
       position: relative;
       transition: all .18s ease;
@@ -139,24 +149,24 @@
     .knob{
       width: 20px; height: 20px;
       border-radius: 999px;
-      background: rgba(231,234,240,0.92);
+      background: rgba(255,255,255,0.95);
       position:absolute;
       top: 2px; left: 2px;
       transition: all .18s ease;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+      box-shadow: 0 8px 18px rgba(15,23,42,0.12);
+      border: 1px solid rgba(15,23,42,0.08);
     }
     .toggle input:checked + .switch{
-      background: rgba(16,185,129,0.25);
-      border-color: rgba(16,185,129,0.35);
-      box-shadow: 0 0 0 4px rgba(16,185,129,0.08);
+      background: rgba(125,211,199,0.38);
+      border-color: rgba(125,211,199,0.55);
+      box-shadow: 0 0 0 4px rgba(125,211,199,0.18);
     }
     .toggle input:checked + .switch .knob{
       left: 22px;
-      background: rgba(231,234,240,0.95);
     }
     .toggleText{
       font-size: 12px;
-      color: var(--muted);
+      color: var(--muted2);
       font-weight: 900;
       letter-spacing: 0.04em;
     }
@@ -172,19 +182,22 @@
       width: 34px; height: 44px;
       display:flex; align-items:center; justify-content:center;
       border-radius: 12px;
-      border:1px solid rgba(154,166,178,0.22);
-      background: rgba(2,6,23,0.22);
+      border:1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
       font-size: 20px;
       font-weight: 900;
       letter-spacing: 0.02em;
+      color: var(--text);
+      box-shadow: 0 10px 20px rgba(15,23,42,0.06);
     }
     .tile.space{
       width: 14px; height: 44px;
-      border: none; background: transparent;
+      border: none; background: transparent; box-shadow:none;
     }
     .tile.punct{
-      width: 22px; border:none; background: transparent;
-      color: var(--muted);
+      width: 22px; border:none; background: transparent; box-shadow:none;
+      color: var(--muted2);
     }
 
     .actions{
@@ -194,49 +207,53 @@
     }
     button{
       cursor:pointer;
-      border: 1px solid rgba(154,166,178,0.22);
-      background: rgba(15,23,34,0.80);
+      border: 1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
       color: var(--text);
       padding: 10px 12px;
       border-radius: 14px;
       font-weight: 900;
       font-size: 13px;
       letter-spacing: 0.01em;
-      transition: transform .08s ease, border-color .14s ease, background .14s ease;
+      transition: transform .08s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease;
+      box-shadow: 0 10px 22px rgba(15,23,42,0.08);
     }
     button:hover{
-      border-color: rgba(16,185,129,0.45);
-      background: rgba(15,23,34,0.92);
+      border-color: rgba(125,211,199,0.60);
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 14px 30px rgba(15,23,42,0.10);
     }
     button:active{ transform: translateY(1px); }
-    button:disabled{ opacity:0.45; cursor:not-allowed; }
+    button:disabled{ opacity:0.55; cursor:not-allowed; box-shadow:none; }
 
     .btnPrimary{
-      border-color: rgba(16,185,129,0.35);
-      background: rgba(16,185,129,0.12);
+      border-color: rgba(125,211,199,0.70);
+      background: linear-gradient(135deg, rgba(125,211,199,0.55), rgba(165,180,252,0.40));
     }
     .btnPrimary:hover{
-      border-color: rgba(16,185,129,0.55);
-      background: rgba(16,185,129,0.16);
+      border-color: rgba(125,211,199,0.85);
+      background: linear-gradient(135deg, rgba(125,211,199,0.65), rgba(165,180,252,0.46));
     }
     .btnGhost{
-      background: rgba(2,6,23,0.12);
+      background: rgba(255,255,255,0.62);
     }
     .btnDanger{
-      border-color: rgba(239,68,68,0.35);
-      background: rgba(239,68,68,0.10);
+      border-color: rgba(253,164,175,0.80);
+      background: rgba(253,164,175,0.22);
     }
     .btnDanger:hover{
-      border-color: rgba(239,68,68,0.55);
-      background: rgba(239,68,68,0.14);
+      border-color: rgba(253,164,175,0.95);
+      background: rgba(253,164,175,0.30);
     }
 
     .hint{
       margin-top: 10px;
       padding: 12px;
       border-radius: 14px;
-      background: rgba(2,6,23,0.20);
-      border: 1px dashed rgba(154,166,178,0.22);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
+      border: 1px dashed rgba(15,23,42,0.14);
       color: var(--muted);
       line-height: 1.4;
       font-size: 13px;
@@ -250,8 +267,9 @@
       gap:8px;
     }
     .key{
-      border:1px solid rgba(154,166,178,0.18);
-      background: rgba(2,6,23,0.18);
+      border:1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(10px);
       border-radius: 12px;
       padding: 10px 0;
       text-align:center;
@@ -260,20 +278,22 @@
       user-select:none;
       cursor:pointer;
       color: var(--text);
-      transition: border-color .14s ease, transform .08s ease, background .14s ease;
+      transition: border-color .14s ease, transform .08s ease, background .14s ease, box-shadow .14s ease;
+      box-shadow: 0 10px 20px rgba(15,23,42,0.06);
     }
     .key:hover{
-      border-color: rgba(16,185,129,0.40);
+      border-color: rgba(125,211,199,0.70);
       transform: translateY(-1px);
+      box-shadow: 0 14px 24px rgba(15,23,42,0.08);
     }
-    .key.used{ opacity:0.35; cursor:not-allowed; transform:none !important; }
+    .key.used{ opacity:0.40; cursor:not-allowed; transform:none !important; box-shadow:none; }
     .key.good{
-      border-color: rgba(34,197,94,0.55);
-      background: rgba(34,197,94,0.10);
+      border-color: rgba(134,239,172,0.85);
+      background: rgba(134,239,172,0.25);
     }
     .key.bad{
-      border-color: rgba(239,68,68,0.55);
-      background: rgba(239,68,68,0.10);
+      border-color: rgba(253,164,175,0.85);
+      background: rgba(253,164,175,0.25);
     }
 
     /* Health meter */
@@ -282,22 +302,24 @@
       border:1px solid var(--border);
       border-radius: 16px;
       padding: 12px;
-      background: rgba(2,6,23,0.18);
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 22px rgba(15,23,42,0.06);
     }
     .meterTop{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
-    .meterTop .label{ color: var(--muted); font-size: 12px; font-weight: 900; letter-spacing:0.10em; text-transform:uppercase; }
+    .meterTop .label{ color: var(--muted2); font-size: 12px; font-weight: 900; letter-spacing:0.10em; text-transform:uppercase; }
     .meterTop .state{ font-weight: 950; }
     .bar{
       height: 12px;
       border-radius: 999px;
-      background: rgba(154,166,178,0.18);
+      background: rgba(15,23,42,0.08);
       overflow:hidden;
       margin-top: 10px;
     }
     .fill{
       height:100%;
       width: 100%;
-      background: linear-gradient(90deg, rgba(34,197,94,0.95), rgba(16,185,129,0.90));
+      background: linear-gradient(90deg, rgba(134,239,172,0.95), rgba(125,211,199,0.90));
       border-radius: 999px;
       transition: width .18s ease;
     }
@@ -311,10 +333,12 @@
       border:1px solid var(--border);
       border-radius: 16px;
       padding: 12px;
-      background: rgba(2,6,23,0.16);
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 22px rgba(15,23,42,0.06);
     }
     .stat .k{
-      color: var(--muted);
+      color: var(--muted2);
       font-size: 12px;
       font-weight: 900;
       letter-spacing:0.10em;
@@ -327,17 +351,19 @@
       margin-top: 10px;
       padding: 12px;
       border-radius: 14px;
-      border: 1px solid rgba(154,166,178,0.20);
-      background: rgba(15,23,34,0.72);
+      border: 1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(10px);
       color: var(--text);
       line-height: 1.35;
       font-size: 13px;
       display:none;
+      box-shadow: 0 12px 26px rgba(15,23,42,0.08);
     }
-    .toast.good{ border-color: rgba(34,197,94,0.35); }
-    .toast.bad{ border-color: rgba(239,68,68,0.35); }
+    .toast.good{ border-color: rgba(134,239,172,0.85); }
+    .toast.bad{ border-color: rgba(253,164,175,0.85); }
 
-    .smallNote{ color: var(--muted); font-size: 12px; line-height:1.4; }
+    .smallNote{ color: var(--muted2); font-size: 12px; line-height:1.4; }
 
     @media (max-width: 980px){
       .grid{ grid-template-columns: 1fr; }
@@ -479,17 +505,15 @@
   let BANK = [];
   let BANK_SIG = "";
 
-  // Difficulty buckets
+  // Difficulty index
   const DIFFS = ["all","easy","medium","hard"];
   const subsetIndices = { all: [], easy: [], medium: [], hard: [] };
 
-  // IMPORTANT CHANGE:
-  // Decks are now IN-MEMORY (not saved to localStorage), so every fresh page load starts at 1000 again.
-  // This matches: "each time someone opens the link, start fresh".
-  const decks = { all: [], easy: [], medium: [], hard: [] };
-
-  // Still OK to persist best streak for the same device (optional)
-  const LS_BEST_STREAK = "pmpHangmanBestStreak_v4";
+  // LocalStorage keys (per browser/device)
+  const LS_VER = "v3"; // bump if you want to force fresh decks
+  const LS_BEST_STREAK = `pmpHangmanBestStreak_${LS_VER}`;
+  const LS_DECK_PREFIX = `pmpHangmanDeck_${LS_VER}_`; // + difficulty
+  const LS_BANK_SIG = `pmpHangmanBankSig_${LS_VER}`;
 
   // =============================
   // UI elements
@@ -539,14 +563,11 @@
 
   // Exam state
   let examActive = false;
-  let examRound = 0;       // 1..EXAM_ROUNDS
+  let examRound = 0;           // 1..EXAM_ROUNDS
   let examSolved = 0;
   let examFailed = 0;
   let examScore = 0;
-
-  // Round state
-  let guessesMade = false;     // NEW: used to lock difficulty only AFTER first guess
-  let roundInPlay = false;
+  let roundLocked = false;     // prevents changing difficulty mid-round
 
   bestStreakEl.textContent = bestStreak;
   roundTotalEl.textContent = String(EXAM_ROUNDS);
@@ -580,20 +601,20 @@
     const hasPunct = /[^A-Z\s]/.test(t);
     const rare = (lettersOnly.match(/[JQXZ]/g) || []).length;
 
-    let s = 0;
-    if (charLen <= 10) s += 0;
-    else if (charLen <= 18) s += 1;
-    else s += 2;
+    let score = 0;
+    if (charLen <= 10) score += 0;
+    else if (charLen <= 18) score += 1;
+    else score += 2;
 
-    if (wordCount <= 2) s += 0;
-    else if (wordCount <= 3) s += 1;
-    else s += 2;
+    if (wordCount <= 2) score += 0;
+    else if (wordCount <= 3) score += 1;
+    else score += 2;
 
-    if (hasPunct) s += 1;
-    if (rare >= 2) s += 1;
+    if (hasPunct) score += 1;
+    if (rare >= 2) score += 1;
 
-    if (s <= 1) return "easy";
-    if (s <= 3) return "medium";
+    if (score <= 1) return "easy";
+    if (score <= 3) return "medium";
     return "hard";
   }
 
@@ -610,23 +631,48 @@
   }
 
   // =============================
-  // Deck logic (NO repeats within a session; resets on page reload)
+  // Deck logic (no repeats per device/browser)
   // =============================
+  function deckKey(diff){ return LS_DECK_PREFIX + diff; }
+
   function buildFreshDeck(diff){
     const base = subsetIndices[diff] || [];
-    decks[diff] = shuffle(base.slice());
-    return decks[diff];
+    const deck = shuffle(base.slice());
+    localStorage.setItem(deckKey(diff), JSON.stringify(deck));
+    localStorage.setItem(LS_BANK_SIG, BANK_SIG);
+    return deck;
   }
 
   function getDeck(diff){
-    if (!decks[diff] || decks[diff].length === 0){
+    // If bank signature changed, reset all decks
+    const storedSig = localStorage.getItem(LS_BANK_SIG);
+    if (storedSig !== BANK_SIG){
+      for (const d of DIFFS){
+        localStorage.removeItem(deckKey(d));
+      }
+      localStorage.setItem(LS_BANK_SIG, BANK_SIG);
+    }
+
+    try{
+      const raw = localStorage.getItem(deckKey(diff));
+      if (!raw) return buildFreshDeck(diff);
+      const deck = JSON.parse(raw);
+      if (!Array.isArray(deck)) return buildFreshDeck(diff);
+      // Basic validation
+      if (deck.some(n => typeof n !== "number" || n < 0 || n >= BANK.length)) return buildFreshDeck(diff);
+      return deck;
+    } catch {
       return buildFreshDeck(diff);
     }
-    return decks[diff];
+  }
+
+  function saveDeck(diff, deck){
+    localStorage.setItem(deckKey(diff), JSON.stringify(deck));
   }
 
   function remainingCount(diff){
-    return (decks[diff] && decks[diff].length) ? decks[diff].length : (subsetIndices[diff] || []).length;
+    const deck = getDeck(diff);
+    return deck.length;
   }
 
   function drawNextPick(diff){
@@ -638,15 +684,17 @@
     }
 
     const idx = deck.pop();
+    saveDeck(diff, deck);
     return BANK[idx];
   }
 
   function resetDecks(){
     for (const d of DIFFS){
-      buildFreshDeck(d);
+      localStorage.removeItem(deckKey(d));
     }
+    localStorage.setItem(LS_BANK_SIG, BANK_SIG);
+    showToast("🧹 Deck reset for this device/browser. You can see terms again from the start.", "good");
     updateRemaining();
-    showToast("🧹 Deck reset. Remaining is back to full for this session.", "good");
   }
 
   // =============================
@@ -726,7 +774,8 @@
 
   function updateRemaining(){
     const diff = diffSelect.value;
-    remainingEl.textContent = String(remainingCount(diff));
+    const rem = remainingCount(diff);
+    remainingEl.textContent = String(rem);
     modeDetailEl.textContent = `${examActive ? "Exam" : "Practice"} • ${difficultyLabel(diff)}`;
   }
 
@@ -735,19 +784,6 @@
     examProgress.style.display = examToggle.checked ? "inline" : "none";
     btnNext.textContent = examToggle.checked ? (examActive ? "Next round" : "Start exam") : "New word";
     btnHint.disabled = false;
-
-    // Allow difficulty selection anytime BEFORE first guess in the round.
-    // In Exam mode, lock difficulty once exam starts (so the 10 rounds are consistent).
-    if (examActive){
-      diffSelect.disabled = true;
-      examToggle.disabled = true;
-      btnResetDeck.disabled = true;
-    } else {
-      examToggle.disabled = false;
-      btnResetDeck.disabled = false;
-      diffSelect.disabled = (roundInPlay && guessesMade); // key fix
-    }
-
     updateRemaining();
     updateStats();
   }
@@ -789,11 +825,6 @@
 
       BANK_SIG = bankSignature();
 
-      // Build fresh decks for this session (so Remaining starts at full)
-      for (const d of DIFFS){
-        buildFreshDeck(d);
-      }
-
       bankStatusEl.textContent = `Bank: ${BANK.length} terms`;
       updateRemaining();
 
@@ -810,7 +841,6 @@
       subsetIndices.medium = [0];
       subsetIndices.hard = [];
       BANK_SIG = bankSignature();
-      for (const d of DIFFS){ buildFreshDeck(d); }
       updateRemaining();
       showToast("⚠️ words.json could not be loaded. Upload words.json to the same folder as index.html.", "bad");
     }
@@ -819,6 +849,13 @@
   // =============================
   // Round flow
   // =============================
+  function lockControls(lock){
+    roundLocked = lock;
+    diffSelect.disabled = lock;
+    examToggle.disabled = lock && examActive; // keep exam mode stable mid-exam
+    btnResetDeck.disabled = lock && examActive; // avoid deck reset mid-exam
+  }
+
   function beginRound(){
     hideToast();
     setHint("");
@@ -826,8 +863,6 @@
     lives = MAX_LIVES;
     used = new Set();
     revealed = new Set();
-    guessesMade = false;
-    roundInPlay = true;
 
     const diff = diffSelect.value;
     currentPick = drawNextPick(diff);
@@ -844,13 +879,14 @@
       btnHint.disabled = true;
     };
 
+    lockControls(true);
     updateRemaining();
-    setModeUI();
+    updateStats();
   }
 
   function endRoundUI(){
     disableKeyboard(true);
-    roundInPlay = false;
+    lockControls(false);
     setModeUI();
   }
 
@@ -861,17 +897,21 @@
     if (examActive){
       examScore += gained;
       examSolved += 1;
-      showToast(`✅ Round ${examRound} solved! +${gained} points. Click “Next round”.`, "good");
     } else {
       score += gained;
       solvedCount += 1;
       streak += 1;
       bestStreak = Math.max(bestStreak, streak);
       localStorage.setItem(LS_BEST_STREAK, String(bestStreak));
-      showToast(`✅ Solved! +${gained} points. Click “New word” for the next term.`, "good");
     }
 
     updateStats();
+
+    if (examActive){
+      showToast(`✅ Round ${examRound} solved! +${gained} points. Click “Next round”.`, "good");
+    } else {
+      showToast(`✅ Solved! +${gained} points. Click “New word” for the next term.`, "good");
+    }
     endRoundUI();
   }
 
@@ -887,16 +927,22 @@
     endRoundUI();
   }
 
-  function finishExam(){
-    // End exam session
+  function maybeFinishExam(){
+    if (!examActive) return false;
+    if (examRound < EXAM_ROUNDS) return false;
+
+    // Exam finished
     examActive = false;
     examToggle.checked = false;
+    setModeUI();
 
     const diffName = difficultyLabel(diffSelect.value);
     const summary = `🏁 Exam complete! Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS} • Difficulty: ${diffName}.`;
     showToast(summary + " Use Share to copy a post-ready blurb.", "good");
 
-    setModeUI();
+    // Reset exam counters for next run (keep totals visible until next action)
+    lockControls(false);
+    return true;
   }
 
   // =============================
@@ -906,12 +952,6 @@
     if (keyEl.classList.contains("used")) return;
     if (used.has(ch)) return;
     used.add(ch);
-
-    // Lock difficulty only AFTER the first guess in the round
-    if (!guessesMade){
-      guessesMade = true;
-      setModeUI();
-    }
 
     const hit = answer.includes(ch);
     if (hit){
@@ -955,6 +995,38 @@
     beginRound();
   }
 
+  async function nextRound(){
+    if (!examToggle.checked){
+      // practice
+      startPractice();
+      return;
+    }
+
+    // exam toggle is ON
+    if (!examActive){
+      // start exam
+      await startExam();
+      return;
+    }
+
+    // exam in progress -> advance
+    examRound += 1;
+    if (examRound > EXAM_ROUNDS){
+      // Safety
+      examRound = EXAM_ROUNDS;
+    }
+    roundNowEl.textContent = String(examRound);
+
+    // If we just completed the final round, finish exam after showing final
+    if (examRound > EXAM_ROUNDS){
+      maybeFinishExam();
+      return;
+    }
+
+    // If previous round ended, start next
+    beginRound();
+  }
+
   // =============================
   // Share
   // =============================
@@ -964,8 +1036,9 @@
 
     let text = "";
     if (examActive){
-      text = `I'm playing PMP + Agile Hangman (Exam mode, ${diffName}). Round ${examRound}/${EXAM_ROUNDS} • Score ${examScore} • Solved ${examSolved}. Try it: ${url}`;
-    } else if (examRound >= EXAM_ROUNDS && (examSolved + examFailed) === EXAM_ROUNDS && (examScore > 0)){
+      text = `I'm playing PMP + Agile Hangman (Exam mode, ${diffName}). Current: Round ${examRound}/${EXAM_ROUNDS} • Score ${examScore} • Solved ${examSolved}. Try it: ${url}`;
+    } else if (examRound >= EXAM_ROUNDS && examScore > 0 && examSolved + examFailed === EXAM_ROUNDS){
+      // If user just finished an exam and hasn’t started another round, we can share exam summary.
       text = `I just finished a 10-round PMP + Agile Hangman exam (${diffName}). Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS}. Try it: ${url}`;
     } else {
       text = `I'm playing PMP + Agile Hangman (${diffName}). Score: ${score} • Best streak: ${bestStreak}. Try it: ${url}`;
@@ -975,6 +1048,7 @@
       await navigator.clipboard.writeText(text);
       showToast("📋 Copied to clipboard! Paste it into LinkedIn (or anywhere).", "good");
     } catch {
+      // fallback: prompt
       window.prompt("Copy this text:", text);
     }
   }
@@ -985,29 +1059,31 @@
   btnNext.addEventListener("click", async () => {
     await loadBank();
 
-    // If a round is in play, require completing it
+    // If a round is mid-play, don't allow skipping (keeps learning loop consistent)
+    // But you can still click New word after round ends. We detect lock by keyboard enabled state.
     const anyKeyEnabled = [...kbdEl.querySelectorAll(".key")].some(k => !k.classList.contains("used") && k.style.pointerEvents !== "none");
-    if (roundInPlay && anyKeyEnabled){
+    if (roundLocked && anyKeyEnabled){
       showToast("Finish this round first (solve or run out of guesses).", "bad");
       return;
     }
 
     if (examToggle.checked){
+      // If a round ended, we move to next round OR start exam
       if (!examActive){
         await startExam();
-        return;
+      } else {
+        // If last round already ended, proceed
+        if (examRound >= EXAM_ROUNDS){
+          // last round completed; finish exam
+          maybeFinishExam();
+        } else {
+          examRound += 1;
+          roundNowEl.textContent = String(examRound);
+          beginRound();
+        }
       }
-
-      // exam active: advance rounds
-      if (examRound >= EXAM_ROUNDS){
-        finishExam();
-        return;
-      }
-
-      examRound += 1;
-      roundNowEl.textContent = String(examRound);
-      beginRound();
     } else {
+      // practice
       startPractice();
     }
   });
@@ -1025,21 +1101,19 @@
 
   diffSelect.addEventListener("change", async () => {
     await loadBank();
-
-    // Only block changing difficulty if the round is already in-play AND user has started guessing
-    if (roundInPlay && guessesMade){
-      showToast("You can change difficulty after the round ends (or before your first guess).", "bad");
-      // revert by forcing UI update
-      setModeUI();
+    if (roundLocked){
+      // In-round changes are not allowed
+      updateRemaining();
+      showToast("Difficulty can be changed after the round ends.", "bad");
       return;
     }
-
     updateRemaining();
     setModeUI();
   });
 
   examToggle.addEventListener("change", () => {
     if (examActive){
+      // Don’t allow toggling off mid-exam (prevents confusing state)
       examToggle.checked = true;
       showToast("Finish the exam run first (10 rounds).", "bad");
       return;
