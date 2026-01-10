@@ -388,6 +388,74 @@
     .helpList li{ margin: 6px 0; }
     .subActionsRight{ margin-top: 12px; display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; }
 
+
+    /* ================= */
+    /* Theme: Dark mode  */
+    /* ================= */
+    body[data-theme="dark"]{
+      --bg:#0b1220;
+      --bg2:#0b1220;
+
+      --card:#0f172a;
+      --card2:#111c33;
+
+      --text:#e5e7eb;
+      --muted:#cbd5e1;
+      --muted2:#94a3b8;
+
+      --border:rgba(226,232,240,0.14);
+
+      --shadow: 0 18px 46px rgba(0,0,0,0.55);
+      --shadow2: 0 10px 28px rgba(0,0,0,0.45);
+    }
+    body[data-theme="dark"]{
+      background:
+        radial-gradient(circle at 12% 18%, rgba(125,211,199,0.18), transparent 42%),
+        radial-gradient(circle at 82% 22%, rgba(165,180,252,0.16), transparent 46%),
+        radial-gradient(circle at 55% 90%, rgba(253,186,116,0.12), transparent 52%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    body[data-theme="dark"] .pill{ background: rgba(15,23,42,0.62); }
+    body[data-theme="dark"] .card{
+      background: linear-gradient(180deg, rgba(15,23,42,0.92), rgba(17,28,51,0.92));
+      border-color: var(--border);
+    }
+    body[data-theme="dark"] .control,
+    body[data-theme="dark"] .meter,
+    body[data-theme="dark"] .stat,
+    body[data-theme="dark"] .hint,
+    body[data-theme="dark"] .toast{
+      background: rgba(15,23,42,0.62);
+      border-color: var(--border);
+    }
+    body[data-theme="dark"] button{
+      background: rgba(15,23,42,0.62);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    body[data-theme="dark"] button:hover{
+      background: rgba(15,23,42,0.78);
+      border-color: rgba(125,211,199,0.45);
+    }
+    body[data-theme="dark"] .btnGhost{ background: rgba(15,23,42,0.56); }
+    body[data-theme="dark"] .tile,
+    body[data-theme="dark"] .key{
+      background: rgba(15,23,42,0.58);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    body[data-theme="dark"] .key.used{ opacity:0.45; }
+    body[data-theme="dark"] .switch{
+      background: rgba(226,232,240,0.10);
+      border-color: var(--border);
+    }
+    body[data-theme="dark"] .knob{
+      background: rgba(226,232,240,0.92);
+      border-color: rgba(226,232,240,0.10);
+    }
+    body[data-theme="dark"] select{ color: var(--text); }
+    body[data-theme="dark"] select option{ background:#0f172a; color:#e5e7eb; }
+
 </style>
 </head>
 <body>
@@ -401,6 +469,15 @@
         <span class="dot"></span>
         <span>Best Streak: <b id="bestStreak">0</b></span>
         <span>Current Streak: <b id="streak">0</b></span>
+      </div>
+
+      <div class="pill" style="gap:10px;">
+        <span style="font-weight:900; letter-spacing:0.08em; text-transform:uppercase;">Theme</span>
+        <label class="toggle" style="gap:10px; margin:0;">
+          <input id="themeToggle" type="checkbox" />
+          <span class="switch"><span class="knob"></span></span>
+          <span class="toggleText" id="themeLabel">Light</span>
+        </label>
       </div>
     </div>
 
@@ -644,6 +721,23 @@
   const examProgress = document.getElementById("examProgress");
   const roundNowEl = document.getElementById("roundNow");
   const roundTotalEl = document.getElementById("roundTotal");
+
+  
+  // =============================
+  // Theme (Light/Dark)
+  // =============================
+  const LS_THEME = "pmpHangmanTheme_v1";
+  const themeToggle = document.getElementById("themeToggle");
+  const themeLabel = document.getElementById("themeLabel");
+
+  function applyTheme(theme){
+    const t = (theme === "dark") ? "dark" : "light";
+    document.body.dataset.theme = t;
+    if (themeToggle) themeToggle.checked = (t === "dark");
+    if (themeLabel) themeLabel.textContent = (t === "dark") ? "Dark" : "Light";
+    try{ localStorage.setItem(LS_THEME, t); }catch(e){}
+  }
+
 
   // =============================
   // Game state
@@ -1159,6 +1253,11 @@
   // =============================
   // Events
 
+  themeToggle?.addEventListener("change", () => {
+    applyTheme(themeToggle.checked ? "dark" : "light");
+  });
+
+
   // Intro / Help navigation
   btnIntroStart?.addEventListener("click", () => {
     showView(viewGame);
@@ -1258,6 +1357,8 @@
   // Boot
   // =============================
   (async function init(){
+    // Apply saved theme (defaults to Light)
+    try{ applyTheme(localStorage.getItem(LS_THEME) || "light"); }catch(e){ applyTheme("light"); }
     await loadBank();
     setModeUI();
     updateStats();
