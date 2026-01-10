@@ -4,1172 +4,1146 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PMP + Agile Hangman — Project Health</title>
-  <meta name="description" content="A hangman-style learning game using PMP + Agile vocabulary. Practice mode, Exam mode, no-repeat deck per device, and shareable results." />
   <style>
     :root{
-      --bgA:#f7f7fb;
-      --bgB:#eef9f4;
-      --bgC:#fff7ed;
+      /* Pastel professional palette */
+      --bg:#f6f7fb;
+      --bg2:#f9fafc;
 
-      --card:rgba(255,255,255,0.78);
-      --cardSolid:#ffffff;
+      --card:#ffffff;
+      --card2:#fbfcff;
 
-      --text:#0f172a;
-      --muted:#475569;
+      --text:#0f172a;      /* slate-900 */
+      --muted:#475569;     /* slate-600 */
+      --muted2:#64748b;    /* slate-500 */
 
       --border:rgba(15,23,42,0.10);
-      --shadow: 0 18px 50px rgba(15,23,42,0.12);
 
-      --accent:#0f766e;     /* teal */
-      --accent2:#b45309;    /* warm amber */
-      --good:#16a34a;
-      --warn:#d97706;
-      --bad:#dc2626;
+      /* Pastel accents */
+      --accent:#7dd3c7;    /* mint */
+      --accent2:#a5b4fc;   /* lavender */
+      --good:#86efac;      /* light green */
+      --warn:#fdba74;      /* peach */
+      --bad:#fda4af;       /* pastel red */
 
-      --radius:24px;
+      --radius:18px;
+      --shadow: 0 16px 40px rgba(15,23,42,0.10);
+      --shadow2: 0 10px 28px rgba(15,23,42,0.08);
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       background:
-        radial-gradient(1200px 700px at 15% 15%, var(--bgC), transparent 60%),
-        radial-gradient(900px 600px at 85% 10%, #e8f2ff, transparent 55%),
-        radial-gradient(900px 600px at 60% 90%, #e8fbf0, transparent 60%),
-        linear-gradient(180deg, var(--bgA), var(--bgB));
-      padding:18px;
+        radial-gradient(circle at 12% 18%, rgba(125,211,199,0.35), transparent 42%),
+        radial-gradient(circle at 82% 22%, rgba(165,180,252,0.30), transparent 46%),
+        radial-gradient(circle at 55% 90%, rgba(253,186,116,0.25), transparent 52%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
     }
 
-    a{color:inherit}
-    .container{max-width:1100px;margin:0 auto}
-
-    /* Top bar */
-    .topbar{
-      display:flex;gap:14px;align-items:flex-start;justify-content:space-between;
-      margin-bottom:16px;
+    .wrap{width:min(1060px, 100%); display:grid; gap:14px;}
+    .top{
+      display:flex; flex-wrap:wrap; gap:12px;
+      align-items:flex-end; justify-content:space-between;
     }
-    .brand h1{
-      margin:0;
-      font-size: clamp(26px, 3vw, 40px);
-      letter-spacing:-0.02em;
-      line-height:1.12;
-      font-weight:800;
-    }
-    .brand h1 .accent{
-      color:var(--accent);
-      font-weight:900;
-    }
-    .brand p{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:14px;
-    }
+    h1{margin:0; letter-spacing:-0.02em; font-size: clamp(20px, 2.4vw, 30px);}
+    .sub{color:var(--muted2); margin-top:6px; line-height:1.35; font-size: 13px;}
 
     .pill{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:10px 14px;
+      padding:10px 12px; border-radius:999px;
       border:1px solid var(--border);
-      border-radius:999px;
-      background: rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.72);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow2);
+      font-size: 12px; color: var(--muted2);
+      display:flex; gap:12px; align-items:center;
       white-space:nowrap;
-      font-size:14px;
     }
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--accent);display:inline-block}
-    .pill b{font-variant-numeric: tabular-nums}
+    .pill b{color:var(--text)}
+    .pill .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(125,211,199,0.18);
+    }
 
-    /* Views */
-    .view{display:none}
-    .view.active{display:block}
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .cardInner{padding:18px}
-
-    /* Intro / Help */
-    .hero{
-      padding:22px;
-      display:grid;
-      gap:14px;
-    }
-    .hero h2{
-      margin:0;
-      font-size:22px;
-      letter-spacing:-0.01em;
-    }
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:15px;
-    }
-    .hero .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
-    .helpList{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:14px;
-    }
-    .helpList li{margin:6px 0}
-
-    /* Layout */
     .grid{
       display:grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap:16px;
-      align-items:start;
+      gap:14px;
     }
-    @media (max-width: 980px){
-      .topbar{flex-direction:column;align-items:stretch}
-      .pill{justify-content:space-between}
-      .grid{grid-template-columns:1fr}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(251,252,255,0.92));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
     }
-
-    /* Sections */
-    .sectionTitle{
-      display:flex;align-items:center;justify-content:space-between;
-      margin:0 0 12px;
-      padding-bottom:10px;
-      border-bottom:1px solid var(--border);
-    }
-    .sectionTitle h3{
-      margin:0;
-      font-size:15px;
+    .card h2{
+      margin:0 0 10px 0;
+      font-size: 12px;
       letter-spacing:0.12em;
-      text-transform:uppercase;
-      color:#1f2937;
-    }
-    .sectionTitle .meta{
-      font-size:13px;
-      color:var(--muted);
-      letter-spacing:0.06em;
-      text-transform:uppercase;
+      text-transform: uppercase;
+      color: var(--muted2);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
     }
 
-    /* Controls row */
     .controls{
-      display:flex; gap:12px; flex-wrap:wrap;
-      align-items:center;
-      margin: 10px 0 14px;
-    }
-    label.small{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
-    select, button, .toggle{
-      font-family:inherit;
-    }
-    select{
-      background: rgba(255,255,255,0.9);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px;
-      font-size:14px;
-      outline:none;
-      min-width:160px;
-    }
-
-    .btn{
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.75);
-      color:var(--text);
-      border-radius:16px;
-      padding:10px 14px;
-      font-size:14px;
-      font-weight:700;
-      cursor:pointer;
-      box-shadow: 0 10px 25px rgba(15,23,42,0.06);
-    }
-    .btn:hover{transform: translateY(-1px)}
-    .btn:active{transform: translateY(0px)}
-    .btnPrimary{
-      background: linear-gradient(180deg, rgba(15,118,110,0.95), rgba(15,118,110,0.82));
-      border-color: rgba(15,118,110,0.35);
-      color:white;
-    }
-    .btnWarn{
-      background: linear-gradient(180deg, rgba(180,83,9,0.92), rgba(180,83,9,0.80));
-      border-color: rgba(180,83,9,0.35);
-      color:white;
-    }
-    .btnGhost{
-      background: rgba(255,255,255,0.5);
-    }
-
-    .toggle{
-      display:flex;align-items:center;gap:10px;
-      padding:8px 12px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.65);
-    }
-    .switch{
-      width:46px;height:26px;border-radius:999px;
-      background: rgba(15,23,42,0.12);
-      border:1px solid rgba(15,23,42,0.10);
-      position:relative;
-      flex:0 0 auto;
-    }
-    .knob{
-      width:22px;height:22px;border-radius:999px;
-      background:white;
-      position:absolute;top:1px;left:1px;
-      box-shadow: 0 8px 20px rgba(15,23,42,0.12);
-      transition: transform 160ms ease;
-    }
-    .switch.on{
-      background: rgba(15,118,110,0.25);
-      border-color: rgba(15,118,110,0.35);
-    }
-    .switch.on .knob{transform: translateX(20px)}
-    .toggleText{font-size:14px;font-weight:800}
-    .chip{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 12px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background: rgba(255,255,255,0.65);
-      font-weight:800;
-      font-variant-numeric: tabular-nums;
-    }
-    .chip small{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:0.12em;text-transform:uppercase}
-
-    /* Word display */
-    .wordBoxes{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin-top:10px;
-      min-height:112px;
-      align-content:flex-start;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 10px;
     }
-    .box{
-      width:54px;height:54px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.55);
-      display:flex;align-items:center;justify-content:center;
-      font-size:22px;font-weight:900;
-      box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+    .controlGroup{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .control{
+      display:flex; gap:8px; align-items:center;
+      padding: 9px 10px;
+      border-radius: 14px;
+      border:1px solid rgba(15,23,42,0.10);
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+    }
+    .control label{
+      font-size: 12px;
+      color: var(--muted2);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    select{
+      background: transparent;
+      color: var(--text);
+      border: none;
+      outline: none;
+      font-weight: 850;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+    }
+    select option{ background: #ffffff; color: var(--text); }
+    .toggle{
+      display:flex; gap:10px; align-items:center;
+      cursor:pointer;
       user-select:none;
     }
-    .box.filled{
-      background: rgba(15,118,110,0.12);
-      border-color: rgba(15,118,110,0.22);
+    .toggle input{ display:none; }
+    .switch{
+      width: 44px; height: 26px;
+      background: rgba(15,23,42,0.08);
+      border: 1px solid rgba(15,23,42,0.10);
+      border-radius: 999px;
+      position: relative;
+      transition: all .18s ease;
     }
-    .box.auto{
-      background: rgba(148,163,184,0.22);
-      border-color: rgba(148,163,184,0.22);
-      color:#0f172a;
-      font-weight:900;
+    .knob{
+      width: 20px; height: 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.95);
+      position:absolute;
+      top: 2px; left: 2px;
+      transition: all .18s ease;
+      box-shadow: 0 8px 18px rgba(15,23,42,0.12);
+      border: 1px solid rgba(15,23,42,0.08);
+    }
+    .toggle input:checked + .switch{
+      background: rgba(125,211,199,0.38);
+      border-color: rgba(125,211,199,0.55);
+      box-shadow: 0 0 0 4px rgba(125,211,199,0.18);
+    }
+    .toggle input:checked + .switch .knob{
+      left: 22px;
+    }
+    .toggleText{
+      font-size: 12px;
+      color: var(--muted2);
+      font-weight: 900;
+      letter-spacing: 0.04em;
     }
 
-    .rowBetween{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:10px;margin-top:10px;color:var(--muted);font-size:14px
+    /* Word board */
+    .word{
+      display:flex; flex-wrap:wrap; gap:10px 12px;
+      padding: 6px 2px 14px;
+      align-items:center;
+      min-height: 64px;
+    }
+    .tile{
+      width: 34px; height: 44px;
+      display:flex; align-items:center; justify-content:center;
+      border-radius: 12px;
+      border:1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      box-shadow: 0 10px 20px rgba(15,23,42,0.06);
+    }
+    .tile.space{
+      width: 14px; height: 44px;
+      border: none; background: transparent; box-shadow:none;
+    }
+    .tile.punct{
+      width: 22px; border:none; background: transparent; box-shadow:none;
+      color: var(--muted2);
+    }
+
+    .actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:space-between;
+      margin-top: 6px;
+    }
+    button{
+      cursor:pointer;
+      border: 1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+      transition: transform .08s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease;
+      box-shadow: 0 10px 22px rgba(15,23,42,0.08);
+    }
+    button:hover{
+      border-color: rgba(125,211,199,0.60);
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 14px 30px rgba(15,23,42,0.10);
+    }
+    button:active{ transform: translateY(1px); }
+    button:disabled{ opacity:0.55; cursor:not-allowed; box-shadow:none; }
+
+    .btnPrimary{
+      border-color: rgba(125,211,199,0.70);
+      background: linear-gradient(135deg, rgba(125,211,199,0.55), rgba(165,180,252,0.40));
+    }
+    .btnPrimary:hover{
+      border-color: rgba(125,211,199,0.85);
+      background: linear-gradient(135deg, rgba(125,211,199,0.65), rgba(165,180,252,0.46));
+    }
+    .btnGhost{
+      background: rgba(255,255,255,0.62);
+    }
+    .btnDanger{
+      border-color: rgba(253,164,175,0.80);
+      background: rgba(253,164,175,0.22);
+    }
+    .btnDanger:hover{
+      border-color: rgba(253,164,175,0.95);
+      background: rgba(253,164,175,0.30);
+    }
+
+    .hint{
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
+      border: 1px dashed rgba(15,23,42,0.14);
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 13px;
+      display:none;
     }
 
     /* Keyboard */
     .kbd{
-      margin-top:12px;
-    }
-    .kbdTitle{
-      display:flex;align-items:center;justify-content:space-between;
-      color:var(--muted);
-      font-size:12px;
-      letter-spacing:0.12em;
-      text-transform:uppercase;
-      margin:14px 0 8px;
-      font-weight:900;
-    }
-    .keys{
-      display:flex;flex-wrap:wrap;gap:10px;
+      display:grid;
+      grid-template-columns: repeat(13, 1fr);
+      gap:8px;
     }
     .key{
-      width:46px;height:46px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.75);
-      box-shadow: 0 12px 26px rgba(15,23,42,0.06);
-      cursor:pointer;
-      font-weight:900;
-      font-size:16px;
-      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 10px 0;
+      text-align:center;
+      font-weight: 950;
+      font-size: 13px;
       user-select:none;
+      cursor:pointer;
+      color: var(--text);
+      transition: border-color .14s ease, transform .08s ease, background .14s ease, box-shadow .14s ease;
+      box-shadow: 0 10px 20px rgba(15,23,42,0.06);
     }
-    .key:hover{transform: translateY(-1px)}
-    .key:active{transform: translateY(0px)}
-    .key.used{
-      opacity:0.38;
-      cursor:not-allowed;
-      transform:none;
+    .key:hover{
+      border-color: rgba(125,211,199,0.70);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 24px rgba(15,23,42,0.08);
     }
+    .key.used{ opacity:0.40; cursor:not-allowed; transform:none !important; box-shadow:none; }
     .key.good{
-      background: rgba(22,163,74,0.18);
-      border-color: rgba(22,163,74,0.22);
+      border-color: rgba(134,239,172,0.85);
+      background: rgba(134,239,172,0.25);
     }
     .key.bad{
-      background: rgba(220,38,38,0.15);
-      border-color: rgba(220,38,38,0.20);
+      border-color: rgba(253,164,175,0.85);
+      background: rgba(253,164,175,0.25);
     }
 
-    /* Right panel cards */
-    .stack{display:grid;gap:14px}
-    .meterWrap{
-      display:flex;align-items:center;justify-content:space-between;gap:12px
-    }
+    /* Health meter */
+    .meterWrap{ display:grid; gap:12px; }
     .meter{
-      height:14px;
-      border-radius:999px;
-      background: rgba(15,23,42,0.10);
-      border:1px solid rgba(15,23,42,0.08);
-      overflow:hidden;
-      flex:1;
-    }
-    .meterFill{
-      height:100%;
-      width:100%;
-      background: linear-gradient(90deg, rgba(22,163,74,0.95), rgba(15,118,110,0.75));
-      border-radius:999px;
-      transition: width 200ms ease;
-    }
-    .meterLabel{
-      font-weight:900;
-      font-variant-numeric: tabular-nums;
-      min-width:92px;
-      text-align:right;
-    }
-    .tileRow{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-    @media (max-width: 520px){
-      .tileRow{grid-template-columns:1fr}
-      .box{width:48px;height:48px;border-radius:14px}
-      .key{width:44px;height:44px;border-radius:14px}
-    }
-
-    .tile{
-      padding:16px;
-      border-radius: var(--radius);
       border:1px solid var(--border);
-      background: rgba(255,255,255,0.65);
-      box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 22px rgba(15,23,42,0.06);
     }
-    .tile h4{
-      margin:0 0 8px;
-      font-size:12px;
-      letter-spacing:0.12em;
-      text-transform:uppercase;
-      color:var(--muted);
+    .meterTop{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .meterTop .label{ color: var(--muted2); font-size: 12px; font-weight: 900; letter-spacing:0.10em; text-transform:uppercase; }
+    .meterTop .state{ font-weight: 950; }
+    .bar{
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.08);
+      overflow:hidden;
+      margin-top: 10px;
     }
-    .tile .big{
-      font-size:30px;
-      font-weight:900;
-      font-variant-numeric: tabular-nums;
-      margin:0;
-    }
-    .tile p{
-      margin:6px 0 0;
-      color:var(--muted);
-      line-height:1.55;
-      font-size:14px;
-    }
-
-    /* Hint / Definition */
-    .callout{
-      margin-top:12px;
-      padding:12px 14px;
-      border-radius:18px;
-      border:1px dashed rgba(15,23,42,0.18);
-      background: rgba(255,255,255,0.55);
-      color: #0f172a;
-      line-height:1.55;
-      font-size:14px;
-    }
-    .callout .label{
-      font-size:12px;
-      letter-spacing:0.12em;
-      text-transform:uppercase;
-      color:var(--muted);
-      font-weight:900;
-      margin-bottom:6px;
+    .fill{
+      height:100%;
+      width: 100%;
+      background: linear-gradient(90deg, rgba(134,239,172,0.95), rgba(125,211,199,0.90));
+      border-radius: 999px;
+      transition: width .18s ease;
     }
 
-    /* Small helper */
-    .miniTip{
-      margin-top:12px;
-      font-size:12px;
-      letter-spacing:0.12em;
+    .statRow{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .stat{
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 22px rgba(15,23,42,0.06);
+    }
+    .stat .k{
+      color: var(--muted2);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing:0.10em;
       text-transform:uppercase;
-      color:var(--muted);
-      font-weight:900;
-      opacity:0.9;
-      text-align:center;
+      display:flex; justify-content:space-between; gap:10px;
     }
+    .stat .v{ font-size: 22px; font-weight: 950; margin-top:6px; }
 
-    /* Footer link row inside views */
-    .subActions{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
-      margin-top:14px;
-      color:var(--muted);
-      font-size:13px;
+    .toast{
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(10px);
+      color: var(--text);
+      line-height: 1.35;
+      font-size: 13px;
+      display:none;
+      box-shadow: 0 12px 26px rgba(15,23,42,0.08);
     }
-    .linkBtn{
-      border:none;
-      background:none;
-      color:var(--accent);
-      font-weight:900;
-      cursor:pointer;
-      padding:0;
-      text-decoration:underline;
+    .toast.good{ border-color: rgba(134,239,172,0.85); }
+    .toast.bad{ border-color: rgba(253,164,175,0.85); }
+
+    .smallNote{ color: var(--muted2); font-size: 12px; line-height:1.4; }
+
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      .kbd{ grid-template-columns: repeat(10, 1fr); }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-
-    <header class="topbar">
-      <div class="brand">
-        <h1>PMP + Agile Hangman — <span class="accent">Project Health</span></h1>
-        <p>Practice mode or Exam mode • 1000-term bank • No repeats per device until exhausted</p>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>PMP + Agile Hangman <span style="color:var(--accent)">— Project Health</span></h1>
+        <div class="sub">Practice mode or Exam mode • 1000-term bank • No repeats per user until exhausted</div>
       </div>
-      <div class="pill" aria-label="streaks">
-        <span class="dot" aria-hidden="true"></span>
+      <div class="pill">
+        <span class="dot"></span>
         <span>Best Streak: <b id="bestStreak">0</b></span>
-        <span>Current Streak: <b id="currentStreak">0</b></span>
+        <span>Current Streak: <b id="streak">0</b></span>
       </div>
-    </header>
+    </div>
 
-    <main>
+    <div class="grid">
+      <!-- Left: game -->
+      <div class="card">
+        <h2>
+          <span>Guess the term</span>
+          <span class="smallNote" id="bankStatus">Loading bank…</span>
+        </h2>
 
-      <!-- INTRO VIEW -->
-      <section id="viewIntro" class="view active">
-        <div class="card">
-          <div class="hero">
-            <h2>What this is</h2>
-            <p>
-              A hangman-style game for project managers: guess a PMBOK/PMP term letter-by-letter,
-              use a meaning-based hint when you’re stuck, and build a streak.
-            </p>
-            <p>
-              <b>Practice</b> is open-ended. <b>Exam mode</b> runs a 10-round session and gives a share-ready summary.
-              Your no-repeat “deck” is stored on <b>your device only</b> (so other people won’t affect your remaining count).
-            </p>
-
-            <div class="ctaRow">
-              <button class="btn btnPrimary" id="btnIntroStart">Start</button>
-              <button class="btn btnGhost" id="btnIntroHow">Instructions</button>
+        <div class="controls">
+          <div class="controlGroup">
+            <div class="control">
+              <label for="diffSelect">Difficulty</label>
+              <select id="diffSelect" title="Filter the word deck by difficulty">
+                <option value="all">Balanced</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
             </div>
 
-            <div class="subActions">
-              <span>Tip: If you’re testing, use an Incognito window to simulate a “new user”.</span>
-              <button class="linkBtn" id="btnJumpToGame">Skip intro</button>
+            <div class="control">
+              <div class="toggle" title="Toggle Exam mode (10 rounds)">
+                <label class="toggle" style="gap:10px;">
+                  <input id="examToggle" type="checkbox" />
+                  <span class="switch"><span class="knob"></span></span>
+                  <span class="toggleText" id="modeLabel">Practice</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="control">
+              <label>Remaining</label>
+              <div style="font-weight:950; font-size:12px;" id="remaining">—</div>
+            </div>
+          </div>
+
+          <div class="controlGroup">
+            <button id="btnShare" class="btnGhost" title="Copy a shareable score blurb">Share</button>
+            <button id="btnResetDeck" class="btnDanger" title="Reset the no-repeat deck (this device/browser)">Reset Deck</button>
+          </div>
+        </div>
+
+        <div class="word" id="word"></div>
+
+        <div class="actions">
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button id="btnHint" class="btnGhost">Show hint</button>
+            <button id="btnNext" class="btnPrimary">New word</button>
+          </div>
+          <div style="color:var(--muted); font-size:12px;">
+            Wrong guesses left: <b id="lives">6</b>
+            <span id="examProgress" style="margin-left:10px; display:none;">• Round <b id="roundNow">1</b>/<b id="roundTotal">10</b></span>
+          </div>
+        </div>
+
+        <div class="hint" id="hint"></div>
+        <div class="toast" id="toast"></div>
+
+        <div style="height:12px;"></div>
+        <h2>Keyboard <span class="smallNote">Tip: You can type on your keyboard too</span></h2>
+        <div class="kbd" id="kbd"></div>
+      </div>
+
+      <!-- Right: status -->
+      <div class="card">
+        <h2>Project health</h2>
+        <div class="meterWrap">
+          <div class="meter">
+            <div class="meterTop">
+              <div class="label">Health meter</div>
+              <div class="state" id="stateText">On Track</div>
+            </div>
+            <div class="bar"><div class="fill" id="fill"></div></div>
+            <div class="smallNote" style="margin-top:10px;">
+              Wrong guesses reduce health. Solve the term to keep the project green.
+            </div>
+          </div>
+
+          <div class="statRow">
+            <div class="stat">
+              <div class="k"><span>Score</span><span id="scoreTag" style="opacity:.9;">Practice</span></div>
+              <div class="v" id="score">0</div>
+            </div>
+            <div class="stat">
+              <div class="k">Solved</div>
+              <div class="v" id="solved">0</div>
+            </div>
+          </div>
+
+          <div class="stat" style="grid-column: 1 / -1;">
+            <div class="k"><span>Mode</span><span id="modeHint" style="opacity:.9;">No-repeat deck per device</span></div>
+            <div class="v" style="font-size:16px; margin-top:10px;" id="modeDetail">Practice • Balanced</div>
+            <div class="smallNote" style="margin-top:8px;">
+              Spaces/hyphens/slashes show automatically. Hint is available once per round.
+            </div>
+          </div>
+
+          <div class="stat" style="grid-column: 1 / -1;">
+            <div class="k"><span>Exam mode</span><span style="opacity:.9;">10 rounds</span></div>
+            <div class="smallNote" style="margin-top:8px;">
+              Turn Exam ON to run a 10-round session. Your exam score is computed the same way as practice.
+              At the end, you'll get a summary and a share-ready message.
             </div>
           </div>
         </div>
-      </section>
-
-      <!-- HELP VIEW -->
-      <section id="viewHelp" class="view">
-        <div class="card">
-          <div class="hero">
-            <h2>How to play</h2>
-                        <ul class="helpList">
-              <li><b>First step (recommended)</b>: Click <b>Reset Deck</b> to start from the full 1000-term bank on this device.</li>
-              <li><b>Difficulty</b>: Easy gives more help, Hard is stricter. (You can change anytime.)</li>
-              <li><b>Practice / Exam</b>: Toggle Exam ON for a 10-round session summary.</li>
-              <li><b>Reset Deck</b>: Clears your device’s history so terms won’t “run out”.</li>
-              <li><b>New word</b>: Skips to a fresh term (counts as a new round).</li>
-              <li><b>Show hint</b>: Shows a meaning-based clue (masked so it won’t reveal the answer). Once per round.</li>
-              <li><b>Keyboard</b>: Click letters or type on your physical keyboard.</li>
-              <li><b>Health meter</b>: Each wrong guess reduces health. Solve the term before it hits zero.</li>
-              <li><b>Share</b>: Copies a share message (and uses native share on mobile if available).</li>
-            </ul>
-
-            <div class="ctaRow">
-              <button class="btn btnPrimary" id="btnHelpStart">Start game</button>
-              <button class="btn btnGhost" id="btnHelpBack">Back</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- GAME VIEW -->
-      <section id="viewGame" class="view">
-        <div class="grid">
-          <!-- LEFT: guess + keyboard -->
-          <div class="card">
-            <div class="cardInner">
-              <div class="sectionTitle">
-                <h3>Guess the term</h3>
-                <div class="meta" id="bankMeta">Bank: —</div>
-              </div>
-
-              <div class="controls">
-                <div>
-                  <label class="small" for="selDifficulty">Difficulty</label><br/>
-                  <select id="selDifficulty" aria-label="difficulty">
-                    <option value="easy">Easy</option>
-                    <option value="balanced" selected>Balanced</option>
-                    <option value="hard">Hard</option>
-                  </select>
-                </div>
-
-                <div class="toggle" role="group" aria-label="mode toggle">
-                  <div id="switchExam" class="switch" tabindex="0" aria-label="exam mode toggle" aria-checked="false" role="switch">
-                    <div class="knob"></div>
-                  </div>
-                  <div>
-                    <div class="toggleText" id="modeLabel">Practice</div>
-                    <div style="font-size:12px;color:var(--muted);font-weight:700">Exam mode = 10 rounds</div>
-                  </div>
-                </div>
-
-                <div class="chip" aria-label="remaining">
-                  <small>Remaining</small>
-                  <span id="remainingCount">—</span>
-                </div>
-
-                <button class="btn btnGhost" id="btnShare">Share</button>
-                <button class="btn btnWarn" id="btnResetDeck">Reset Deck</button>
-              </div>
-
-              <div class="wordBoxes" id="wordBoxes" aria-label="word boxes"></div>
-
-              <div class="rowBetween">
-                <div style="display:flex;gap:10px;flex-wrap:wrap">
-                  <button class="btn btnGhost" id="btnHint">Show hint</button>
-                  <button class="btn btnPrimary" id="btnNew">New word</button>
-                </div>
-                <div>Wrong guesses left: <b id="livesLeft">—</b></div>
-              </div>
-
-              <div class="callout" id="hintWrap" style="display:none">
-                <div class="label">Hint</div>
-                <div id="hintText">—</div>
-              </div>
-
-              <div class="kbd">
-                <div class="kbdTitle">
-                  <span>Keyboard</span>
-                  <span>Tip: you can type on your keyboard too</span>
-                </div>
-                <div class="keys" id="keys"></div>
-              </div>
-
-              <div class="miniTip" id="statusLine">Ready.</div>
-            </div>
-          </div>
-
-          <!-- RIGHT: project health -->
-          <div class="card">
-            <div class="cardInner">
-              <div class="sectionTitle">
-                <h3>Project Health</h3>
-                <div class="meta" id="modeMeta">Practice • Balanced</div>
-              </div>
-
-              <div class="tile">
-                <div class="meterWrap">
-                  <div style="display:flex;flex-direction:column;gap:6px;flex:1">
-                    <h4 style="margin:0;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)">Health meter</h4>
-                    <div class="meter" aria-label="health meter"><div class="meterFill" id="meterFill"></div></div>
-                  </div>
-                  <div class="meterLabel" id="healthLabel">On Track</div>
-                </div>
-                <p>Wrong guesses reduce health. Solve the term to keep the project green.</p>
-              </div>
-
-              <div class="tileRow" style="margin-top:14px">
-                <div class="tile">
-                  <h4>Score</h4>
-                  <p class="big" id="score">0</p>
-                </div>
-                <div class="tile">
-                  <h4>Solved</h4>
-                  <p class="big" id="solved">0</p>
-                </div>
-              </div>
-
-              <div class="tile" style="margin-top:14px">
-                <h4>Definition</h4>
-                <p id="defText">Solve the term (or run out of guesses) to see the definition.</p>
-              </div>
-
-              <div class="tile" style="margin-top:14px">
-                <h4>Exam mode</h4>
-                <p>Turn Exam ON to run a 10-round session. At the end you’ll get a summary and a share-ready message.</p>
-              </div>
-
-              <div class="subActions">
-                <button class="linkBtn" id="btnBackHome">Back to intro</button>
-                <span>Works on Chrome, Safari, and mobile.</span>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main>
+      </div>
+    </div>
   </div>
 
-  <script>
-    /**********************
-     * Small utilities
-     **********************/
-    const $ = (id) => document.getElementById(id);
+<script>
+  // =============================
+  // Configuration
+  // =============================
+  const MAX_LIVES = 6;
+  const EXAM_ROUNDS = 10;
 
-    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
-    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+  // Word bank loaded from words.json
+  let BANK = [];
+  let BANK_SIG = "";
 
-    function titleCase(s){
-      return s.toLowerCase().replace(/\b[a-z]/g, (m)=>m.toUpperCase());
-    }
+  // Difficulty index
+  const DIFFS = ["all","easy","medium","hard"];
+  const subsetIndices = { all: [], easy: [], medium: [], hard: [] };
 
-    /**********************
-     * Views
-     **********************/
-    const viewIntro = $("viewIntro");
-    const viewHelp  = $("viewHelp");
-    const viewGame  = $("viewGame");
+  // LocalStorage keys (per browser/device)
+  const LS_VER = "v3"; // bump if you want to force fresh decks
+  const LS_BEST_STREAK = `pmpHangmanBestStreak_${LS_VER}`;
+  const LS_DECK_PREFIX = `pmpHangmanDeck_${LS_VER}_`; // + difficulty
+  const LS_BANK_SIG = `pmpHangmanBankSig_${LS_VER}`;
 
-    function showView(which){
-      for(const v of [viewIntro, viewHelp, viewGame]) v.classList.remove("active");
-      if(which === "intro") viewIntro.classList.add("active");
-      if(which === "help")  viewHelp.classList.add("active");
-      if(which === "game")  viewGame.classList.add("active");
-    }
+  // =============================
+  // UI elements
+  // =============================
+  const wordEl = document.getElementById("word");
+  const kbdEl = document.getElementById("kbd");
+  const hintEl = document.getElementById("hint");
+  const btnHint = document.getElementById("btnHint");
+  const btnNext = document.getElementById("btnNext");
+  const btnShare = document.getElementById("btnShare");
+  const btnResetDeck = document.getElementById("btnResetDeck");
+  const livesEl = document.getElementById("lives");
+  const fillEl = document.getElementById("fill");
+  const stateText = document.getElementById("stateText");
+  const scoreEl = document.getElementById("score");
+  const solvedEl = document.getElementById("solved");
+  const streakEl = document.getElementById("streak");
+  const bestStreakEl = document.getElementById("bestStreak");
+  const toastEl = document.getElementById("toast");
+  const bankStatusEl = document.getElementById("bankStatus");
+  const diffSelect = document.getElementById("diffSelect");
+  const examToggle = document.getElementById("examToggle");
+  const modeLabel = document.getElementById("modeLabel");
+  const remainingEl = document.getElementById("remaining");
+  const modeDetailEl = document.getElementById("modeDetail");
+  const scoreTagEl = document.getElementById("scoreTag");
 
-    $("btnIntroStart").addEventListener("click", () => { showView("game"); bootIfNeeded(); });
-    $("btnIntroHow").addEventListener("click", () => showView("help"));
-    $("btnHelpBack").addEventListener("click", () => showView("intro"));
-    $("btnHelpStart").addEventListener("click", () => { showView("game"); bootIfNeeded(); });
-    $("btnJumpToGame").addEventListener("click", () => { showView("game"); bootIfNeeded(); });
-    $("btnBackHome").addEventListener("click", () => showView("intro"));
+  const examProgress = document.getElementById("examProgress");
+  const roundNowEl = document.getElementById("roundNow");
+  const roundTotalEl = document.getElementById("roundTotal");
 
-    /**********************
-     * Word bank loading
-     **********************/
-    let BANK = [];
-    let bankReady = false;
+  // =============================
+  // Game state
+  // =============================
+  const ALPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  let used = new Set();
+  let revealed = new Set();
+  let answer = "";
+  let currentPick = null;
 
-    async function loadBank(){
-      if(bankReady) return;
-      $("statusLine").textContent = "Loading word bank…";
-      try{
-        const res = await fetch("words.json", {cache:"no-store"});
-        if(!res.ok) throw new Error("Could not load words.json ("+res.status+")");
-        BANK = await res.json();
-        if(!Array.isArray(BANK) || BANK.length < 50) throw new Error("words.json does not look valid.");
-        bankReady = true;
-        $("statusLine").textContent = "Word bank loaded.";
-      }catch(err){
-        console.error(err);
-        $("statusLine").textContent = "Could not load words.json. Make sure it is in the same folder as index.html.";
-      }
-    }
+  let lives = MAX_LIVES;
+  let score = 0;
+  let solvedCount = 0;
 
-    /**********************
-     * No-repeat deck (per device)
-     **********************/
-    const STORAGE_KEY = "pmpHangman.deck.v3";
-    const STREAK_KEY  = "pmpHangman.streak.v3";
+  let streak = 0;
+  let bestStreak = Number(localStorage.getItem(LS_BEST_STREAK) || 0);
 
-    function bankSignature(){
-      // simple signature: length + first term + last term
-      const first = (BANK[0]?.term || "").slice(0,24);
-      const last  = (BANK[BANK.length-1]?.term || "").slice(0,24);
-      return `len:${BANK.length}|f:${first}|l:${last}`;
-    }
+  // Exam state
+  let examActive = false;
+  let examRound = 0;           // 1..EXAM_ROUNDS
+  let examSolved = 0;
+  let examFailed = 0;
+  let examScore = 0;
+  let roundLocked = false;     // prevents changing difficulty mid-round
 
-    function defaultDeck(){
-      return { signature: bankSignature(), used: {} };
-    }
+  bestStreakEl.textContent = bestStreak;
+  roundTotalEl.textContent = String(EXAM_ROUNDS);
 
-    function loadDeck(){
-      try{
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if(!raw) return defaultDeck();
-        const obj = JSON.parse(raw);
-        if(!obj || obj.signature !== bankSignature()) return defaultDeck();
-        if(!obj.used) obj.used = {};
-        return obj;
-      }catch{
-        return defaultDeck();
-      }
-    }
+  // =============================
+  // Utilities
+  // =============================
+  function showToast(text, type){
+    toastEl.textContent = text;
+    toastEl.className = "toast " + (type || "");
+    toastEl.style.display = "block";
+  }
+  function hideToast(){ toastEl.style.display = "none"; }
 
-    function saveDeck(deck){
-      try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(deck)); }catch{}
-    }
+  function setHint(text){
+    hintEl.textContent = text || "";
+    hintEl.style.display = text ? "block" : "none";
+  }
 
-    function resetDeck(){
-      const d = defaultDeck();
-      saveDeck(d);
-      updateRemaining(d);
-      $("statusLine").textContent = "Deck reset on this device.";
-    }
+  function difficultyLabel(d){
+    if (d === "all") return "Balanced";
+    return d.charAt(0).toUpperCase() + d.slice(1);
+  }
 
-    function updateRemaining(deck){
-      const remaining = BANK.length - Object.keys(deck.used||{}).length;
-      $("remainingCount").textContent = remaining.toString();
-      $("bankMeta").textContent = `Bank: ${BANK.length} terms`;
-    }
+  function classifyDifficulty(term){
+    // Lightweight heuristic: length + number of words + punctuation/rare letters
+    const t = (term || "").toUpperCase().trim();
+    const lettersOnly = t.replace(/[^A-Z]/g,"");
+    const charLen = lettersOnly.length;
+    const wordCount = t.split(/\s+/).filter(Boolean).length;
+    const hasPunct = /[^A-Z\s]/.test(t);
+    const rare = (lettersOnly.match(/[JQXZ]/g) || []).length;
 
-    function pickNext(deck){
-      // pick a term that hasn't been used on this device. If exhausted, reset used.
-      const used = deck.used || {};
-      if(Object.keys(used).length >= BANK.length){
-        deck.used = {};
-      }
-      // Simple random pick with retry
-      for(let i=0;i<5000;i++){
-        const idx = Math.floor(Math.random()*BANK.length);
-        if(!deck.used[idx]){
-          deck.used[idx] = 1;
-          saveDeck(deck);
-          updateRemaining(deck);
-          return BANK[idx];
-        }
-      }
-      // fallback
-      const idx = Math.floor(Math.random()*BANK.length);
-      deck.used[idx]=1;
-      saveDeck(deck);
-      updateRemaining(deck);
-      return BANK[idx];
-    }
-
-    /**********************
-     * Hint masking
-     **********************/
-    function safeHint(term, definition){
-      if(!definition) return "No hint available for this term yet.";
-      let hint = String(definition);
-
-      // Remove exact term (case-insensitive)
-      const esc = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      hint = hint.replace(new RegExp(esc, "ig"), "____");
-
-      // Remove significant term words (>=4 chars) so hint doesn't literally contain the answer
-      const words = term
-        .toUpperCase()
-        .replace(/[^A-Z0-9 ]+/g, " ")
-        .split(/\s+/)
-        .filter(Boolean)
-        .filter(w => w.length >= 4);
-
-      for(const w of words){
-        const re = new RegExp("\\b"+w+"\\b", "ig");
-        hint = hint.replace(re, "____");
-      }
-
-      // Clean up repeated blanks
-      hint = hint.replace(/(__+\s*){2,}/g, "____ ");
-      hint = hint.replace(/\s+/g, " ").trim();
-
-      // Make sure it's not empty
-      if(hint.length < 8){
-        return "A common PMP/Agile concept related to project delivery. (Hint was masked to avoid giving the answer.)";
-      }
-      return hint;
-    }
-
-    /**********************
-     * Game state
-     **********************/
-    let deck = null;
-    let currentPick = null;
-    let normalizedAnswer = "";
-    let revealed = [];
-    let guessed = {};
-    let livesMax = 6;
-    let livesLeft = 6;
-    let solvedCount = 0;
     let score = 0;
+    if (charLen <= 10) score += 0;
+    else if (charLen <= 18) score += 1;
+    else score += 2;
 
-    // Exam mode: 10 rounds
-    let examOn = false;
-    let examRound = 0;
-    let examSolved = 0;
-    let examScore = 0;
+    if (wordCount <= 2) score += 0;
+    else if (wordCount <= 3) score += 1;
+    else score += 2;
 
-    // Hint usage
-    let hintUsed = false;
+    if (hasPunct) score += 1;
+    if (rare >= 2) score += 1;
 
-    // Streaks
-    function loadStreak(){
-      try{
-        const raw = localStorage.getItem(STREAK_KEY);
-        if(!raw) return {best:0, current:0};
-        const s = JSON.parse(raw);
-        return {best: s.best||0, current: s.current||0};
-      }catch{
-        return {best:0, current:0};
+    if (score <= 1) return "easy";
+    if (score <= 3) return "medium";
+    return "hard";
+  }
+
+  function bankSignature(){
+    return String(BANK.length) + ":" + DIFFS.map(d => subsetIndices[d].length).join(",");
+  }
+
+  function shuffle(arr){
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // =============================
+  // Deck logic (no repeats per device/browser)
+  // =============================
+  function deckKey(diff){ return LS_DECK_PREFIX + diff; }
+
+  function buildFreshDeck(diff){
+    const base = subsetIndices[diff] || [];
+    const deck = shuffle(base.slice());
+    localStorage.setItem(deckKey(diff), JSON.stringify(deck));
+    localStorage.setItem(LS_BANK_SIG, BANK_SIG);
+    return deck;
+  }
+
+  function getDeck(diff){
+    // If bank signature changed, reset all decks
+    const storedSig = localStorage.getItem(LS_BANK_SIG);
+    if (storedSig !== BANK_SIG){
+      for (const d of DIFFS){
+        localStorage.removeItem(deckKey(d));
       }
-    }
-    function saveStreak(s){
-      try{ localStorage.setItem(STREAK_KEY, JSON.stringify(s)); }catch{}
-    }
-    function updateStreakUI(s){
-      $("bestStreak").textContent = String(s.best||0);
-      $("currentStreak").textContent = String(s.current||0);
-    }
-    let streak = loadStreak();
-    updateStreakUI(streak);
-
-    /**********************
-     * Difficulty settings
-     **********************/
-    function applyDifficulty(diff){
-      if(diff === "easy"){
-        livesMax = 8;
-      }else if(diff === "hard"){
-        livesMax = 5;
-      }else{
-        livesMax = 6;
-      }
-      livesLeft = Math.min(livesLeft, livesMax);
-      renderHealth();
-      $("modeMeta").textContent = `${examOn ? "Exam" : "Practice"} • ${titleCase(diff)}`;
+      localStorage.setItem(LS_BANK_SIG, BANK_SIG);
     }
 
-    /**********************
-     * Rendering
-     **********************/
-    function renderBoxes(){
-      const boxWrap = $("wordBoxes");
-      boxWrap.innerHTML = "";
-      const answer = currentPick.term;
-      for(let i=0;i<answer.length;i++){
-        const ch = answer[i];
-        const box = document.createElement("div");
-        box.className = "box";
-        if(ch === " " || ch === "-" || ch === "/"){
-          box.classList.add("auto");
-          box.textContent = ch;
-        }else{
-          const show = revealed[i] ? ch.toUpperCase() : "";
-          box.textContent = show;
-          if(show) box.classList.add("filled");
-        }
-        boxWrap.appendChild(box);
-      }
+    try{
+      const raw = localStorage.getItem(deckKey(diff));
+      if (!raw) return buildFreshDeck(diff);
+      const deck = JSON.parse(raw);
+      if (!Array.isArray(deck)) return buildFreshDeck(diff);
+      // Basic validation
+      if (deck.some(n => typeof n !== "number" || n < 0 || n >= BANK.length)) return buildFreshDeck(diff);
+      return deck;
+    } catch {
+      return buildFreshDeck(diff);
+    }
+  }
+
+  function saveDeck(diff, deck){
+    localStorage.setItem(deckKey(diff), JSON.stringify(deck));
+  }
+
+  function remainingCount(diff){
+    const deck = getDeck(diff);
+    return deck.length;
+  }
+
+  function drawNextPick(diff){
+    let deck = getDeck(diff);
+
+    if (deck.length === 0){
+      deck = buildFreshDeck(diff);
+      showToast("🎉 You’ve exhausted all terms in this difficulty. Resetting the deck.", "good");
     }
 
-    function renderKeyboard(){
-      const keys = $("keys");
-      keys.innerHTML = "";
-      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      for(const L of letters){
-        const btn = document.createElement("button");
-        btn.className = "key";
-        btn.textContent = L;
-        btn.type = "button";
-        if(guessed[L]){
-          btn.classList.add("used");
-          if(guessed[L] === "good") btn.classList.add("good");
-          if(guessed[L] === "bad") btn.classList.add("bad");
-        }
-        btn.addEventListener("click", () => handleGuess(L));
-        keys.appendChild(btn);
-      }
+    const idx = deck.pop();
+    saveDeck(diff, deck);
+    return BANK[idx];
+  }
+
+  function resetDecks(){
+    for (const d of DIFFS){
+      localStorage.removeItem(deckKey(d));
     }
+    localStorage.setItem(LS_BANK_SIG, BANK_SIG);
+    showToast("🧹 Deck reset for this device/browser. You can see terms again from the start.", "good");
+    updateRemaining();
+  }
 
-    function renderHealth(){
-      $("livesLeft").textContent = String(livesLeft);
-      const pct = clamp(livesLeft / livesMax, 0, 1);
-      $("meterFill").style.width = (pct*100).toFixed(0) + "%";
-
-      // label
-      let label = "On Track";
-      if(pct <= 0.34) label = "At Risk";
-      else if(pct <= 0.67) label = "Watch";
-      $("healthLabel").textContent = label;
-
-      // subtle color shift (no hard coding extra colors)
-      if(pct <= 0.34) $("meterFill").style.filter = "saturate(1.1) contrast(1.05)";
-      else $("meterFill").style.filter = "none";
-    }
-
-    function setHintVisible(visible){
-      $("hintWrap").style.display = visible ? "block" : "none";
-    }
-
-    function setDefinitionText(txt){
-      $("defText").textContent = txt;
-    }
-
-    function updateScoreUI(){
-      $("score").textContent = String(score);
-      $("solved").textContent = String(solvedCount);
-    }
-
-    /**********************
-     * Round lifecycle
-     **********************/
-    function normalizeAnswer(str){
-      return str.toUpperCase();
-    }
-
-    function startRound(){
-      setHintVisible(false);
-      hintUsed = false;
-      setDefinitionText("Solve the term (or run out of guesses) to see the definition.");
-
-      currentPick = pickNext(deck);
-      normalizedAnswer = normalizeAnswer(currentPick.term);
-      revealed = [];
-      guessed = {};
-      livesLeft = livesMax;
-
-      for(let i=0;i<normalizedAnswer.length;i++){
-        const ch = normalizedAnswer[i];
-        if(ch === " " || ch === "-" || ch === "/"){
-          revealed[i] = true;
-        }else{
-          revealed[i] = false;
-        }
-      }
-
-      $("statusLine").textContent = examOn
-        ? `Exam: Round ${examRound+1}/10`
-        : "Practice: New term loaded.";
-
-      renderBoxes();
-      renderKeyboard();
-      renderHealth();
-      updateScoreUI();
-    }
-
-    function allRevealed(){
-      for(let i=0;i<normalizedAnswer.length;i++){
-        const ch = normalizedAnswer[i];
-        if(ch === " " || ch === "-" || ch === "/") continue;
-        if(!revealed[i]) return false;
-      }
-      return true;
-    }
-
-    function endRound(win){
-      // show definition now
-      const def = currentPick.definition || currentPick.hint || "No definition available for this term yet.";
-      setDefinitionText(def);
-
-      if(win){
-        solvedCount += 1;
-        score += 10 + livesLeft; // reward for remaining health
-        $("statusLine").textContent = "Solved! +score. Click New word to continue.";
-
-        streak.current += 1;
-        streak.best = Math.max(streak.best, streak.current);
-        saveStreak(streak);
-        updateStreakUI(streak);
-
-        if(examOn){
-          examSolved += 1;
-          examScore += 10 + livesLeft;
-        }
-      }else{
-        $("statusLine").textContent = "Out of guesses. Click New word to continue.";
-        streak.current = 0;
-        saveStreak(streak);
-        updateStreakUI(streak);
-
-        if(examOn){
-          // no score
-        }
-      }
-
-      updateScoreUI();
-
-      // Exam progression
-      if(examOn){
-        examRound += 1;
-        if(examRound >= 10){
-          // End exam
-          const msg = `PMP Hangman — Exam Results: ${examSolved}/10 solved • Score ${examScore}.`;
-          $("statusLine").textContent = "Exam finished! Use Share to copy your results.";
-          // store summary for share
-          window.__examSummary = msg;
-          // auto-turn exam off for next play
-          toggleExam(false, true);
-        }
-      }
-    }
-
-    function handleGuess(letter){
-      if(!currentPick) return;
-      const L = letter.toUpperCase();
-      if(guessed[L]) return; // already guessed
-
-      let hit = false;
-      for(let i=0;i<normalizedAnswer.length;i++){
-        if(normalizedAnswer[i] === L){
-          revealed[i] = true;
-          hit = true;
-        }
-      }
-
-      guessed[L] = hit ? "good" : "bad";
-      if(!hit){
-        livesLeft -= 1;
-      }
-
-      renderBoxes();
-      renderKeyboard();
-      renderHealth();
-
-      if(allRevealed()){
-        endRound(true);
-        return;
-      }
-
-      if(livesLeft <= 0){
-        // reveal everything
-        for(let i=0;i<revealed.length;i++){
-          if(normalizedAnswer[i] !== " " && normalizedAnswer[i] !== "-" && normalizedAnswer[i] !== "/"){
-            revealed[i] = true;
-          }
-        }
-        renderBoxes();
-        endRound(false);
-      }
-    }
-
-    /**********************
-     * Share
-     **********************/
-    async function share(){
-      const url = location.href.split("#")[0];
-      const diff = $("selDifficulty").value;
-      const mode = examOn ? "Exam" : "Practice";
-      const base = window.__examSummary
-        ? window.__examSummary
-        : `PMP + Agile Hangman — ${mode} • ${titleCase(diff)} • Solved ${solvedCount} • Score ${score}`;
-      const text = `${base}\n${url}`;
-
-      try{
-        if(navigator.share){
-          await navigator.share({title:"PMP Hangman", text, url});
-          $("statusLine").textContent = "Shared.";
-          return;
-        }
-      }catch(e){
-        // ignore and fall back
-      }
-
-      try{
-        await navigator.clipboard.writeText(text);
-        $("statusLine").textContent = "Copied share text to clipboard.";
-      }catch{
-        // last fallback
-        prompt("Copy this:", text);
-      }
-    }
-
-    /**********************
-     * Exam toggle
-     **********************/
-    function toggleExam(on, silent){
-      examOn = !!on;
-      $("switchExam").classList.toggle("on", examOn);
-      $("switchExam").setAttribute("aria-checked", examOn ? "true" : "false");
-      $("modeLabel").textContent = examOn ? "Exam" : "Practice";
-      $("modeMeta").textContent = `${examOn ? "Exam" : "Practice"} • ${titleCase($("selDifficulty").value)}`;
-
-      if(examOn){
-        examRound = 0;
-        examSolved = 0;
-        examScore = 0;
-        window.__examSummary = null;
-        if(!silent) $("statusLine").textContent = "Exam mode ON (10 rounds).";
-      }else{
-        if(!silent) $("statusLine").textContent = "Practice mode ON.";
-      }
-    }
-
-    $("switchExam").addEventListener("click", () => { toggleExam(!examOn); startRound(); });
-    $("switchExam").addEventListener("keydown", (e) => {
-      if(e.key === "Enter" || e.key === " "){
-        e.preventDefault();
-        toggleExam(!examOn);
-        startRound();
-      }
+  // =============================
+  // Rendering
+  // =============================
+  function renderKeyboard(){
+    kbdEl.innerHTML = "";
+    ALPH.forEach(ch => {
+      const d = document.createElement("div");
+      d.className = "key";
+      d.textContent = ch;
+      d.addEventListener("click", () => onGuess(ch, d));
+      kbdEl.appendChild(d);
     });
+  }
 
-    /**********************
-     * Buttons / Inputs
-     **********************/
-    $("btnShare").addEventListener("click", share);
-    $("btnResetDeck").addEventListener("click", () => {
-      resetDeck();
-      startRound();
-    });
-    $("btnNew").addEventListener("click", () => startRound());
-    $("btnHint").addEventListener("click", () => {
-      if(!currentPick) return;
-      if(hintUsed){
-        $("statusLine").textContent = "Hint already used this round.";
-        return;
+  function renderWord(){
+    wordEl.innerHTML = "";
+    for (const ch of answer) {
+      if (ch === " ") {
+        const s = document.createElement("div");
+        s.className = "tile space";
+        wordEl.appendChild(s);
+        continue;
       }
-      const def = currentPick.definition || currentPick.hint || "";
-      const pre = currentPick.hint ? String(currentPick.hint) : "";
-      $("hintText").textContent = pre || safeHint(currentPick.term, def);
-      setHintVisible(true);
-      hintUsed = true;
-      $("statusLine").textContent = "Hint shown (masked).";
-    });
-
-    $("selDifficulty").addEventListener("change", () => {
-      applyDifficulty($("selDifficulty").value);
-      // reset lives to new max for the current round
-      livesLeft = livesMax;
-      renderHealth();
-      $("statusLine").textContent = `Difficulty set to ${titleCase($("selDifficulty").value)}.`;
-    });
-
-    // physical keyboard support
-    window.addEventListener("keydown", (e) => {
-      if(!viewGame.classList.contains("active")) return;
-      const k = e.key.toUpperCase();
-      if(k.length === 1 && k >= "A" && k <= "Z"){
-        handleGuess(k);
+      if (!/[A-Z]/.test(ch)) {
+        const p = document.createElement("div");
+        p.className = "tile punct";
+        p.textContent = ch;
+        wordEl.appendChild(p);
+        continue;
       }
-    });
+      const t = document.createElement("div");
+      t.className = "tile";
+      t.textContent = revealed.has(ch) ? ch : "";
+      wordEl.appendChild(t);
+    }
+  }
 
-    /**********************
-     * Boot
-     **********************/
-    let booted = false;
-    async function bootIfNeeded(){
-      if(booted) return;
-      booted = true;
-      await loadBank();
-      if(!bankReady) return;
-      deck = loadDeck();
-      updateRemaining(deck);
-      applyDifficulty($("selDifficulty").value);
-      toggleExam(false, true);
-      startRound();
+  function updateHealth(){
+    livesEl.textContent = lives;
+    const pct = Math.max(0, lives / MAX_LIVES) * 100;
+    fillEl.style.width = pct + "%";
+
+    if (lives >= 5) stateText.textContent = "On Track";
+    else if (lives >= 3) stateText.textContent = "At Risk";
+    else if (lives >= 1) stateText.textContent = "Critical";
+    else stateText.textContent = "Failed";
+
+    if (lives >= 5) fillEl.style.background = "linear-gradient(90deg, rgba(34,197,94,0.95), rgba(16,185,129,0.90))";
+    else if (lives >= 3) fillEl.style.background = "linear-gradient(90deg, rgba(245,158,11,0.95), rgba(20,184,166,0.85))";
+    else fillEl.style.background = "linear-gradient(90deg, rgba(239,68,68,0.95), rgba(245,158,11,0.85))";
+  }
+
+  function updateStats(){
+    scoreEl.textContent = String(examActive ? examScore : score);
+    solvedEl.textContent = String(examActive ? examSolved : solvedCount);
+    streakEl.textContent = String(streak);
+    bestStreakEl.textContent = String(bestStreak);
+    scoreTagEl.textContent = examActive ? "Exam" : "Practice";
+  }
+
+  function disableKeyboard(disabled=true){
+    [...kbdEl.querySelectorAll(".key")].forEach(k => {
+      if (disabled) k.classList.add("used");
+      else k.classList.remove("used");
+      k.style.pointerEvents = disabled ? "none" : "auto";
+    });
+  }
+
+  function isSolved(){
+    for (const ch of answer) {
+      if (/[A-Z]/.test(ch) && !revealed.has(ch)) return false;
+    }
+    return true;
+  }
+
+  function updateRemaining(){
+    const diff = diffSelect.value;
+    const rem = remainingCount(diff);
+    remainingEl.textContent = String(rem);
+    modeDetailEl.textContent = `${examActive ? "Exam" : "Practice"} • ${difficultyLabel(diff)}`;
+  }
+
+  function setModeUI(){
+    modeLabel.textContent = examToggle.checked ? "Exam" : "Practice";
+    examProgress.style.display = examToggle.checked ? "inline" : "none";
+    btnNext.textContent = examToggle.checked ? (examActive ? "Next round" : "Start exam") : "New word";
+    btnHint.disabled = false;
+    updateRemaining();
+    updateStats();
+  }
+
+  // =============================
+  // Load bank
+  // =============================
+  async function loadBank(){
+    if (BANK.length) return;
+
+    bankStatusEl.textContent = "Loading bank…";
+
+    try{
+      const res = await fetch("./words.json", { cache: "no-store" });
+      if (!res.ok) throw new Error("Failed to load words.json (" + res.status + ")");
+      const data = await res.json();
+      if (!Array.isArray(data) || !data.length) throw new Error("words.json is empty/invalid");
+
+      BANK = data
+        .filter(x => x && typeof x.term === "string" && typeof x.hint === "string")
+        .map(x => ({
+          term: x.term.trim().toUpperCase(),
+          hint: x.hint.trim(),
+          diff: "medium"
+        }));
+
+      // Build difficulty subsets
+      subsetIndices.all = [];
+      subsetIndices.easy = [];
+      subsetIndices.medium = [];
+      subsetIndices.hard = [];
+
+      BANK.forEach((item, idx) => {
+        const d = classifyDifficulty(item.term);
+        item.diff = d;
+        subsetIndices.all.push(idx);
+        subsetIndices[d].push(idx);
+      });
+
+      BANK_SIG = bankSignature();
+
+      bankStatusEl.textContent = `Bank: ${BANK.length} terms`;
+      updateRemaining();
+
+    } catch (e){
+      console.warn(e);
+      bankStatusEl.textContent = "Bank load failed (using fallback)";
+      BANK = [
+        { term: "WORK BREAKDOWN STRUCTURE", hint: "A hierarchical decomposition of project scope into deliverables and work packages (WBS).", diff:"medium" },
+        { term: "CRITICAL PATH", hint: "The longest dependent path that sets the minimum project duration.", diff:"easy" },
+        { term: "RISK REGISTER", hint: "A document listing identified risks, responses, owners, and status.", diff:"easy" }
+      ];
+      subsetIndices.all = [0,1,2];
+      subsetIndices.easy = [1,2];
+      subsetIndices.medium = [0];
+      subsetIndices.hard = [];
+      BANK_SIG = bankSignature();
+      updateRemaining();
+      showToast("⚠️ words.json could not be loaded. Upload words.json to the same folder as index.html.", "bad");
+    }
+  }
+
+  // =============================
+  // Round flow
+  // =============================
+  function lockControls(lock){
+    roundLocked = lock;
+    diffSelect.disabled = lock;
+    examToggle.disabled = lock && examActive; // keep exam mode stable mid-exam
+    btnResetDeck.disabled = lock && examActive; // avoid deck reset mid-exam
+  }
+
+  function beginRound(){
+    hideToast();
+    setHint("");
+
+    lives = MAX_LIVES;
+    used = new Set();
+    revealed = new Set();
+
+    const diff = diffSelect.value;
+    currentPick = drawNextPick(diff);
+    answer = currentPick.term;
+
+    renderWord();
+    updateHealth();
+    renderKeyboard();
+    disableKeyboard(false);
+
+    btnHint.disabled = false;
+    btnHint.onclick = () => {
+      setHint("Hint: " + currentPick.hint);
+      btnHint.disabled = true;
+    };
+
+    lockControls(true);
+    updateRemaining();
+    updateStats();
+  }
+
+  function endRoundUI(){
+    disableKeyboard(true);
+    lockControls(false);
+    setModeUI();
+  }
+
+  function onRoundWin(){
+    const bonus = Math.max(0, lives) * 2;
+    const gained = 10 + bonus;
+
+    if (examActive){
+      examScore += gained;
+      examSolved += 1;
+    } else {
+      score += gained;
+      solvedCount += 1;
+      streak += 1;
+      bestStreak = Math.max(bestStreak, streak);
+      localStorage.setItem(LS_BEST_STREAK, String(bestStreak));
     }
 
-    // Preload bank immediately (so Start feels instant)
-    loadBank();
-  </script>
+    updateStats();
+
+    if (examActive){
+      showToast(`✅ Round ${examRound} solved! +${gained} points. Click “Next round”.`, "good");
+    } else {
+      showToast(`✅ Solved! +${gained} points. Click “New word” for the next term.`, "good");
+    }
+    endRoundUI();
+  }
+
+  function onRoundFail(){
+    if (examActive){
+      examFailed += 1;
+      showToast(`❌ Round ${examRound} failed. The term was: ${answer}. Click “Next round”.`, "bad");
+    } else {
+      streak = 0;
+      showToast(`❌ Project failed. The term was: ${answer}. Click “New word” to try again.`, "bad");
+    }
+    updateStats();
+    endRoundUI();
+  }
+
+  function maybeFinishExam(){
+    if (!examActive) return false;
+    if (examRound < EXAM_ROUNDS) return false;
+
+    // Exam finished
+    examActive = false;
+    examToggle.checked = false;
+    setModeUI();
+
+    const diffName = difficultyLabel(diffSelect.value);
+    const summary = `🏁 Exam complete! Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS} • Difficulty: ${diffName}.`;
+    showToast(summary + " Use Share to copy a post-ready blurb.", "good");
+
+    // Reset exam counters for next run (keep totals visible until next action)
+    lockControls(false);
+    return true;
+  }
+
+  // =============================
+  // Guess logic
+  // =============================
+  function onGuess(ch, keyEl){
+    if (keyEl.classList.contains("used")) return;
+    if (used.has(ch)) return;
+    used.add(ch);
+
+    const hit = answer.includes(ch);
+    if (hit){
+      revealed.add(ch);
+      keyEl.classList.add("used","good");
+      renderWord();
+
+      if (isSolved()){
+        onRoundWin();
+      }
+    } else {
+      lives -= 1;
+      keyEl.classList.add("used","bad");
+      updateHealth();
+
+      if (lives <= 0){
+        onRoundFail();
+      }
+    }
+  }
+
+  // =============================
+  // Mode actions
+  // =============================
+  async function startPractice(){
+    examActive = false;
+    examRound = 0;
+    setModeUI();
+    beginRound();
+  }
+
+  async function startExam(){
+    examActive = true;
+    examRound = 1;
+    examSolved = 0;
+    examFailed = 0;
+    examScore = 0;
+
+    roundNowEl.textContent = String(examRound);
+    setModeUI();
+    beginRound();
+  }
+
+  async function nextRound(){
+    if (!examToggle.checked){
+      // practice
+      startPractice();
+      return;
+    }
+
+    // exam toggle is ON
+    if (!examActive){
+      // start exam
+      await startExam();
+      return;
+    }
+
+    // exam in progress -> advance
+    examRound += 1;
+    if (examRound > EXAM_ROUNDS){
+      // Safety
+      examRound = EXAM_ROUNDS;
+    }
+    roundNowEl.textContent = String(examRound);
+
+    // If we just completed the final round, finish exam after showing final
+    if (examRound > EXAM_ROUNDS){
+      maybeFinishExam();
+      return;
+    }
+
+    // If previous round ended, start next
+    beginRound();
+  }
+
+  // =============================
+  // Share
+  // =============================
+  async function shareResult(){
+    const url = window.location.href;
+    const diffName = difficultyLabel(diffSelect.value);
+
+    let text = "";
+    if (examActive){
+      text = `I'm playing PMP + Agile Hangman (Exam mode, ${diffName}). Current: Round ${examRound}/${EXAM_ROUNDS} • Score ${examScore} • Solved ${examSolved}. Try it: ${url}`;
+    } else if (examRound >= EXAM_ROUNDS && examScore > 0 && examSolved + examFailed === EXAM_ROUNDS){
+      // If user just finished an exam and hasn’t started another round, we can share exam summary.
+      text = `I just finished a 10-round PMP + Agile Hangman exam (${diffName}). Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS}. Try it: ${url}`;
+    } else {
+      text = `I'm playing PMP + Agile Hangman (${diffName}). Score: ${score} • Best streak: ${bestStreak}. Try it: ${url}`;
+    }
+
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast("📋 Copied to clipboard! Paste it into LinkedIn (or anywhere).", "good");
+    } catch {
+      // fallback: prompt
+      window.prompt("Copy this text:", text);
+    }
+  }
+
+  // =============================
+  // Events
+  // =============================
+  btnNext.addEventListener("click", async () => {
+    await loadBank();
+
+    // If a round is mid-play, don't allow skipping (keeps learning loop consistent)
+    // But you can still click New word after round ends. We detect lock by keyboard enabled state.
+    const anyKeyEnabled = [...kbdEl.querySelectorAll(".key")].some(k => !k.classList.contains("used") && k.style.pointerEvents !== "none");
+    if (roundLocked && anyKeyEnabled){
+      showToast("Finish this round first (solve or run out of guesses).", "bad");
+      return;
+    }
+
+    if (examToggle.checked){
+      // If a round ended, we move to next round OR start exam
+      if (!examActive){
+        await startExam();
+      } else {
+        // If last round already ended, proceed
+        if (examRound >= EXAM_ROUNDS){
+          // last round completed; finish exam
+          maybeFinishExam();
+        } else {
+          examRound += 1;
+          roundNowEl.textContent = String(examRound);
+          beginRound();
+        }
+      }
+    } else {
+      // practice
+      startPractice();
+    }
+  });
+
+  btnShare.addEventListener("click", () => shareResult());
+
+  btnResetDeck.addEventListener("click", async () => {
+    await loadBank();
+    if (examActive){
+      showToast("End the exam first before resetting the deck.", "bad");
+      return;
+    }
+    resetDecks();
+  });
+
+  diffSelect.addEventListener("change", async () => {
+    await loadBank();
+    if (roundLocked){
+      // In-round changes are not allowed
+      updateRemaining();
+      showToast("Difficulty can be changed after the round ends.", "bad");
+      return;
+    }
+    updateRemaining();
+    setModeUI();
+  });
+
+  examToggle.addEventListener("change", () => {
+    if (examActive){
+      // Don’t allow toggling off mid-exam (prevents confusing state)
+      examToggle.checked = true;
+      showToast("Finish the exam run first (10 rounds).", "bad");
+      return;
+    }
+    setModeUI();
+  });
+
+  window.addEventListener("keydown", (e)=>{
+    const k = String(e.key || "").toUpperCase();
+    if (k.length === 1 && k >= "A" && k <= "Z") {
+      const keyDiv = [...kbdEl.querySelectorAll(".key")].find(x => x.textContent === k);
+      if (keyDiv && !keyDiv.classList.contains("used") && keyDiv.style.pointerEvents !== "none") onGuess(k, keyDiv);
+    }
+    if (e.key === "Enter") {
+      btnNext.click();
+    }
+  });
+
+  // =============================
+  // Boot
+  // =============================
+  (async function init(){
+    await loadBank();
+    setModeUI();
+    updateStats();
+    renderKeyboard();
+    disableKeyboard(true);
+    // start immediately in practice with first word
+    startPractice();
+  })();
+</script>
 </body>
 </html>
