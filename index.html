@@ -479,15 +479,17 @@
   let BANK = [];
   let BANK_SIG = "";
 
-  // Difficulty index
+  // Difficulty buckets
   const DIFFS = ["all","easy","medium","hard"];
   const subsetIndices = { all: [], easy: [], medium: [], hard: [] };
 
-  // LocalStorage keys (per browser/device)
-  const LS_VER = "v3"; // bump if you want to force fresh decks
-  const LS_BEST_STREAK = `pmpHangmanBestStreak_${LS_VER}`;
-  const LS_DECK_PREFIX = `pmpHangmanDeck_${LS_VER}_`; // + difficulty
-  const LS_BANK_SIG = `pmpHangmanBankSig_${LS_VER}`;
+  // IMPORTANT CHANGE:
+  // Decks are now IN-MEMORY (not saved to localStorage), so every fresh page load starts at 1000 again.
+  // This matches: "each time someone opens the link, start fresh".
+  const decks = { all: [], easy: [], medium: [], hard: [] };
+
+  // Still OK to persist best streak for the same device (optional)
+  const LS_BEST_STREAK = "pmpHangmanBestStreak_v4";
 
   // =============================
   // UI elements
@@ -537,11 +539,14 @@
 
   // Exam state
   let examActive = false;
-  let examRound = 0;           // 1..EXAM_ROUNDS
+  let examRound = 0;       // 1..EXAM_ROUNDS
   let examSolved = 0;
   let examFailed = 0;
   let examScore = 0;
-  let roundLocked = false;     // prevents changing difficulty mid-round
+
+  // Round state
+  let guessesMade = false;     // NEW: used to lock difficulty only AFTER first guess
+  let roundInPlay = false;
 
   bestStreakEl.textContent = bestStreak;
   roundTotalEl.textContent = String(EXAM_ROUNDS);
@@ -575,20 +580,20 @@
     const hasPunct = /[^A-Z\s]/.test(t);
     const rare = (lettersOnly.match(/[JQXZ]/g) || []).length;
 
-    let score = 0;
-    if (charLen <= 10) score += 0;
-    else if (charLen <= 18) score += 1;
-    else score += 2;
+    let s = 0;
+    if (charLen <= 10) s += 0;
+    else if (charLen <= 18) s += 1;
+    else s += 2;
 
-    if (wordCount <= 2) score += 0;
-    else if (wordCount <= 3) score += 1;
-    else score += 2;
+    if (wordCount <= 2) s += 0;
+    else if (wordCount <= 3) s += 1;
+    else s += 2;
 
-    if (hasPunct) score += 1;
-    if (rare >= 2) score += 1;
+    if (hasPunct) s += 1;
+    if (rare >= 2) s += 1;
 
-    if (score <= 1) return "easy";
-    if (score <= 3) return "medium";
+    if (s <= 1) return "easy";
+    if (s <= 3) return "medium";
     return "hard";
   }
 
@@ -605,48 +610,23 @@
   }
 
   // =============================
-  // Deck logic (no repeats per device/browser)
+  // Deck logic (NO repeats within a session; resets on page reload)
   // =============================
-  function deckKey(diff){ return LS_DECK_PREFIX + diff; }
-
   function buildFreshDeck(diff){
     const base = subsetIndices[diff] || [];
-    const deck = shuffle(base.slice());
-    localStorage.setItem(deckKey(diff), JSON.stringify(deck));
-    localStorage.setItem(LS_BANK_SIG, BANK_SIG);
-    return deck;
+    decks[diff] = shuffle(base.slice());
+    return decks[diff];
   }
 
   function getDeck(diff){
-    // If bank signature changed, reset all decks
-    const storedSig = localStorage.getItem(LS_BANK_SIG);
-    if (storedSig !== BANK_SIG){
-      for (const d of DIFFS){
-        localStorage.removeItem(deckKey(d));
-      }
-      localStorage.setItem(LS_BANK_SIG, BANK_SIG);
-    }
-
-    try{
-      const raw = localStorage.getItem(deckKey(diff));
-      if (!raw) return buildFreshDeck(diff);
-      const deck = JSON.parse(raw);
-      if (!Array.isArray(deck)) return buildFreshDeck(diff);
-      // Basic validation
-      if (deck.some(n => typeof n !== "number" || n < 0 || n >= BANK.length)) return buildFreshDeck(diff);
-      return deck;
-    } catch {
+    if (!decks[diff] || decks[diff].length === 0){
       return buildFreshDeck(diff);
     }
-  }
-
-  function saveDeck(diff, deck){
-    localStorage.setItem(deckKey(diff), JSON.stringify(deck));
+    return decks[diff];
   }
 
   function remainingCount(diff){
-    const deck = getDeck(diff);
-    return deck.length;
+    return (decks[diff] && decks[diff].length) ? decks[diff].length : (subsetIndices[diff] || []).length;
   }
 
   function drawNextPick(diff){
@@ -658,17 +638,15 @@
     }
 
     const idx = deck.pop();
-    saveDeck(diff, deck);
     return BANK[idx];
   }
 
   function resetDecks(){
     for (const d of DIFFS){
-      localStorage.removeItem(deckKey(d));
+      buildFreshDeck(d);
     }
-    localStorage.setItem(LS_BANK_SIG, BANK_SIG);
-    showToast("🧹 Deck reset for this device/browser. You can see terms again from the start.", "good");
     updateRemaining();
+    showToast("🧹 Deck reset. Remaining is back to full for this session.", "good");
   }
 
   // =============================
@@ -748,8 +726,7 @@
 
   function updateRemaining(){
     const diff = diffSelect.value;
-    const rem = remainingCount(diff);
-    remainingEl.textContent = String(rem);
+    remainingEl.textContent = String(remainingCount(diff));
     modeDetailEl.textContent = `${examActive ? "Exam" : "Practice"} • ${difficultyLabel(diff)}`;
   }
 
@@ -758,6 +735,19 @@
     examProgress.style.display = examToggle.checked ? "inline" : "none";
     btnNext.textContent = examToggle.checked ? (examActive ? "Next round" : "Start exam") : "New word";
     btnHint.disabled = false;
+
+    // Allow difficulty selection anytime BEFORE first guess in the round.
+    // In Exam mode, lock difficulty once exam starts (so the 10 rounds are consistent).
+    if (examActive){
+      diffSelect.disabled = true;
+      examToggle.disabled = true;
+      btnResetDeck.disabled = true;
+    } else {
+      examToggle.disabled = false;
+      btnResetDeck.disabled = false;
+      diffSelect.disabled = (roundInPlay && guessesMade); // key fix
+    }
+
     updateRemaining();
     updateStats();
   }
@@ -799,6 +789,11 @@
 
       BANK_SIG = bankSignature();
 
+      // Build fresh decks for this session (so Remaining starts at full)
+      for (const d of DIFFS){
+        buildFreshDeck(d);
+      }
+
       bankStatusEl.textContent = `Bank: ${BANK.length} terms`;
       updateRemaining();
 
@@ -815,6 +810,7 @@
       subsetIndices.medium = [0];
       subsetIndices.hard = [];
       BANK_SIG = bankSignature();
+      for (const d of DIFFS){ buildFreshDeck(d); }
       updateRemaining();
       showToast("⚠️ words.json could not be loaded. Upload words.json to the same folder as index.html.", "bad");
     }
@@ -823,13 +819,6 @@
   // =============================
   // Round flow
   // =============================
-  function lockControls(lock){
-    roundLocked = lock;
-    diffSelect.disabled = lock;
-    examToggle.disabled = lock && examActive; // keep exam mode stable mid-exam
-    btnResetDeck.disabled = lock && examActive; // avoid deck reset mid-exam
-  }
-
   function beginRound(){
     hideToast();
     setHint("");
@@ -837,6 +826,8 @@
     lives = MAX_LIVES;
     used = new Set();
     revealed = new Set();
+    guessesMade = false;
+    roundInPlay = true;
 
     const diff = diffSelect.value;
     currentPick = drawNextPick(diff);
@@ -853,14 +844,13 @@
       btnHint.disabled = true;
     };
 
-    lockControls(true);
     updateRemaining();
-    updateStats();
+    setModeUI();
   }
 
   function endRoundUI(){
     disableKeyboard(true);
-    lockControls(false);
+    roundInPlay = false;
     setModeUI();
   }
 
@@ -871,21 +861,17 @@
     if (examActive){
       examScore += gained;
       examSolved += 1;
+      showToast(`✅ Round ${examRound} solved! +${gained} points. Click “Next round”.`, "good");
     } else {
       score += gained;
       solvedCount += 1;
       streak += 1;
       bestStreak = Math.max(bestStreak, streak);
       localStorage.setItem(LS_BEST_STREAK, String(bestStreak));
+      showToast(`✅ Solved! +${gained} points. Click “New word” for the next term.`, "good");
     }
 
     updateStats();
-
-    if (examActive){
-      showToast(`✅ Round ${examRound} solved! +${gained} points. Click “Next round”.`, "good");
-    } else {
-      showToast(`✅ Solved! +${gained} points. Click “New word” for the next term.`, "good");
-    }
     endRoundUI();
   }
 
@@ -901,22 +887,16 @@
     endRoundUI();
   }
 
-  function maybeFinishExam(){
-    if (!examActive) return false;
-    if (examRound < EXAM_ROUNDS) return false;
-
-    // Exam finished
+  function finishExam(){
+    // End exam session
     examActive = false;
     examToggle.checked = false;
-    setModeUI();
 
     const diffName = difficultyLabel(diffSelect.value);
     const summary = `🏁 Exam complete! Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS} • Difficulty: ${diffName}.`;
     showToast(summary + " Use Share to copy a post-ready blurb.", "good");
 
-    // Reset exam counters for next run (keep totals visible until next action)
-    lockControls(false);
-    return true;
+    setModeUI();
   }
 
   // =============================
@@ -926,6 +906,12 @@
     if (keyEl.classList.contains("used")) return;
     if (used.has(ch)) return;
     used.add(ch);
+
+    // Lock difficulty only AFTER the first guess in the round
+    if (!guessesMade){
+      guessesMade = true;
+      setModeUI();
+    }
 
     const hit = answer.includes(ch);
     if (hit){
@@ -969,38 +955,6 @@
     beginRound();
   }
 
-  async function nextRound(){
-    if (!examToggle.checked){
-      // practice
-      startPractice();
-      return;
-    }
-
-    // exam toggle is ON
-    if (!examActive){
-      // start exam
-      await startExam();
-      return;
-    }
-
-    // exam in progress -> advance
-    examRound += 1;
-    if (examRound > EXAM_ROUNDS){
-      // Safety
-      examRound = EXAM_ROUNDS;
-    }
-    roundNowEl.textContent = String(examRound);
-
-    // If we just completed the final round, finish exam after showing final
-    if (examRound > EXAM_ROUNDS){
-      maybeFinishExam();
-      return;
-    }
-
-    // If previous round ended, start next
-    beginRound();
-  }
-
   // =============================
   // Share
   // =============================
@@ -1010,9 +964,8 @@
 
     let text = "";
     if (examActive){
-      text = `I'm playing PMP + Agile Hangman (Exam mode, ${diffName}). Current: Round ${examRound}/${EXAM_ROUNDS} • Score ${examScore} • Solved ${examSolved}. Try it: ${url}`;
-    } else if (examRound >= EXAM_ROUNDS && examScore > 0 && examSolved + examFailed === EXAM_ROUNDS){
-      // If user just finished an exam and hasn’t started another round, we can share exam summary.
+      text = `I'm playing PMP + Agile Hangman (Exam mode, ${diffName}). Round ${examRound}/${EXAM_ROUNDS} • Score ${examScore} • Solved ${examSolved}. Try it: ${url}`;
+    } else if (examRound >= EXAM_ROUNDS && (examSolved + examFailed) === EXAM_ROUNDS && (examScore > 0)){
       text = `I just finished a 10-round PMP + Agile Hangman exam (${diffName}). Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS}. Try it: ${url}`;
     } else {
       text = `I'm playing PMP + Agile Hangman (${diffName}). Score: ${score} • Best streak: ${bestStreak}. Try it: ${url}`;
@@ -1022,7 +975,6 @@
       await navigator.clipboard.writeText(text);
       showToast("📋 Copied to clipboard! Paste it into LinkedIn (or anywhere).", "good");
     } catch {
-      // fallback: prompt
       window.prompt("Copy this text:", text);
     }
   }
@@ -1033,31 +985,29 @@
   btnNext.addEventListener("click", async () => {
     await loadBank();
 
-    // If a round is mid-play, don't allow skipping (keeps learning loop consistent)
-    // But you can still click New word after round ends. We detect lock by keyboard enabled state.
+    // If a round is in play, require completing it
     const anyKeyEnabled = [...kbdEl.querySelectorAll(".key")].some(k => !k.classList.contains("used") && k.style.pointerEvents !== "none");
-    if (roundLocked && anyKeyEnabled){
+    if (roundInPlay && anyKeyEnabled){
       showToast("Finish this round first (solve or run out of guesses).", "bad");
       return;
     }
 
     if (examToggle.checked){
-      // If a round ended, we move to next round OR start exam
       if (!examActive){
         await startExam();
-      } else {
-        // If last round already ended, proceed
-        if (examRound >= EXAM_ROUNDS){
-          // last round completed; finish exam
-          maybeFinishExam();
-        } else {
-          examRound += 1;
-          roundNowEl.textContent = String(examRound);
-          beginRound();
-        }
+        return;
       }
+
+      // exam active: advance rounds
+      if (examRound >= EXAM_ROUNDS){
+        finishExam();
+        return;
+      }
+
+      examRound += 1;
+      roundNowEl.textContent = String(examRound);
+      beginRound();
     } else {
-      // practice
       startPractice();
     }
   });
@@ -1075,19 +1025,21 @@
 
   diffSelect.addEventListener("change", async () => {
     await loadBank();
-    if (roundLocked){
-      // In-round changes are not allowed
-      updateRemaining();
-      showToast("Difficulty can be changed after the round ends.", "bad");
+
+    // Only block changing difficulty if the round is already in-play AND user has started guessing
+    if (roundInPlay && guessesMade){
+      showToast("You can change difficulty after the round ends (or before your first guess).", "bad");
+      // revert by forcing UI update
+      setModeUI();
       return;
     }
+
     updateRemaining();
     setModeUI();
   });
 
   examToggle.addEventListener("change", () => {
     if (examActive){
-      // Don’t allow toggling off mid-exam (prevents confusing state)
       examToggle.checked = true;
       showToast("Finish the exam run first (10 rounds).", "bad");
       return;
