@@ -165,11 +165,14 @@
       display:flex; gap:12px; flex-wrap:wrap;
       align-items:center;
       margin: 10px 0 14px;
+      position:relative;
+      z-index:2; /* helps Safari/overlay quirks */
     }
     label.small{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
-    select, button, .toggle{
-      font-family:inherit;
-    }
+    select, button, .toggle{ font-family:inherit; }
+
+    /* Safari-safe select: ensure it is clickable and above overlays */
+    .selectWrap{ position:relative; z-index:5; }
     select{
       background: rgba(255,255,255,0.9);
       border:1px solid var(--border);
@@ -178,6 +181,11 @@
       font-size:14px;
       outline:none;
       min-width:160px;
+      position:relative;
+      z-index:6;
+      pointer-events:auto;
+      -webkit-appearance: menulist;
+      appearance: menulist;
     }
 
     .btn{
@@ -213,6 +221,8 @@
       border-radius:16px;
       border:1px solid var(--border);
       background: rgba(255,255,255,0.65);
+      position:relative;
+      z-index:3;
     }
     .switch{
       width:46px;height:26px;border-radius:999px;
@@ -242,6 +252,8 @@
       background: rgba(255,255,255,0.65);
       font-weight:800;
       font-variant-numeric: tabular-nums;
+      position:relative;
+      z-index:2;
     }
     .chip small{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:0.12em;text-transform:uppercase}
 
@@ -281,9 +293,7 @@
     }
 
     /* Keyboard */
-    .kbd{
-      margin-top:12px;
-    }
+    .kbd{ margin-top:12px; }
     .kbdTitle{
       display:flex;align-items:center;justify-content:space-between;
       color:var(--muted);
@@ -293,9 +303,7 @@
       margin:14px 0 8px;
       font-weight:900;
     }
-    .keys{
-      display:flex;flex-wrap:wrap;gap:10px;
-    }
+    .keys{ display:flex;flex-wrap:wrap;gap:10px; }
     .key{
       width:46px;height:46px;
       border-radius:16px;
@@ -325,7 +333,6 @@
     }
 
     /* Right panel cards */
-    .stack{display:grid;gap:14px}
     .meterWrap{
       display:flex;align-items:center;justify-content:space-between;gap:12px
     }
@@ -408,7 +415,6 @@
       margin-bottom:6px;
     }
 
-    /* Small helper */
     .miniTip{
       margin-top:12px;
       font-size:12px;
@@ -420,7 +426,6 @@
       text-align:center;
     }
 
-    /* Footer link row inside views */
     .subActions{
       display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
       margin-top:14px;
@@ -438,9 +443,9 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
-
     <header class="topbar">
       <div class="brand">
         <h1>PMP + Agile Hangman — <span class="accent">Project Health</span></h1>
@@ -454,7 +459,6 @@
     </header>
 
     <main>
-
       <!-- INTRO VIEW -->
       <section id="viewIntro" class="view active">
         <div class="card">
@@ -466,7 +470,7 @@
             </p>
             <p>
               <b>Practice</b> is open-ended. <b>Exam mode</b> runs a 10-round session and gives a share-ready summary.
-              Your no-repeat “deck” is stored on <b>your device only</b> (so other people won’t affect your remaining count).
+              Your no-repeat “deck” is stored on <b>your device only</b>.
             </p>
 
             <div class="ctaRow">
@@ -475,7 +479,7 @@
             </div>
 
             <div class="subActions">
-              <span>Tip: If you’re testing, use an Incognito window to simulate a “new user”.</span>
+              <span>Tip: Use an Incognito window to simulate a “new user”.</span>
               <button class="linkBtn" id="btnJumpToGame">Skip intro</button>
             </div>
           </div>
@@ -487,15 +491,15 @@
         <div class="card">
           <div class="hero">
             <h2>How to play</h2>
-                        <ul class="helpList">
-              <li><b>First step (recommended)</b>: Click <b>Reset Deck</b> to start from the full 1000-term bank on this device.</li>
-              <li><b>Difficulty</b>: Easy gives more help, Hard is stricter. (You can change anytime.)</li>
+            <ul class="helpList">
+              <li><b>First step (recommended)</b>: Click <b>Reset Deck</b> to start from the full bank on this device.</li>
+              <li><b>Difficulty</b>: Easy gives more help, Hard is stricter (change anytime).</li>
               <li><b>Practice / Exam</b>: Toggle Exam ON for a 10-round session summary.</li>
               <li><b>Reset Deck</b>: Clears your device’s history so terms won’t “run out”.</li>
-              <li><b>New word</b>: Skips to a fresh term (counts as a new round).</li>
-              <li><b>Show hint</b>: Shows a meaning-based clue (masked so it won’t reveal the answer). Once per round.</li>
+              <li><b>New word</b>: Skips to a fresh term (new round).</li>
+              <li><b>Show hint</b>: Shows a meaning-based clue (masked to avoid revealing the term). Once per round.</li>
               <li><b>Keyboard</b>: Click letters or type on your physical keyboard.</li>
-              <li><b>Health meter</b>: Each wrong guess reduces health. Solve the term before it hits zero.</li>
+              <li><b>Health meter</b>: Each wrong guess reduces health—solve before it hits zero.</li>
               <li><b>Share</b>: Copies a share message (and uses native share on mobile if available).</li>
             </ul>
 
@@ -510,7 +514,7 @@
       <!-- GAME VIEW -->
       <section id="viewGame" class="view">
         <div class="grid">
-          <!-- LEFT: guess + keyboard -->
+          <!-- LEFT -->
           <div class="card">
             <div class="cardInner">
               <div class="sectionTitle">
@@ -519,11 +523,11 @@
               </div>
 
               <div class="controls">
-                <div>
+                <div class="selectWrap">
                   <label class="small" for="selDifficulty">Difficulty</label><br/>
                   <select id="selDifficulty" aria-label="difficulty">
                     <option value="easy">Easy</option>
-                    <option value="balanced" selected>Balanced</option>
+                    <option value="balanced">Balanced</option>
                     <option value="hard">Hard</option>
                   </select>
                 </div>
@@ -574,7 +578,7 @@
             </div>
           </div>
 
-          <!-- RIGHT: project health -->
+          <!-- RIGHT -->
           <div class="card">
             <div class="cardInner">
               <div class="sectionTitle">
@@ -618,12 +622,10 @@
                 <button class="linkBtn" id="btnBackHome">Back to intro</button>
                 <span>Works on Chrome, Safari, and mobile.</span>
               </div>
-
             </div>
           </div>
         </div>
       </section>
-
     </main>
   </div>
 
@@ -632,16 +634,11 @@
      * Small utilities
      **********************/
     const $ = (id) => document.getElementById(id);
-
-    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
-    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
-
-    function titleCase(s){
-      return s.toLowerCase().replace(/\b[a-z]/g, (m)=>m.toUpperCase());
-    }
+    const clamp = (n,a,b)=>Math.max(a,Math.min(b,n));
+    const titleCase = (s)=>s.toLowerCase().replace(/\b[a-z]/g, m => m.toUpperCase());
 
     /**********************
-     * Views
+     * Views (Intro / Help / Game)
      **********************/
     const viewIntro = $("viewIntro");
     const viewHelp  = $("viewHelp");
@@ -669,28 +666,30 @@
 
     async function loadBank(){
       if(bankReady) return;
-      $("statusLine").textContent = "Loading word bank…";
+      // statusLine may not exist if user is on intro, so guard
+      if($("statusLine")) $("statusLine").textContent = "Loading word bank…";
+
       try{
-        const res = await fetch("words.json", {cache:"no-store"});
+        const res = await fetch("words.json", { cache:"no-store" });
         if(!res.ok) throw new Error("Could not load words.json ("+res.status+")");
         BANK = await res.json();
         if(!Array.isArray(BANK) || BANK.length < 50) throw new Error("words.json does not look valid.");
         bankReady = true;
-        $("statusLine").textContent = "Word bank loaded.";
+        if($("statusLine")) $("statusLine").textContent = "Word bank loaded.";
       }catch(err){
         console.error(err);
-        $("statusLine").textContent = "Could not load words.json. Make sure it is in the same folder as index.html.";
+        if($("statusLine")) $("statusLine").textContent =
+          "Could not load words.json. Make sure it is in the same folder as index.html.";
       }
     }
 
     /**********************
      * No-repeat deck (per device)
      **********************/
-    const STORAGE_KEY = "pmpHangman.deck.v3";
-    const STREAK_KEY  = "pmpHangman.streak.v3";
+    const STORAGE_KEY = "pmpHangman.deck.v4";
+    const STREAK_KEY  = "pmpHangman.streak.v4";
 
     function bankSignature(){
-      // simple signature: length + first term + last term
       const first = (BANK[0]?.term || "").slice(0,24);
       const last  = (BANK[BANK.length-1]?.term || "").slice(0,24);
       return `len:${BANK.length}|f:${first}|l:${last}`;
@@ -717,32 +716,34 @@
       try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(deck)); }catch{}
     }
 
-    function resetDeck(){
-      const d = defaultDeck();
-      saveDeck(d);
-      // IMPORTANT: also update the in-memory deck so Reset works immediately
-      deck = d;
-      updateRemaining(d);
-      $("statusLine").textContent = "Deck reset on this device.";
-      return d;
-    }
+    let deck = null;
 
     function updateRemaining(deck, currentIdx=null){
       const usedCount = Object.keys(deck.used||{}).length;
-      // Show "remaining including the current card" so Reset goes back to 1000
       let remaining = BANK.length - usedCount;
+
+      // show "remaining including current card" so Reset feels like full bank
       if(typeof currentIdx === "number" && deck.used && deck.used[currentIdx]) remaining += 1;
+
       $("remainingCount").textContent = String(remaining);
       $("bankMeta").textContent = `Bank: ${BANK.length} terms`;
     }
 
+    function resetDeck(){
+      const d = defaultDeck();
+      saveDeck(d);
+      deck = d;                 // IMPORTANT: update in-memory deck immediately
+      updateRemaining(d, null); // should show full 1000
+      $("statusLine").textContent = "Deck reset on this device.";
+      return d;
+    }
+
     function pickNext(deck){
-      // pick a term that hasn't been used on this device. If exhausted, reset used.
       const used = deck.used || {};
       if(Object.keys(used).length >= BANK.length){
         deck.used = {};
       }
-      // Simple random pick with retry
+
       for(let i=0;i<5000;i++){
         const idx = Math.floor(Math.random()*BANK.length);
         if(!deck.used[idx]){
@@ -752,7 +753,7 @@
           return Object.assign({__idx: idx}, BANK[idx]);
         }
       }
-      // fallback
+
       const idx = Math.floor(Math.random()*BANK.length);
       deck.used[idx]=1;
       saveDeck(deck);
@@ -761,17 +762,15 @@
     }
 
     /**********************
-     * Hint masking
+     * Hint masking (so it doesn't reveal answer)
      **********************/
     function safeHint(term, definition){
       if(!definition) return "No hint available for this term yet.";
       let hint = String(definition);
 
-      // Remove exact term (case-insensitive)
       const esc = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       hint = hint.replace(new RegExp(esc, "ig"), "____");
 
-      // Remove significant term words (>=4 chars) so hint doesn't literally contain the answer
       const words = term
         .toUpperCase()
         .replace(/[^A-Z0-9 ]+/g, " ")
@@ -780,17 +779,14 @@
         .filter(w => w.length >= 4);
 
       for(const w of words){
-        const re = new RegExp("\\b"+w+"\\b", "ig");
-        hint = hint.replace(re, "____");
+        hint = hint.replace(new RegExp("\\b"+w+"\\b", "ig"), "____");
       }
 
-      // Clean up repeated blanks
       hint = hint.replace(/(__+\s*){2,}/g, "____ ");
       hint = hint.replace(/\s+/g, " ").trim();
 
-      // Make sure it's not empty
-      if(hint.length < 8){
-        return "A common PMP/Agile concept related to project delivery. (Hint was masked to avoid giving the answer.)";
+      if(hint.length < 10){
+        return "A PMBOK/PMP concept used in project planning and delivery (masked to avoid revealing the term).";
       }
       return hint;
     }
@@ -798,7 +794,6 @@
     /**********************
      * Game state
      **********************/
-    let deck = null;
     let currentPick = null;
     let normalizedAnswer = "";
     let revealed = [];
@@ -808,16 +803,16 @@
     let solvedCount = 0;
     let score = 0;
 
-    // Exam mode: 10 rounds
     let examOn = false;
     let examRound = 0;
     let examSolved = 0;
     let examScore = 0;
 
-    // Hint usage
     let hintUsed = false;
 
-    // Streaks
+    /**********************
+     * Streaks
+     **********************/
     function loadStreak(){
       try{
         const raw = localStorage.getItem(STREAK_KEY);
@@ -839,16 +834,13 @@
     updateStreakUI(streak);
 
     /**********************
-     * Difficulty settings
+     * Difficulty
      **********************/
     function applyDifficulty(diff){
-      if(diff === "easy"){
-        livesMax = 8;
-      }else if(diff === "hard"){
-        livesMax = 5;
-      }else{
-        livesMax = 6;
-      }
+      if(diff === "easy") livesMax = 8;
+      else if(diff === "hard") livesMax = 5;
+      else livesMax = 6;
+
       livesLeft = Math.min(livesLeft, livesMax);
       renderHealth();
       $("modeMeta").textContent = `${examOn ? "Exam" : "Practice"} • ${titleCase(diff)}`;
@@ -861,10 +853,12 @@
       const boxWrap = $("wordBoxes");
       boxWrap.innerHTML = "";
       const answer = currentPick.term;
+
       for(let i=0;i<answer.length;i++){
         const ch = answer[i];
         const box = document.createElement("div");
         box.className = "box";
+
         if(ch === " " || ch === "-" || ch === "/"){
           box.classList.add("auto");
           box.textContent = ch;
@@ -881,16 +875,19 @@
       const keys = $("keys");
       keys.innerHTML = "";
       const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
       for(const L of letters){
         const btn = document.createElement("button");
         btn.className = "key";
         btn.textContent = L;
         btn.type = "button";
+
         if(guessed[L]){
           btn.classList.add("used");
           if(guessed[L] === "good") btn.classList.add("good");
           if(guessed[L] === "bad") btn.classList.add("bad");
         }
+
         btn.addEventListener("click", () => handleGuess(L));
         keys.appendChild(btn);
       }
@@ -901,34 +898,27 @@
       const pct = clamp(livesLeft / livesMax, 0, 1);
       $("meterFill").style.width = (pct*100).toFixed(0) + "%";
 
-      // label
       let label = "On Track";
       if(pct <= 0.34) label = "At Risk";
       else if(pct <= 0.67) label = "Watch";
       $("healthLabel").textContent = label;
 
-      // Visual health feedback: both size + gentle color shift
       const fill = $("meterFill");
       if(pct <= 0.34){
         fill.style.background = "linear-gradient(90deg, rgba(192,57,43,0.95), rgba(217,131,36,0.85))";
-        fill.style.filter = "saturate(1.05)";
       }else if(pct <= 0.67){
         fill.style.background = "linear-gradient(90deg, rgba(217,131,36,0.95), rgba(31,138,112,0.85))";
-        fill.style.filter = "saturate(1.02)";
       }else{
-        fill.style.background = "linear-gradient(90deg, rgba(31,138,112,0.95), rgba(31,138,112,0.75))";
-        fill.style.filter = "none";
+        fill.style.background = "linear-gradient(90deg, rgba(22,163,74,0.95), rgba(15,118,110,0.75))";
       }
     }
 
     function setHintVisible(visible){
       $("hintWrap").style.display = visible ? "block" : "none";
     }
-
     function setDefinitionText(txt){
       $("defText").textContent = txt;
     }
-
     function updateScoreUI(){
       $("score").textContent = String(score);
       $("solved").textContent = String(solvedCount);
@@ -937,35 +927,29 @@
     /**********************
      * Round lifecycle
      **********************/
-    function normalizeAnswer(str){
-      return str.toUpperCase();
-    }
+    function normalizeAnswer(str){ return String(str||"").toUpperCase(); }
 
     function startRound(){
       setHintVisible(false);
-      // Always pull the latest deck from storage (Reset / multi-tab safe)
-      deck = loadDeck();
       hintUsed = false;
       setDefinitionText("Solve the term (or run out of guesses) to see the definition.");
 
+      // Always reload deck (multi-tab safe + reset-safe)
+      deck = loadDeck();
+
       currentPick = pickNext(deck);
       normalizedAnswer = normalizeAnswer(currentPick.term);
+
       revealed = [];
       guessed = {};
       livesLeft = livesMax;
 
       for(let i=0;i<normalizedAnswer.length;i++){
         const ch = normalizedAnswer[i];
-        if(ch === " " || ch === "-" || ch === "/"){
-          revealed[i] = true;
-        }else{
-          revealed[i] = false;
-        }
+        revealed[i] = (ch === " " || ch === "-" || ch === "/");
       }
 
-      $("statusLine").textContent = examOn
-        ? `Exam: Round ${examRound+1}/10`
-        : "Practice: New term loaded.";
+      $("statusLine").textContent = examOn ? `Exam: Round ${examRound+1}/10` : "Practice: New term loaded.";
 
       renderBoxes();
       renderKeyboard();
@@ -983,14 +967,12 @@
     }
 
     function endRound(win){
-      // show definition now
       const def = currentPick.definition || currentPick.hint || "No definition available for this term yet.";
       setDefinitionText(def);
 
       if(win){
         solvedCount += 1;
-        score += 10 + livesLeft; // reward for remaining health
-        $("statusLine").textContent = "Solved! +score. Click New word to continue.";
+        score += 10 + livesLeft;
 
         streak.current += 1;
         streak.best = Math.max(streak.best, streak.current);
@@ -1001,29 +983,23 @@
           examSolved += 1;
           examScore += 10 + livesLeft;
         }
+
+        $("statusLine").textContent = "Solved! Click New word to continue.";
       }else{
-        $("statusLine").textContent = "Out of guesses. Click New word to continue.";
         streak.current = 0;
         saveStreak(streak);
         updateStreakUI(streak);
 
-        if(examOn){
-          // no score
-        }
+        $("statusLine").textContent = "Out of guesses. Click New word to continue.";
       }
 
       updateScoreUI();
 
-      // Exam progression
       if(examOn){
         examRound += 1;
         if(examRound >= 10){
-          // End exam
-          const msg = `PMP Hangman — Exam Results: ${examSolved}/10 solved • Score ${examScore}.`;
+          window.__examSummary = `PMP Hangman — Exam Results: ${examSolved}/10 solved • Score ${examScore}.`;
           $("statusLine").textContent = "Exam finished! Use Share to copy your results.";
-          // store summary for share
-          window.__examSummary = msg;
-          // auto-turn exam off for next play
           toggleExam(false, true);
         }
       }
@@ -1032,7 +1008,7 @@
     function handleGuess(letter){
       if(!currentPick) return;
       const L = letter.toUpperCase();
-      if(guessed[L]) return; // already guessed
+      if(guessed[L]) return;
 
       let hit = false;
       for(let i=0;i<normalizedAnswer.length;i++){
@@ -1043,25 +1019,18 @@
       }
 
       guessed[L] = hit ? "good" : "bad";
-      if(!hit){
-        livesLeft -= 1;
-      }
+      if(!hit) livesLeft -= 1;
 
       renderBoxes();
       renderKeyboard();
       renderHealth();
 
-      if(allRevealed()){
-        endRound(true);
-        return;
-      }
+      if(allRevealed()) return endRound(true);
 
       if(livesLeft <= 0){
-        // reveal everything
         for(let i=0;i<revealed.length;i++){
-          if(normalizedAnswer[i] !== " " && normalizedAnswer[i] !== "-" && normalizedAnswer[i] !== "/"){
-            revealed[i] = true;
-          }
+          const ch = normalizedAnswer[i];
+          if(ch !== " " && ch !== "-" && ch !== "/") revealed[i] = true;
         }
         renderBoxes();
         endRound(false);
@@ -1082,19 +1051,16 @@
 
       try{
         if(navigator.share){
-          await navigator.share({title:"PMP Hangman", text, url});
+          await navigator.share({ title:"PMP Hangman", text, url });
           $("statusLine").textContent = "Shared.";
           return;
         }
-      }catch(e){
-        // ignore and fall back
-      }
+      }catch(e){}
 
       try{
         await navigator.clipboard.writeText(text);
         $("statusLine").textContent = "Copied share text to clipboard.";
       }catch{
-        // last fallback
         prompt("Copy this:", text);
       }
     }
@@ -1133,11 +1099,14 @@
      * Buttons / Inputs
      **********************/
     $("btnShare").addEventListener("click", share);
+
     $("btnResetDeck").addEventListener("click", () => {
       resetDeck();
       startRound();
     });
+
     $("btnNew").addEventListener("click", () => startRound());
+
     $("btnHint").addEventListener("click", () => {
       if(!currentPick) return;
       if(hintUsed){
@@ -1151,12 +1120,13 @@
       $("statusLine").textContent = "Hint shown (masked).";
     });
 
-    $("selDifficulty").addEventListener("change", () => {
-      applyDifficulty($("selDifficulty").value);
-      // reset lives to new max for the current round
-      livesLeft = livesMax;
+    // IMPORTANT: dropdown must work
+    $("selDifficulty").addEventListener("change", (e) => {
+      const val = e.target.value;
+      applyDifficulty(val);
+      livesLeft = livesMax;   // reset health for current round
       renderHealth();
-      $("statusLine").textContent = `Difficulty set to ${titleCase($("selDifficulty").value)}.`;
+      $("statusLine").textContent = `Difficulty set to ${titleCase(val)}.`;
     });
 
     // physical keyboard support
@@ -1175,16 +1145,21 @@
     async function bootIfNeeded(){
       if(booted) return;
       booted = true;
+
       await loadBank();
       if(!bankReady) return;
+
+      // set default dropdown value (still user-changeable)
+      $("selDifficulty").value = "balanced";
+
       deck = loadDeck();
-      updateRemaining(deck);
+      updateRemaining(deck, null);
       applyDifficulty($("selDifficulty").value);
       toggleExam(false, true);
       startRound();
     }
 
-    // Preload bank immediately (so Start feels instant)
+    // preload bank
     loadBank();
   </script>
 </body>
