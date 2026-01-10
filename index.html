@@ -560,6 +560,21 @@
                 <label class="toggle" style="gap:10px;">
                   <input id="examToggle" type="checkbox" />
                   <span class="switch"><span class="knob"></span></span>
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CEVYMZHCC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Enable GA DebugView by adding ?debug=1 to the URL
+    const __gaDebug = new URLSearchParams(window.location.search).has('debug');
+    gtag('config', 'G-5CEVYMZHCC', {
+      anonymize_ip: true,
+      send_page_view: true,
+      debug_mode: __gaDebug
+    });
+  </script>
                   <span class="toggleText" id="modeLabel">Practice</span>
                 </label>
               </div>
@@ -653,6 +668,17 @@
   </div>
 
 <script>
+
+// =============================
+// Analytics helpers (GA4)
+// =============================
+function trackEvent(name, params = {}) {
+  try {
+    if (typeof gtag === "function") {
+      gtag("event", name, params);
+    }
+  } catch (e) { /* no-op */ }
+}
   // =============================
   // Configuration
   // =============================
@@ -1090,6 +1116,14 @@
   function onRoundWin(){
     const bonus = Math.max(0, lives) * 2;
     const gained = 10 + bonus;
+    trackEvent("round_end", {
+      result: "win",
+      mode: examActive ? "exam" : "practice",
+      difficulty: currentDifficulty,
+      round: examActive ? examRound : null,
+      lives_left: lives,
+      points: gained
+    });
 
     if (examActive){
       examScore += gained;
@@ -1113,6 +1147,13 @@
   }
 
   function onRoundFail(){
+    trackEvent("round_end", {
+      result: "fail",
+      mode: examActive ? "exam" : "practice",
+      difficulty: currentDifficulty,
+      round: examActive ? examRound : null,
+      lives_left: lives
+    });
     if (examActive){
       examFailed += 1;
       showToast(`❌ Round ${examRound} failed. The term was: ${answer}. Click “Next round”.`, "bad");
@@ -1135,6 +1176,12 @@
 
     const diffName = difficultyLabel(diffSelect.value);
     const summary = `🏁 Exam complete! Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS} • Difficulty: ${diffName}.`;
+    trackEvent("exam_complete", {
+      score: examScore,
+      solved: examSolved,
+      failed: examFailed,
+      difficulty: diffSelect.value
+    });
     showToast(summary + " Use Share to copy a post-ready blurb.", "good");
 
     // Reset exam counters for next run (keep totals visible until next action)
@@ -1260,20 +1307,23 @@
 
   // Intro / Help navigation
   btnIntroStart?.addEventListener("click", () => {
+    trackEvent("start_game", { entry: "intro_start" });
     showView(viewGame);
     startPractice(); // starts in practice by default (toggle Exam if desired)
   });
   btnJumpToGame?.addEventListener("click", () => {
+    trackEvent("start_game", { entry: "skip_intro" });
     showView(viewGame);
     startPractice();
   });
-  btnIntroHow?.addEventListener("click", () => showView(viewHelp));
-  btnHelpBack?.addEventListener("click", () => showView(viewIntro));
+  btnIntroHow?.addEventListener("click", () => { trackEvent("view_instructions", { entry: "intro_how" }); showView(viewHelp); });
+  btnHelpBack?.addEventListener("click", () => { trackEvent("back_to_intro", { from: "instructions" }); showView(viewIntro); });
   btnHelpStart?.addEventListener("click", () => {
+    trackEvent("start_game", { entry: "instructions_start" });
     showView(viewGame);
     startPractice();
   });
-  btnBackHome?.addEventListener("click", () => showView(viewIntro));
+  btnBackHome?.addEventListener("click", () => { trackEvent("back_to_intro", { from: "game" }); showView(viewIntro); });
 
 
   // =============================
@@ -1309,9 +1359,10 @@
     }
   });
 
-  btnShare.addEventListener("click", () => shareResult());
+  btnShare.addEventListener("click", () => { trackEvent("share_click", { mode: examActive ? "exam" : "practice", difficulty: currentDifficulty }); shareResult(); });
 
   btnResetDeck.addEventListener("click", async () => {
+    trackEvent("reset_deck", { mode: examActive ? "exam" : "practice", difficulty: currentDifficulty });
     await loadBank();
     if (examActive){
       showToast("End the exam first before resetting the deck.", "bad");
