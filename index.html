@@ -3,17 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#D04A02">
+
+  <!-- iOS Add to Home Screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PMP Hangman">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CEVYMZHCC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-5CEVYMZHCC');
   </script>
 
   <title>PMP + Agile Hangman — Project Health</title>
+
   <style>
     :root{
       /* Pastel professional palette */
@@ -82,6 +93,9 @@
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: 0 0 0 6px rgba(125,211,199,0.18);
     }
+
+    /* Step 6 optional install button (hidden until installable) */
+    #installBtn{ display:none; }
 
     .grid{
       display:grid;
@@ -379,7 +393,6 @@
       .grid{ grid-template-columns: 1fr; }
       .kbd{ grid-template-columns: repeat(10, 1fr); }
     }
-  
 
     /* ============== */
     /* Multi-view UX  */
@@ -397,7 +410,6 @@
     .helpList{ margin:10px 0 0; padding-left: 18px; color: var(--muted); line-height:1.6; }
     .helpList li{ margin: 6px 0; }
     .subActionsRight{ margin-top: 12px; display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; }
-
 
     /* ================= */
     /* Theme: Dark mode  */
@@ -465,9 +477,9 @@
     }
     body[data-theme="dark"] select{ color: var(--text); }
     body[data-theme="dark"] select option{ background:#0f172a; color:#e5e7eb; }
-
-</style>
+  </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="top">
@@ -475,6 +487,12 @@
         <h1>PMP + Agile Hangman <span style="color:var(--accent)">— Project Health</span></h1>
         <div class="sub">Practice mode or Exam mode • 1000-term bank • No repeats per user until exhausted</div>
       </div>
+
+      <!-- Step 6 optional: install button (shows only when installable) -->
+      <button id="installBtn" class="btnGhost" onclick="installApp()" title="Install this app to your device">
+        Install App
+      </button>
+
       <div class="pill">
         <span class="dot"></span>
         <span>Best Streak: <b id="bestStreak">0</b></span>
@@ -491,892 +509,863 @@
       </div>
     </div>
 
-    
-      <!-- INTRO VIEW -->
-      <section id="viewIntro" class="view active">
-        <div class="card introCard">
-          <div class="hero">
-            <h2>Welcome</h2>
-            <p>
-              This is a hangman-style study game for <b>PMP / PMBOK</b> terms.
-              Guess the term letter-by-letter, use a meaning-based hint when you’re stuck,
-              and build a streak.
-            </p>
-            <p>
-              Choose a <b>difficulty</b> (Balanced / Easy / Hard). Toggle <b>Exam mode</b> to run a 10-round session.
-              Your word deck is stored <b>per device</b>, so terms won’t repeat until you exhaust the bank or reset.
-            </p>
+    <!-- INTRO VIEW -->
+    <section id="viewIntro" class="view active">
+      <div class="card introCard">
+        <div class="hero">
+          <h2>Welcome</h2>
+          <p>
+            This is a hangman-style study game for <b>PMP / PMBOK</b> terms.
+            Guess the term letter-by-letter, use a meaning-based hint when you’re stuck,
+            and build a streak.
+          </p>
+          <p>
+            Choose a <b>difficulty</b> (Balanced / Easy / Hard). Toggle <b>Exam mode</b> to run a 10-round session.
+            Your word deck is stored <b>per device</b>, so terms won’t repeat until you exhaust the bank or reset.
+          </p>
 
-            <div class="ctaRow">
-              <button class="btn btnPrimary" id="btnIntroStart">Start</button>
-              <button class="btn btnGhost" id="btnIntroHow">Instructions</button>
-            </div>
+          <div class="ctaRow">
+            <button class="btn btnPrimary" id="btnIntroStart">Start</button>
+            <button class="btn btnGhost" id="btnIntroHow">Instructions</button>
+          </div>
 
-            <div class="subActions">
-              <span>Tip: Use an Incognito window to simulate a “new user”.</span>
-              <button class="linkBtn" id="btnJumpToGame">Skip intro</button>
-            </div>
+          <div class="subActions">
+            <span>Tip: Use an Incognito window to simulate a “new user”.</span>
+            <button class="linkBtn" id="btnJumpToGame">Skip intro</button>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- HELP VIEW -->
-      <section id="viewHelp" class="view">
-        <div class="card introCard">
-          <div class="hero">
-            <h2>How to play</h2>
-            <ul class="helpList">
-              <li><b>Reset Deck</b>: Start fresh from the full bank (recommended before your first session).</li>
-              <li><b>Difficulty</b>: Filters the deck — Balanced mixes all, Easy is shorter/cleaner terms, Hard is longer/less common.</li>
-              <li><b>Exam toggle</b>: Turn ON to run a 10-round session. You’ll get a summary at the end.</li>
-              <li><b>New word</b>: Loads the next term. (In exam mode this starts the next round.)</li>
-              <li><b>Show hint</b>: Shows a definition-style clue (it won’t reveal the answer). Once per round.</li>
-              <li><b>Keyboard</b>: Click letters or type on your physical keyboard.</li>
-              <li><b>Health meter</b>: Each wrong guess reduces health. Solve the term before it hits zero.</li>
-              <li><b>Share</b>: Copies a share message (and uses native share on mobile when available).</li>
-            </ul>
+    <!-- HELP VIEW -->
+    <section id="viewHelp" class="view">
+      <div class="card introCard">
+        <div class="hero">
+          <h2>How to play</h2>
+          <ul class="helpList">
+            <li><b>Reset Deck</b>: Start fresh from the full bank (recommended before your first session).</li>
+            <li><b>Difficulty</b>: Filters the deck — Balanced mixes all, Easy is shorter/cleaner terms, Hard is longer/less common.</li>
+            <li><b>Exam toggle</b>: Turn ON to run a 10-round session. You’ll get a summary at the end.</li>
+            <li><b>New word</b>: Loads the next term. (In exam mode this starts the next round.)</li>
+            <li><b>Show hint</b>: Shows a definition-style clue (it won’t reveal the answer). Once per round.</li>
+            <li><b>Keyboard</b>: Click letters or type on your physical keyboard.</li>
+            <li><b>Health meter</b>: Each wrong guess reduces health. Solve the term before it hits zero.</li>
+            <li><b>Share</b>: Copies a share message (and uses native share on mobile when available).</li>
+          </ul>
 
-            <div class="ctaRow">
-              <button class="btn btnPrimary" id="btnHelpStart">Start game</button>
-              <button class="btn btnGhost" id="btnHelpBack">Back</button>
-            </div>
+          <div class="ctaRow">
+            <button class="btn btnPrimary" id="btnHelpStart">Start game</button>
+            <button class="btn btnGhost" id="btnHelpBack">Back</button>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- GAME VIEW -->
-      <section id="viewGame" class="view">
-<div class="grid">
-      <!-- Left: game -->
-      <div class="card">
-        <h2>
-          <span>Guess the term</span>
-          <span class="smallNote" id="bankStatus">Loading bank…</span>
-        </h2>
+    <!-- GAME VIEW -->
+    <section id="viewGame" class="view">
+      <div class="grid">
+        <!-- Left: game -->
+        <div class="card">
+          <h2>
+            <span>Guess the term</span>
+            <span class="smallNote" id="bankStatus">Loading bank…</span>
+          </h2>
 
-        <div class="controls">
-          <div class="controlGroup">
-            <div class="control">
-              <label for="diffSelect">Difficulty</label>
-              <select id="diffSelect" title="Filter the word deck by difficulty">
-                <option value="all">Balanced</option>
-                <option value="easy">Easy</option>
-                <option value="hard">Hard</option>
-              </select>
-            </div>
+          <div class="controls">
+            <div class="controlGroup">
+              <div class="control">
+                <label for="diffSelect">Difficulty</label>
+                <select id="diffSelect" title="Filter the word deck by difficulty">
+                  <option value="all">Balanced</option>
+                  <option value="easy">Easy</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </div>
 
-            <div class="control">
-              <div class="toggle" title="Toggle Exam mode (10 rounds)">
-                <label class="toggle" style="gap:10px;">
-                  <input id="examToggle" type="checkbox" />
-                  <span class="switch"><span class="knob"></span></span>
-                  <span class="toggleText" id="modeLabel">Practice</span>
-                </label>
+              <div class="control">
+                <div class="toggle" title="Toggle Exam mode (10 rounds)">
+                  <label class="toggle" style="gap:10px;">
+                    <input id="examToggle" type="checkbox" />
+                    <span class="switch"><span class="knob"></span></span>
+                    <span class="toggleText" id="modeLabel">Practice</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="control">
+                <label>Remaining</label>
+                <div style="font-weight:950; font-size:12px;" id="remaining">—</div>
               </div>
             </div>
 
-            <div class="control">
-              <label>Remaining</label>
-              <div style="font-weight:950; font-size:12px;" id="remaining">—</div>
+            <div class="controlGroup">
+              <button id="btnShare" class="btnGhost" title="Copy a shareable score blurb">Share</button>
+              <button id="btnResetDeck" class="btnDanger" title="Reset the no-repeat deck (this device/browser)">Reset Deck</button>
             </div>
           </div>
 
-          <div class="controlGroup">
-            <button id="btnShare" class="btnGhost" title="Copy a shareable score blurb">Share</button>
-            <button id="btnResetDeck" class="btnDanger" title="Reset the no-repeat deck (this device/browser)">Reset Deck</button>
+          <div class="word" id="word"></div>
+
+          <div class="actions">
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button id="btnHint" class="btnGhost">Show hint</button>
+              <button id="btnNext" class="btnPrimary">New word</button>
+            </div>
+            <div style="color:var(--muted); font-size:12px;">
+              Wrong guesses left: <b id="lives">6</b>
+              <span id="examProgress" style="margin-left:10px; display:none;">• Round <b id="roundNow">1</b>/<b id="roundTotal">10</b></span>
+            </div>
           </div>
+
+          <div class="hint" id="hint"></div>
+          <div class="toast" id="toast"></div>
+
+          <div style="height:12px;"></div>
+          <h2>Keyboard <span class="smallNote">Tip: You can type on your keyboard too</span></h2>
+          <div class="kbd" id="kbd"></div>
         </div>
 
-        <div class="word" id="word"></div>
-
-        <div class="actions">
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button id="btnHint" class="btnGhost">Show hint</button>
-            <button id="btnNext" class="btnPrimary">New word</button>
-          </div>
-          <div style="color:var(--muted); font-size:12px;">
-            Wrong guesses left: <b id="lives">6</b>
-            <span id="examProgress" style="margin-left:10px; display:none;">• Round <b id="roundNow">1</b>/<b id="roundTotal">10</b></span>
-          </div>
-        </div>
-
-        <div class="hint" id="hint"></div>
-        <div class="toast" id="toast"></div>
-
-        <div style="height:12px;"></div>
-        <h2>Keyboard <span class="smallNote">Tip: You can type on your keyboard too</span></h2>
-        <div class="kbd" id="kbd"></div>
-      </div>
-
-      <!-- Right: status -->
-      <div class="card">
-        <h2>Project health</h2>
-        <div class="meterWrap">
-          <div class="meter">
-            <div class="meterTop">
-              <div class="label">Health meter</div>
-              <div class="state" id="stateText">On Track</div>
+        <!-- Right: status -->
+        <div class="card">
+          <h2>Project health</h2>
+          <div class="meterWrap">
+            <div class="meter">
+              <div class="meterTop">
+                <div class="label">Health meter</div>
+                <div class="state" id="stateText">On Track</div>
+              </div>
+              <div class="bar"><div class="fill" id="fill"></div></div>
+              <div class="smallNote" style="margin-top:10px;">
+                Wrong guesses reduce health. Solve the term to keep the project green.
+              </div>
             </div>
-            <div class="bar"><div class="fill" id="fill"></div></div>
-            <div class="smallNote" style="margin-top:10px;">
-              Wrong guesses reduce health. Solve the term to keep the project green.
-            </div>
-          </div>
 
-          <div class="statRow">
-            <div class="stat">
-              <div class="k"><span>Score</span><span id="scoreTag" style="opacity:.9;">Practice</span></div>
-              <div class="v" id="score">0</div>
+            <div class="statRow">
+              <div class="stat">
+                <div class="k"><span>Score</span><span id="scoreTag" style="opacity:.9;">Practice</span></div>
+                <div class="v" id="score">0</div>
+              </div>
+              <div class="stat">
+                <div class="k">Solved</div>
+                <div class="v" id="solved">0</div>
+              </div>
             </div>
-            <div class="stat">
-              <div class="k">Solved</div>
-              <div class="v" id="solved">0</div>
+
+            <div class="stat" style="grid-column: 1 / -1;">
+              <div class="k"><span>Mode</span><span id="modeHint" style="opacity:.9;">No-repeat deck per device</span></div>
+              <div class="v" style="font-size:16px; margin-top:10px;" id="modeDetail">Practice • Balanced</div>
+              <div class="smallNote" style="margin-top:8px;">
+                Spaces/hyphens/slashes show automatically. Hint is available once per round.
+              </div>
+            </div>
+
+            <div class="stat" style="grid-column: 1 / -1;">
+              <div class="k"><span>Exam mode</span><span style="opacity:.9;">10 rounds</span></div>
+              <div class="smallNote" style="margin-top:8px;">
+                Turn Exam ON to run a 10-round session. Your exam score is computed the same way as practice.
+                At the end, you'll get a summary and a share-ready message.
+              </div>
             </div>
           </div>
 
-          <div class="stat" style="grid-column: 1 / -1;">
-            <div class="k"><span>Mode</span><span id="modeHint" style="opacity:.9;">No-repeat deck per device</span></div>
-            <div class="v" style="font-size:16px; margin-top:10px;" id="modeDetail">Practice • Balanced</div>
-            <div class="smallNote" style="margin-top:8px;">
-              Spaces/hyphens/slashes show automatically. Hint is available once per round.
-            </div>
-          </div>
-
-          <div class="stat" style="grid-column: 1 / -1;">
-            <div class="k"><span>Exam mode</span><span style="opacity:.9;">10 rounds</span></div>
-            <div class="smallNote" style="margin-top:8px;">
-              Turn Exam ON to run a 10-round session. Your exam score is computed the same way as practice.
-              At the end, you'll get a summary and a share-ready message.
-            </div>
-          </div>
-        </div>
-      
           <div class="subActionsRight" style="margin-top:14px;">
             <button class="linkBtn" id="btnBackHome">Back to intro</button>
             <span class="smallNote">Works on Chrome, Safari, and mobile.</span>
           </div>
 
-</div>
-    </div>
-  </section>
-
+        </div>
+      </div>
+    </section>
   </div>
 
-<script>
-  // =============================
-  // Configuration
-  // =============================
-  const MAX_LIVES = 6;
-  const EXAM_ROUNDS = 10;
+  <script>
+    // =============================
+    // Configuration
+    // =============================
+    const MAX_LIVES = 6;
+    const EXAM_ROUNDS = 10;
 
-  // Word bank loaded from words.json
-  let BANK = [];
-  let BANK_SIG = "";
+    // Word bank loaded from words.json
+    let BANK = [];
+    let BANK_SIG = "";
 
-  // Difficulty index
-  const DIFFS = ["all","easy","medium","hard"];
-  const subsetIndices = { all: [], easy: [], medium: [], hard: [] };
+    // Difficulty index
+    const DIFFS = ["all","easy","medium","hard"];
+    const subsetIndices = { all: [], easy: [], medium: [], hard: [] };
 
-  // LocalStorage keys (per browser/device)
-  const LS_VER = "v3"; // bump if you want to force fresh decks
-  const LS_BEST_STREAK = `pmpHangmanBestStreak_${LS_VER}`;
-  const LS_DECK_PREFIX = `pmpHangmanDeck_${LS_VER}_`; // + difficulty
-  const LS_BANK_SIG = `pmpHangmanBankSig_${LS_VER}`;
+    // LocalStorage keys (per browser/device)
+    const LS_VER = "v3"; // bump if you want to force fresh decks
+    const LS_BEST_STREAK = `pmpHangmanBestStreak_${LS_VER}`;
+    const LS_DECK_PREFIX = `pmpHangmanDeck_${LS_VER}_`; // + difficulty
+    const LS_BANK_SIG = `pmpHangmanBankSig_${LS_VER}`;
 
-  // =============================
-  // UI elements
-  // =============================
-  const wordEl = document.getElementById("word");
-  const kbdEl = document.getElementById("kbd");
-  const hintEl = document.getElementById("hint");
-  const btnHint = document.getElementById("btnHint");
-  const btnNext = document.getElementById("btnNext");
-  const btnShare = document.getElementById("btnShare");
-  // Views
-  const viewIntro = document.getElementById("viewIntro");
-  const viewHelp  = document.getElementById("viewHelp");
-  const viewGame  = document.getElementById("viewGame");
-  const btnIntroStart = document.getElementById("btnIntroStart");
-  const btnIntroHow   = document.getElementById("btnIntroHow");
-  const btnJumpToGame = document.getElementById("btnJumpToGame");
-  const btnHelpStart  = document.getElementById("btnHelpStart");
-  const btnHelpBack   = document.getElementById("btnHelpBack");
-  const btnBackHome   = document.getElementById("btnBackHome");
+    // =============================
+    // UI elements
+    // =============================
+    const wordEl = document.getElementById("word");
+    const kbdEl = document.getElementById("kbd");
+    const hintEl = document.getElementById("hint");
+    const btnHint = document.getElementById("btnHint");
+    const btnNext = document.getElementById("btnNext");
+    const btnShare = document.getElementById("btnShare");
 
-  function showView(el){
-    [viewIntro, viewHelp, viewGame].forEach(v => v && v.classList.remove("active"));
-    if (el) el.classList.add("active");
-    // Scroll to top on view change (helps mobile)
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+    // Views
+    const viewIntro = document.getElementById("viewIntro");
+    const viewHelp  = document.getElementById("viewHelp");
+    const viewGame  = document.getElementById("viewGame");
+    const btnIntroStart = document.getElementById("btnIntroStart");
+    const btnIntroHow   = document.getElementById("btnIntroHow");
+    const btnJumpToGame = document.getElementById("btnJumpToGame");
+    const btnHelpStart  = document.getElementById("btnHelpStart");
+    const btnHelpBack   = document.getElementById("btnHelpBack");
+    const btnBackHome   = document.getElementById("btnBackHome");
 
-
-  const btnResetDeck = document.getElementById("btnResetDeck");
-  const livesEl = document.getElementById("lives");
-  const fillEl = document.getElementById("fill");
-  const stateText = document.getElementById("stateText");
-  const scoreEl = document.getElementById("score");
-  const solvedEl = document.getElementById("solved");
-  const streakEl = document.getElementById("streak");
-  const bestStreakEl = document.getElementById("bestStreak");
-  const toastEl = document.getElementById("toast");
-  const bankStatusEl = document.getElementById("bankStatus");
-  const diffSelect = document.getElementById("diffSelect");
-  const examToggle = document.getElementById("examToggle");
-  const modeLabel = document.getElementById("modeLabel");
-  const remainingEl = document.getElementById("remaining");
-  const modeDetailEl = document.getElementById("modeDetail");
-  const scoreTagEl = document.getElementById("scoreTag");
-
-  const examProgress = document.getElementById("examProgress");
-  const roundNowEl = document.getElementById("roundNow");
-  const roundTotalEl = document.getElementById("roundTotal");
-
-  
-  // =============================
-  // Theme (Light/Dark)
-  // =============================
-  const LS_THEME = "pmpHangmanTheme_v1";
-  const themeToggle = document.getElementById("themeToggle");
-  const themeLabel = document.getElementById("themeLabel");
-
-  function applyTheme(theme){
-    const t = (theme === "dark") ? "dark" : "light";
-    document.body.dataset.theme = t;
-    if (themeToggle) themeToggle.checked = (t === "dark");
-    if (themeLabel) themeLabel.textContent = (t === "dark") ? "Dark" : "Light";
-    try{ localStorage.setItem(LS_THEME, t); }catch(e){}
-  }
-
-
-  // =============================
-  // Game state
-  // =============================
-  const ALPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  let used = new Set();
-  let revealed = new Set();
-  let answer = "";
-  let currentPick = null;
-
-  let lives = MAX_LIVES;
-  let score = 0;
-  let solvedCount = 0;
-
-  let streak = 0;
-  let bestStreak = Number(localStorage.getItem(LS_BEST_STREAK) || 0);
-
-  // Exam state
-  let examActive = false;
-  let examRound = 0;           // 1..EXAM_ROUNDS
-  let examSolved = 0;
-  let examFailed = 0;
-  let examScore = 0;
-  let roundLocked = false;     // prevents changing difficulty mid-round
-
-  bestStreakEl.textContent = bestStreak;
-  roundTotalEl.textContent = String(EXAM_ROUNDS);
-
-  // =============================
-  // Utilities
-  // =============================
-  function showToast(text, type){
-    toastEl.textContent = text;
-    toastEl.className = "toast " + (type || "");
-    toastEl.style.display = "block";
-  }
-  function hideToast(){ toastEl.style.display = "none"; }
-
-  function setHint(text){
-    hintEl.textContent = text || "";
-    hintEl.style.display = text ? "block" : "none";
-  }
-
-  function difficultyLabel(d){
-    if (d === "all") return "Balanced";
-    return d.charAt(0).toUpperCase() + d.slice(1);
-  }
-
-  function classifyDifficulty(term){
-    // Lightweight heuristic: length + number of words + punctuation/rare letters
-    const t = (term || "").toUpperCase().trim();
-    const lettersOnly = t.replace(/[^A-Z]/g,"");
-    const charLen = lettersOnly.length;
-    const wordCount = t.split(/\s+/).filter(Boolean).length;
-    const hasPunct = /[^A-Z\s]/.test(t);
-    const rare = (lettersOnly.match(/[JQXZ]/g) || []).length;
-
-    let score = 0;
-    if (charLen <= 10) score += 0;
-    else if (charLen <= 18) score += 1;
-    else score += 2;
-
-    if (wordCount <= 2) score += 0;
-    else if (wordCount <= 3) score += 1;
-    else score += 2;
-
-    if (hasPunct) score += 1;
-    if (rare >= 2) score += 1;
-
-    if (score <= 1) return "easy";
-    if (score <= 3) return "medium";
-    return "hard";
-  }
-
-  function bankSignature(){
-    return String(BANK.length) + ":" + DIFFS.map(d => subsetIndices[d].length).join(",");
-  }
-
-  function shuffle(arr){
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+    function showView(el){
+      [viewIntro, viewHelp, viewGame].forEach(v => v && v.classList.remove("active"));
+      if (el) el.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    return arr;
-  }
 
-  // =============================
-  // Deck logic (no repeats per device/browser)
-  // =============================
-  function deckKey(diff){ return LS_DECK_PREFIX + diff; }
+    const btnResetDeck = document.getElementById("btnResetDeck");
+    const livesEl = document.getElementById("lives");
+    const fillEl = document.getElementById("fill");
+    const stateText = document.getElementById("stateText");
+    const scoreEl = document.getElementById("score");
+    const solvedEl = document.getElementById("solved");
+    const streakEl = document.getElementById("streak");
+    const bestStreakEl = document.getElementById("bestStreak");
+    const toastEl = document.getElementById("toast");
+    const bankStatusEl = document.getElementById("bankStatus");
+    const diffSelect = document.getElementById("diffSelect");
+    const examToggle = document.getElementById("examToggle");
+    const modeLabel = document.getElementById("modeLabel");
+    const remainingEl = document.getElementById("remaining");
+    const modeDetailEl = document.getElementById("modeDetail");
+    const scoreTagEl = document.getElementById("scoreTag");
 
-  function buildFreshDeck(diff){
-    const base = subsetIndices[diff] || [];
-    const deck = shuffle(base.slice());
-    localStorage.setItem(deckKey(diff), JSON.stringify(deck));
-    localStorage.setItem(LS_BANK_SIG, BANK_SIG);
-    return deck;
-  }
+    const examProgress = document.getElementById("examProgress");
+    const roundNowEl = document.getElementById("roundNow");
+    const roundTotalEl = document.getElementById("roundTotal");
 
-  function getDeck(diff){
-    // If bank signature changed, reset all decks
-    const storedSig = localStorage.getItem(LS_BANK_SIG);
-    if (storedSig !== BANK_SIG){
+    // =============================
+    // Theme (Light/Dark)
+    // =============================
+    const LS_THEME = "pmpHangmanTheme_v1";
+    const themeToggle = document.getElementById("themeToggle");
+    const themeLabel = document.getElementById("themeLabel");
+
+    function applyTheme(theme){
+      const t = (theme === "dark") ? "dark" : "light";
+      document.body.dataset.theme = t;
+      if (themeToggle) themeToggle.checked = (t === "dark");
+      if (themeLabel) themeLabel.textContent = (t === "dark") ? "Dark" : "Light";
+      try{ localStorage.setItem(LS_THEME, t); }catch(e){}
+    }
+
+    // =============================
+    // Game state
+    // =============================
+    const ALPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    let used = new Set();
+    let revealed = new Set();
+    let answer = "";
+    let currentPick = null;
+
+    let lives = MAX_LIVES;
+    let score = 0;
+    let solvedCount = 0;
+
+    let streak = 0;
+    let bestStreak = Number(localStorage.getItem(LS_BEST_STREAK) || 0);
+
+    // Exam state
+    let examActive = false;
+    let examRound = 0;           // 1..EXAM_ROUNDS
+    let examSolved = 0;
+    let examFailed = 0;
+    let examScore = 0;
+    let roundLocked = false;     // prevents changing difficulty mid-round
+
+    bestStreakEl.textContent = bestStreak;
+    roundTotalEl.textContent = String(EXAM_ROUNDS);
+
+    // =============================
+    // Utilities
+    // =============================
+    function showToast(text, type){
+      toastEl.textContent = text;
+      toastEl.className = "toast " + (type || "");
+      toastEl.style.display = "block";
+    }
+    function hideToast(){ toastEl.style.display = "none"; }
+
+    function setHint(text){
+      hintEl.textContent = text || "";
+      hintEl.style.display = text ? "block" : "none";
+    }
+
+    function difficultyLabel(d){
+      if (d === "all") return "Balanced";
+      return d.charAt(0).toUpperCase() + d.slice(1);
+    }
+
+    function classifyDifficulty(term){
+      const t = (term || "").toUpperCase().trim();
+      const lettersOnly = t.replace(/[^A-Z]/g,"");
+      const charLen = lettersOnly.length;
+      const wordCount = t.split(/\s+/).filter(Boolean).length;
+      const hasPunct = /[^A-Z\s]/.test(t);
+      const rare = (lettersOnly.match(/[JQXZ]/g) || []).length;
+
+      let sc = 0;
+      if (charLen <= 10) sc += 0;
+      else if (charLen <= 18) sc += 1;
+      else sc += 2;
+
+      if (wordCount <= 2) sc += 0;
+      else if (wordCount <= 3) sc += 1;
+      else sc += 2;
+
+      if (hasPunct) sc += 1;
+      if (rare >= 2) sc += 1;
+
+      if (sc <= 1) return "easy";
+      if (sc <= 3) return "medium";
+      return "hard";
+    }
+
+    function bankSignature(){
+      return String(BANK.length) + ":" + DIFFS.map(d => subsetIndices[d].length).join(",");
+    }
+
+    function shuffle(arr){
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // =============================
+    // Deck logic (no repeats per device/browser)
+    // =============================
+    function deckKey(diff){ return LS_DECK_PREFIX + diff; }
+
+    function buildFreshDeck(diff){
+      const base = subsetIndices[diff] || [];
+      const deck = shuffle(base.slice());
+      localStorage.setItem(deckKey(diff), JSON.stringify(deck));
+      localStorage.setItem(LS_BANK_SIG, BANK_SIG);
+      return deck;
+    }
+
+    function getDeck(diff){
+      const storedSig = localStorage.getItem(LS_BANK_SIG);
+      if (storedSig !== BANK_SIG){
+        for (const d of DIFFS){
+          localStorage.removeItem(deckKey(d));
+        }
+        localStorage.setItem(LS_BANK_SIG, BANK_SIG);
+      }
+
+      try{
+        const raw = localStorage.getItem(deckKey(diff));
+        if (!raw) return buildFreshDeck(diff);
+        const deck = JSON.parse(raw);
+        if (!Array.isArray(deck)) return buildFreshDeck(diff);
+        if (deck.some(n => typeof n !== "number" || n < 0 || n >= BANK.length)) return buildFreshDeck(diff);
+        return deck;
+      } catch {
+        return buildFreshDeck(diff);
+      }
+    }
+
+    function saveDeck(diff, deck){
+      localStorage.setItem(deckKey(diff), JSON.stringify(deck));
+    }
+
+    function remainingCount(diff){
+      const deck = getDeck(diff);
+      return deck.length;
+    }
+
+    function drawNextPick(diff){
+      let deck = getDeck(diff);
+
+      if (deck.length === 0){
+        deck = buildFreshDeck(diff);
+        showToast("🎉 You’ve exhausted all terms in this difficulty. Resetting the deck.", "good");
+      }
+
+      const idx = deck.pop();
+      saveDeck(diff, deck);
+      return BANK[idx];
+    }
+
+    function resetDecks(){
       for (const d of DIFFS){
         localStorage.removeItem(deckKey(d));
       }
       localStorage.setItem(LS_BANK_SIG, BANK_SIG);
+      showToast("🧹 Deck reset for this device/browser. You can see terms again from the start.", "good");
+      updateRemaining();
     }
 
-    try{
-      const raw = localStorage.getItem(deckKey(diff));
-      if (!raw) return buildFreshDeck(diff);
-      const deck = JSON.parse(raw);
-      if (!Array.isArray(deck)) return buildFreshDeck(diff);
-      // Basic validation
-      if (deck.some(n => typeof n !== "number" || n < 0 || n >= BANK.length)) return buildFreshDeck(diff);
-      return deck;
-    } catch {
-      return buildFreshDeck(diff);
-    }
-  }
-
-  function saveDeck(diff, deck){
-    localStorage.setItem(deckKey(diff), JSON.stringify(deck));
-  }
-
-  function remainingCount(diff){
-    const deck = getDeck(diff);
-    return deck.length;
-  }
-
-  function drawNextPick(diff){
-    let deck = getDeck(diff);
-
-    if (deck.length === 0){
-      deck = buildFreshDeck(diff);
-      showToast("🎉 You’ve exhausted all terms in this difficulty. Resetting the deck.", "good");
-    }
-
-    const idx = deck.pop();
-    saveDeck(diff, deck);
-    return BANK[idx];
-  }
-
-  function resetDecks(){
-    for (const d of DIFFS){
-      localStorage.removeItem(deckKey(d));
-    }
-    localStorage.setItem(LS_BANK_SIG, BANK_SIG);
-    showToast("🧹 Deck reset for this device/browser. You can see terms again from the start.", "good");
-    updateRemaining();
-  }
-
-  // =============================
-  // Rendering
-  // =============================
-  function renderKeyboard(){
-    kbdEl.innerHTML = "";
-    ALPH.forEach(ch => {
-      const d = document.createElement("div");
-      d.className = "key";
-      d.textContent = ch;
-      d.addEventListener("click", () => onGuess(ch, d));
-      kbdEl.appendChild(d);
-    });
-  }
-
-  function renderWord(){
-    wordEl.innerHTML = "";
-    for (const ch of answer) {
-      if (ch === " ") {
-        const s = document.createElement("div");
-        s.className = "tile space";
-        wordEl.appendChild(s);
-        continue;
-      }
-      if (!/[A-Z]/.test(ch)) {
-        const p = document.createElement("div");
-        p.className = "tile punct";
-        p.textContent = ch;
-        wordEl.appendChild(p);
-        continue;
-      }
-      const t = document.createElement("div");
-      t.className = "tile";
-      t.textContent = revealed.has(ch) ? ch : "";
-      wordEl.appendChild(t);
-    }
-  }
-
-  function updateHealth(){
-    livesEl.textContent = lives;
-    const pct = Math.max(0, lives / MAX_LIVES) * 100;
-    fillEl.style.width = pct + "%";
-
-    if (lives >= 5) stateText.textContent = "On Track";
-    else if (lives >= 3) stateText.textContent = "At Risk";
-    else if (lives >= 1) stateText.textContent = "Critical";
-    else stateText.textContent = "Failed";
-
-    if (lives >= 5) fillEl.style.background = "linear-gradient(90deg, rgba(34,197,94,0.95), rgba(16,185,129,0.90))";
-    else if (lives >= 3) fillEl.style.background = "linear-gradient(90deg, rgba(245,158,11,0.95), rgba(20,184,166,0.85))";
-    else fillEl.style.background = "linear-gradient(90deg, rgba(239,68,68,0.95), rgba(245,158,11,0.85))";
-  }
-
-  function updateStats(){
-    scoreEl.textContent = String(examActive ? examScore : score);
-    solvedEl.textContent = String(examActive ? examSolved : solvedCount);
-    streakEl.textContent = String(streak);
-    bestStreakEl.textContent = String(bestStreak);
-    scoreTagEl.textContent = examActive ? "Exam" : "Practice";
-  }
-
-  function disableKeyboard(disabled=true){
-    [...kbdEl.querySelectorAll(".key")].forEach(k => {
-      if (disabled) k.classList.add("used");
-      else k.classList.remove("used");
-      k.style.pointerEvents = disabled ? "none" : "auto";
-    });
-  }
-
-  function isSolved(){
-    for (const ch of answer) {
-      if (/[A-Z]/.test(ch) && !revealed.has(ch)) return false;
-    }
-    return true;
-  }
-
-  function updateRemaining(){
-    const diff = diffSelect.value;
-    const rem = remainingCount(diff);
-    remainingEl.textContent = String(rem);
-    modeDetailEl.textContent = `${examActive ? "Exam" : "Practice"} • ${difficultyLabel(diff)}`;
-  }
-
-  function setModeUI(){
-    modeLabel.textContent = examToggle.checked ? "Exam" : "Practice";
-    examProgress.style.display = examToggle.checked ? "inline" : "none";
-    btnNext.textContent = examToggle.checked ? (examActive ? "Next round" : "Start exam") : "New word";
-    btnHint.disabled = false;
-    updateRemaining();
-    updateStats();
-  }
-
-  // =============================
-  // Load bank
-  // =============================
-  async function loadBank(){
-    if (BANK.length) return;
-
-    bankStatusEl.textContent = "Loading bank…";
-
-    try{
-      const res = await fetch("./words.json", { cache: "no-store" });
-      if (!res.ok) throw new Error("Failed to load words.json (" + res.status + ")");
-      const data = await res.json();
-      if (!Array.isArray(data) || !data.length) throw new Error("words.json is empty/invalid");
-
-      BANK = data
-        .filter(x => x && typeof x.term === "string" && typeof x.hint === "string")
-        .map(x => ({
-          term: x.term.trim().toUpperCase(),
-          hint: x.hint.trim(),
-          diff: "medium"
-        }));
-
-      // Build difficulty subsets
-      subsetIndices.all = [];
-      subsetIndices.easy = [];
-      subsetIndices.medium = [];
-      subsetIndices.hard = [];
-
-      BANK.forEach((item, idx) => {
-        const d = classifyDifficulty(item.term);
-        item.diff = d;
-        subsetIndices.all.push(idx);
-        subsetIndices[d].push(idx);
+    // =============================
+    // Rendering
+    // =============================
+    function renderKeyboard(){
+      kbdEl.innerHTML = "";
+      ALPH.forEach(ch => {
+        const d = document.createElement("div");
+        d.className = "key";
+        d.textContent = ch;
+        d.addEventListener("click", () => onGuess(ch, d));
+        kbdEl.appendChild(d);
       });
+    }
 
-      BANK_SIG = bankSignature();
+    function renderWord(){
+      wordEl.innerHTML = "";
+      for (const ch of answer) {
+        if (ch === " ") {
+          const s = document.createElement("div");
+          s.className = "tile space";
+          wordEl.appendChild(s);
+          continue;
+        }
+        if (!/[A-Z]/.test(ch)) {
+          const p = document.createElement("div");
+          p.className = "tile punct";
+          p.textContent = ch;
+          wordEl.appendChild(p);
+          continue;
+        }
+        const t = document.createElement("div");
+        t.className = "tile";
+        t.textContent = revealed.has(ch) ? ch : "";
+        wordEl.appendChild(t);
+      }
+    }
 
-      bankStatusEl.textContent = `Bank: ${BANK.length} terms`;
+    function updateHealth(){
+      livesEl.textContent = lives;
+      const pct = Math.max(0, lives / MAX_LIVES) * 100;
+      fillEl.style.width = pct + "%";
+
+      if (lives >= 5) stateText.textContent = "On Track";
+      else if (lives >= 3) stateText.textContent = "At Risk";
+      else if (lives >= 1) stateText.textContent = "Critical";
+      else stateText.textContent = "Failed";
+
+      if (lives >= 5) fillEl.style.background = "linear-gradient(90deg, rgba(34,197,94,0.95), rgba(16,185,129,0.90))";
+      else if (lives >= 3) fillEl.style.background = "linear-gradient(90deg, rgba(245,158,11,0.95), rgba(20,184,166,0.85))";
+      else fillEl.style.background = "linear-gradient(90deg, rgba(239,68,68,0.95), rgba(245,158,11,0.85))";
+    }
+
+    function updateStats(){
+      scoreEl.textContent = String(examActive ? examScore : score);
+      solvedEl.textContent = String(examActive ? examSolved : solvedCount);
+      streakEl.textContent = String(streak);
+      bestStreakEl.textContent = String(bestStreak);
+      scoreTagEl.textContent = examActive ? "Exam" : "Practice";
+    }
+
+    function disableKeyboard(disabled=true){
+      [...kbdEl.querySelectorAll(".key")].forEach(k => {
+        if (disabled) k.classList.add("used");
+        else k.classList.remove("used");
+        k.style.pointerEvents = disabled ? "none" : "auto";
+      });
+    }
+
+    function isSolved(){
+      for (const ch of answer) {
+        if (/[A-Z]/.test(ch) && !revealed.has(ch)) return false;
+      }
+      return true;
+    }
+
+    function updateRemaining(){
+      const diff = diffSelect.value;
+      const rem = remainingCount(diff);
+      remainingEl.textContent = String(rem);
+      modeDetailEl.textContent = `${examActive ? "Exam" : "Practice"} • ${difficultyLabel(diff)}`;
+    }
+
+    function setModeUI(){
+      modeLabel.textContent = examToggle.checked ? "Exam" : "Practice";
+      examProgress.style.display = examToggle.checked ? "inline" : "none";
+      btnNext.textContent = examToggle.checked ? (examActive ? "Next round" : "Start exam") : "New word";
+      btnHint.disabled = false;
       updateRemaining();
-
-    } catch (e){
-      console.warn(e);
-      bankStatusEl.textContent = "Bank load failed (using fallback)";
-      BANK = [
-        { term: "WORK BREAKDOWN STRUCTURE", hint: "A hierarchical decomposition of project scope into deliverables and work packages (WBS).", diff:"medium" },
-        { term: "CRITICAL PATH", hint: "The longest dependent path that sets the minimum project duration.", diff:"easy" },
-        { term: "RISK REGISTER", hint: "A document listing identified risks, responses, owners, and status.", diff:"easy" }
-      ];
-      subsetIndices.all = [0,1,2];
-      subsetIndices.easy = [1,2];
-      subsetIndices.medium = [0];
-      subsetIndices.hard = [];
-      BANK_SIG = bankSignature();
-      updateRemaining();
-      showToast("⚠️ words.json could not be loaded. Upload words.json to the same folder as index.html.", "bad");
-    }
-  }
-
-  // =============================
-  // Round flow
-  // =============================
-  function lockControls(lock){
-    roundLocked = lock;
-    // Allow changing difficulty anytime (applies on the next word/round)
-    diffSelect.disabled = false;
-    // Keep exam mode stable mid-exam
-    examToggle.disabled = lock && examActive;
-    // Avoid deck reset mid-exam
-    btnResetDeck.disabled = lock && examActive;
-  }
-
-  function beginRound(){
-    hideToast();
-    setHint("");
-
-    lives = MAX_LIVES;
-    used = new Set();
-    revealed = new Set();
-
-    const diff = diffSelect.value;
-    currentPick = drawNextPick(diff);
-    answer = currentPick.term;
-
-    renderWord();
-    updateHealth();
-    renderKeyboard();
-    disableKeyboard(false);
-
-    btnHint.disabled = false;
-    btnHint.onclick = () => {
-      setHint("Hint: " + currentPick.hint);
-      btnHint.disabled = true;
-    };
-
-    lockControls(true);
-    updateRemaining();
-    updateStats();
-  }
-
-  function endRoundUI(){
-    disableKeyboard(true);
-    lockControls(false);
-    setModeUI();
-  }
-
-  function onRoundWin(){
-    const bonus = Math.max(0, lives) * 2;
-    const gained = 10 + bonus;
-
-    if (examActive){
-      examScore += gained;
-      examSolved += 1;
-    } else {
-      score += gained;
-      solvedCount += 1;
-      streak += 1;
-      bestStreak = Math.max(bestStreak, streak);
-      localStorage.setItem(LS_BEST_STREAK, String(bestStreak));
+      updateStats();
     }
 
-    updateStats();
+    // =============================
+    // Load bank
+    // =============================
+    async function loadBank(){
+      if (BANK.length) return;
 
-    if (examActive){
-      showToast(`✅ Round ${examRound} solved! +${gained} points. Click “Next round”.`, "good");
-    } else {
-      showToast(`✅ Solved! +${gained} points. Click “New word” for the next term.`, "good");
+      bankStatusEl.textContent = "Loading bank…";
+
+      try{
+        const res = await fetch("./words.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to load words.json (" + res.status + ")");
+        const data = await res.json();
+        if (!Array.isArray(data) || !data.length) throw new Error("words.json is empty/invalid");
+
+        BANK = data
+          .filter(x => x && typeof x.term === "string" && typeof x.hint === "string")
+          .map(x => ({
+            term: x.term.trim().toUpperCase(),
+            hint: x.hint.trim(),
+            diff: "medium"
+          }));
+
+        subsetIndices.all = [];
+        subsetIndices.easy = [];
+        subsetIndices.medium = [];
+        subsetIndices.hard = [];
+
+        BANK.forEach((item, idx) => {
+          const d = classifyDifficulty(item.term);
+          item.diff = d;
+          subsetIndices.all.push(idx);
+          subsetIndices[d].push(idx);
+        });
+
+        BANK_SIG = bankSignature();
+
+        bankStatusEl.textContent = `Bank: ${BANK.length} terms`;
+        updateRemaining();
+
+      } catch (e){
+        console.warn(e);
+        bankStatusEl.textContent = "Bank load failed (using fallback)";
+        BANK = [
+          { term: "WORK BREAKDOWN STRUCTURE", hint: "A hierarchical decomposition of project scope into deliverables and work packages (WBS).", diff:"medium" },
+          { term: "CRITICAL PATH", hint: "The longest dependent path that sets the minimum project duration.", diff:"easy" },
+          { term: "RISK REGISTER", hint: "A document listing identified risks, responses, owners, and status.", diff:"easy" }
+        ];
+        subsetIndices.all = [0,1,2];
+        subsetIndices.easy = [1,2];
+        subsetIndices.medium = [0];
+        subsetIndices.hard = [];
+        BANK_SIG = bankSignature();
+        updateRemaining();
+        showToast("⚠️ words.json could not be loaded. Upload words.json to the same folder as index.html.", "bad");
+      }
     }
-    endRoundUI();
-  }
 
-  function onRoundFail(){
-    if (examActive){
-      examFailed += 1;
-      showToast(`❌ Round ${examRound} failed. The term was: ${answer}. Click “Next round”.`, "bad");
-    } else {
-      streak = 0;
-      showToast(`❌ Project failed. The term was: ${answer}. Click “New word” to try again.`, "bad");
+    // =============================
+    // Round flow
+    // =============================
+    function lockControls(lock){
+      roundLocked = lock;
+      diffSelect.disabled = false;
+      examToggle.disabled = lock && examActive;
+      btnResetDeck.disabled = lock && examActive;
     }
-    updateStats();
-    endRoundUI();
-  }
 
-  function maybeFinishExam(){
-    if (!examActive) return false;
-    if (examRound < EXAM_ROUNDS) return false;
+    function beginRound(){
+      hideToast();
+      setHint("");
 
-    // Exam finished
-    examActive = false;
-    examToggle.checked = false;
-    setModeUI();
+      lives = MAX_LIVES;
+      used = new Set();
+      revealed = new Set();
 
-    const diffName = difficultyLabel(diffSelect.value);
-    const summary = `🏁 Exam complete! Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS} • Difficulty: ${diffName}.`;
-    showToast(summary + " Use Share to copy a post-ready blurb.", "good");
+      const diff = diffSelect.value;
+      currentPick = drawNextPick(diff);
+      answer = currentPick.term;
 
-    // Reset exam counters for next run (keep totals visible until next action)
-    lockControls(false);
-    return true;
-  }
-
-  // =============================
-  // Guess logic
-  // =============================
-  function onGuess(ch, keyEl){
-    if (keyEl.classList.contains("used")) return;
-    if (used.has(ch)) return;
-    used.add(ch);
-
-    const hit = answer.includes(ch);
-    if (hit){
-      revealed.add(ch);
-      keyEl.classList.add("used","good");
       renderWord();
-
-      if (isSolved()){
-        onRoundWin();
-      }
-    } else {
-      lives -= 1;
-      keyEl.classList.add("used","bad");
       updateHealth();
+      renderKeyboard();
+      disableKeyboard(false);
 
-      if (lives <= 0){
-        onRoundFail();
-      }
-    }
-  }
+      btnHint.disabled = false;
+      btnHint.onclick = () => {
+        setHint("Hint: " + currentPick.hint);
+        btnHint.disabled = true;
+      };
 
-  // =============================
-  // Mode actions
-  // =============================
-  async function startPractice(){
-    examActive = false;
-    examRound = 0;
-    setModeUI();
-    beginRound();
-  }
-
-  async function startExam(){
-    examActive = true;
-    examRound = 1;
-    examSolved = 0;
-    examFailed = 0;
-    examScore = 0;
-
-    roundNowEl.textContent = String(examRound);
-    setModeUI();
-    beginRound();
-  }
-
-  async function nextRound(){
-    if (!examToggle.checked){
-      // practice
-      startPractice();
-      return;
+      lockControls(true);
+      updateRemaining();
+      updateStats();
     }
 
-    // exam toggle is ON
-    if (!examActive){
-      // start exam
-      await startExam();
-      return;
+    function endRoundUI(){
+      disableKeyboard(true);
+      lockControls(false);
+      setModeUI();
     }
 
-    // exam in progress -> advance
-    examRound += 1;
-    if (examRound > EXAM_ROUNDS){
-      // Safety
-      examRound = EXAM_ROUNDS;
-    }
-    roundNowEl.textContent = String(examRound);
+    function onRoundWin(){
+      const bonus = Math.max(0, lives) * 2;
+      const gained = 10 + bonus;
 
-    // If we just completed the final round, finish exam after showing final
-    if (examRound > EXAM_ROUNDS){
-      maybeFinishExam();
-      return;
-    }
-
-    // If previous round ended, start next
-    beginRound();
-  }
-
-  // =============================
-  // Share
-  // =============================
-  async function shareResult(){
-    const url = window.location.href;
-    const diffName = difficultyLabel(diffSelect.value);
-
-    let text = "";
-    if (examActive){
-      text = `I'm playing PMP + Agile Hangman (Exam mode, ${diffName}). Current: Round ${examRound}/${EXAM_ROUNDS} • Score ${examScore} • Solved ${examSolved}. Try it: ${url}`;
-    } else if (examRound >= EXAM_ROUNDS && examScore > 0 && examSolved + examFailed === EXAM_ROUNDS){
-      // If user just finished an exam and hasn’t started another round, we can share exam summary.
-      text = `I just finished a 10-round PMP + Agile Hangman exam (${diffName}). Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS}. Try it: ${url}`;
-    } else {
-      text = `I'm playing PMP + Agile Hangman (${diffName}). Score: ${score} • Best streak: ${bestStreak}. Try it: ${url}`;
-    }
-
-    try{
-      await navigator.clipboard.writeText(text);
-      showToast("📋 Copied to clipboard! Paste it into LinkedIn (or anywhere).", "good");
-    } catch {
-      // fallback: prompt
-      window.prompt("Copy this text:", text);
-    }
-  }
-
-  // =============================
-  // Events
-
-  themeToggle?.addEventListener("change", () => {
-    applyTheme(themeToggle.checked ? "dark" : "light");
-  });
-
-
-  // Intro / Help navigation
-  btnIntroStart?.addEventListener("click", () => {
-    showView(viewGame);
-    startPractice(); // starts in practice by default (toggle Exam if desired)
-  });
-  btnJumpToGame?.addEventListener("click", () => {
-    showView(viewGame);
-    startPractice();
-  });
-  btnIntroHow?.addEventListener("click", () => showView(viewHelp));
-  btnHelpBack?.addEventListener("click", () => showView(viewIntro));
-  btnHelpStart?.addEventListener("click", () => {
-    showView(viewGame);
-    startPractice();
-  });
-  btnBackHome?.addEventListener("click", () => showView(viewIntro));
-
-
-  // =============================
-  btnNext.addEventListener("click", async () => {
-    await loadBank();
-
-    // If a round is mid-play, don't allow skipping (keeps learning loop consistent)
-    // But you can still click New word after round ends. We detect lock by keyboard enabled state.
-    const anyKeyEnabled = [...kbdEl.querySelectorAll(".key")].some(k => !k.classList.contains("used") && k.style.pointerEvents !== "none");
-    if (roundLocked && anyKeyEnabled){
-      showToast("Finish this round first (solve or run out of guesses).", "bad");
-      return;
-    }
-
-    if (examToggle.checked){
-      // If a round ended, we move to next round OR start exam
-      if (!examActive){
-        await startExam();
+      if (examActive){
+        examScore += gained;
+        examSolved += 1;
       } else {
-        // If last round already ended, proceed
-        if (examRound >= EXAM_ROUNDS){
-          // last round completed; finish exam
-          maybeFinishExam();
-        } else {
-          examRound += 1;
-          roundNowEl.textContent = String(examRound);
-          beginRound();
+        score += gained;
+        solvedCount += 1;
+        streak += 1;
+        bestStreak = Math.max(bestStreak, streak);
+        localStorage.setItem(LS_BEST_STREAK, String(bestStreak));
+      }
+
+      updateStats();
+
+      if (examActive){
+        showToast(`✅ Round ${examRound} solved! +${gained} points. Click “Next round”.`, "good");
+      } else {
+        showToast(`✅ Solved! +${gained} points. Click “New word” for the next term.`, "good");
+      }
+      endRoundUI();
+    }
+
+    function onRoundFail(){
+      if (examActive){
+        showToast(`❌ Round ${examRound} failed. The term was: ${answer}. Click “Next round”.`, "bad");
+      } else {
+        streak = 0;
+        showToast(`❌ Project failed. The term was: ${answer}. Click “New word” to try again.`, "bad");
+      }
+      updateStats();
+      endRoundUI();
+    }
+
+    function maybeFinishExam(){
+      if (!examActive) return false;
+      if (examRound < EXAM_ROUNDS) return false;
+
+      examActive = false;
+      examToggle.checked = false;
+      setModeUI();
+
+      const diffName = difficultyLabel(diffSelect.value);
+      const summary = `🏁 Exam complete! Score: ${examScore} • Solved: ${examSolved}/${EXAM_ROUNDS} • Difficulty: ${diffName}.`;
+      showToast(summary + " Use Share to copy a post-ready blurb.", "good");
+
+      lockControls(false);
+      return true;
+    }
+
+    // =============================
+    // Guess logic
+    // =============================
+    function onGuess(ch, keyEl){
+      if (keyEl.classList.contains("used")) return;
+      if (used.has(ch)) return;
+      used.add(ch);
+
+      const hit = answer.includes(ch);
+      if (hit){
+        revealed.add(ch);
+        keyEl.classList.add("used","good");
+        renderWord();
+
+        if (isSolved()){
+          onRoundWin();
+        }
+      } else {
+        lives -= 1;
+        keyEl.classList.add("used","bad");
+        updateHealth();
+
+        if (lives <= 0){
+          onRoundFail();
         }
       }
-    } else {
-      // practice
+    }
+
+    // =============================
+    // Share
+    // =============================
+    async function shareResult(){
+      const url = window.location.href;
+      const diffName = difficultyLabel(diffSelect.value);
+
+      let text = "";
+      if (examActive){
+        text = `I'm playing PMP + Agile Hangman (Exam mode, ${diffName}). Current: Round ${examRound}/${EXAM_ROUNDS} • Score ${examScore} • Solved ${examSolved}. Try it: ${url}`;
+      } else {
+        text = `I'm playing PMP + Agile Hangman (${diffName}). Score: ${score} • Best streak: ${bestStreak}. Try it: ${url}`;
+      }
+
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("📋 Copied to clipboard! Paste it into LinkedIn (or anywhere).", "good");
+      } catch {
+        window.prompt("Copy this text:", text);
+      }
+    }
+
+    // =============================
+    // Events
+    // =============================
+    themeToggle?.addEventListener("change", () => {
+      applyTheme(themeToggle.checked ? "dark" : "light");
+    });
+
+    // Intro / Help navigation
+    btnIntroStart?.addEventListener("click", () => {
+      showView(viewGame);
       startPractice();
+    });
+    btnJumpToGame?.addEventListener("click", () => {
+      showView(viewGame);
+      startPractice();
+    });
+    btnIntroHow?.addEventListener("click", () => showView(viewHelp));
+    btnHelpBack?.addEventListener("click", () => showView(viewIntro));
+    btnHelpStart?.addEventListener("click", () => {
+      showView(viewGame);
+      startPractice();
+    });
+    btnBackHome?.addEventListener("click", () => showView(viewIntro));
+
+    async function startPractice(){
+      examActive = false;
+      examRound = 0;
+      setModeUI();
+      beginRound();
     }
-  });
 
-  btnShare.addEventListener("click", () => shareResult());
+    async function startExam(){
+      examActive = true;
+      examRound = 1;
+      examSolved = 0;
+      examFailed = 0;
+      examScore = 0;
 
-  btnResetDeck.addEventListener("click", async () => {
-    await loadBank();
-    if (examActive){
-      showToast("End the exam first before resetting the deck.", "bad");
-      return;
+      roundNowEl.textContent = String(examRound);
+      setModeUI();
+      beginRound();
     }
-    resetDecks();
-  });
 
-  diffSelect.addEventListener("change", async () => {
-    await loadBank();
-    if (roundLocked){
-      // Allow changing now; it applies on the next word/round
+    btnNext.addEventListener("click", async () => {
+      await loadBank();
+
+      const anyKeyEnabled = [...kbdEl.querySelectorAll(".key")].some(k => !k.classList.contains("used") && k.style.pointerEvents !== "none");
+      if (roundLocked && anyKeyEnabled){
+        showToast("Finish this round first (solve or run out of guesses).", "bad");
+        return;
+      }
+
+      if (examToggle.checked){
+        if (!examActive){
+          await startExam();
+        } else {
+          if (examRound >= EXAM_ROUNDS){
+            maybeFinishExam();
+          } else {
+            examRound += 1;
+            roundNowEl.textContent = String(examRound);
+            beginRound();
+          }
+        }
+      } else {
+        startPractice();
+      }
+    });
+
+    btnShare.addEventListener("click", () => shareResult());
+
+    btnResetDeck.addEventListener("click", async () => {
+      await loadBank();
+      if (examActive){
+        showToast("End the exam first before resetting the deck.", "bad");
+        return;
+      }
+      resetDecks();
+    });
+
+    diffSelect.addEventListener("change", async () => {
+      await loadBank();
+      if (roundLocked){
+        updateRemaining();
+        showToast("Difficulty updated — it will apply on the next word.", "warn");
+        return;
+      }
       updateRemaining();
-      showToast("Difficulty updated — it will apply on the next word.", "warn");
-      return;
-    }
-    updateRemaining();
-    setModeUI();
-  });
+      setModeUI();
+    });
 
-  examToggle.addEventListener("change", () => {
-    if (examActive){
-      // Don’t allow toggling off mid-exam (prevents confusing state)
-      examToggle.checked = true;
-      showToast("Finish the exam run first (10 rounds).", "bad");
-      return;
-    }
-    setModeUI();
-  });
+    examToggle.addEventListener("change", () => {
+      if (examActive){
+        examToggle.checked = true;
+        showToast("Finish the exam run first (10 rounds).", "bad");
+        return;
+      }
+      setModeUI();
+    });
 
-  window.addEventListener("keydown", (e)=>{
-    const k = String(e.key || "").toUpperCase();
-    if (k.length === 1 && k >= "A" && k <= "Z") {
-      const keyDiv = [...kbdEl.querySelectorAll(".key")].find(x => x.textContent === k);
-      if (keyDiv && !keyDiv.classList.contains("used") && keyDiv.style.pointerEvents !== "none") onGuess(k, keyDiv);
-    }
-    if (e.key === "Enter") {
-      btnNext.click();
-    }
-  });
+    window.addEventListener("keydown", (e)=>{
+      const k = String(e.key || "").toUpperCase();
+      if (k.length === 1 && k >= "A" && k <= "Z") {
+        const keyDiv = [...kbdEl.querySelectorAll(".key")].find(x => x.textContent === k);
+        if (keyDiv && !keyDiv.classList.contains("used") && keyDiv.style.pointerEvents !== "none") onGuess(k, keyDiv);
+      }
+      if (e.key === "Enter") {
+        btnNext.click();
+      }
+    });
 
-  // =============================
-  // Boot
-  // =============================
-  (async function init(){
-    // Apply saved theme (defaults to Light)
-    try{ applyTheme(localStorage.getItem(LS_THEME) || "light"); }catch(e){ applyTheme("light"); }
-    await loadBank();
-    setModeUI();
-    updateStats();
-    renderKeyboard();
-    disableKeyboard(true);
-    // Start on the intro screen
-    showView(viewIntro);
-  })();
-</script>
+    // =============================
+    // PWA: Service Worker + Install Button
+    // =============================
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(console.error);
+      });
+    }
+
+    // Install flow (Chrome/Edge/Android)
+    let deferredPrompt = null;
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      const btn = document.getElementById("installBtn");
+      if (btn) btn.style.display = "inline-flex";
+    });
+
+    window.addEventListener("appinstalled", () => {
+      const btn = document.getElementById("installBtn");
+      if (btn) btn.style.display = "none";
+    });
+
+    async function installApp(){
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+
+      const btn = document.getElementById("installBtn");
+      if (btn) btn.style.display = "none";
+    }
+
+    // Make installApp available to the onclick handler
+    window.installApp = installApp;
+
+    // =============================
+    // Boot
+    // =============================
+    (async function init(){
+      try{ applyTheme(localStorage.getItem(LS_THEME) || "light"); }catch(e){ applyTheme("light"); }
+      await loadBank();
+      setModeUI();
+      updateStats();
+      renderKeyboard();
+      disableKeyboard(true);
+      showView(viewIntro);
+    })();
+  </script>
 </body>
 </html>
